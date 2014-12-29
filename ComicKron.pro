@@ -13,17 +13,9 @@ ROOTDIR = .
 android|ios: CONFIG += USE_SYSTEM_ZLIB
 
 # Subprojects
-!CONFIG(USE_SYSTEM_ZLIB) {
-    SUBDIRS += zlib
-}
-
-!CONFIG(USE_SYSTEM_LIBARCHIVE) {
-    SUBDIRS += libarchive
-}
-
-!CONFIG(USE_SYSTEM_PODOFO) {
-    SUBDIRS += podofo
-}
+!CONFIG(USE_SYSTEM_ZLIB): SUBDIRS += zlib
+!CONFIG(USE_SYSTEM_LIBARCHIVE): SUBDIRS += libarchive
+!CONFIG(USE_SYSTEM_PODOFO): SUBDIRS += podofo
 
 SUBDIRS += \
     gmock \

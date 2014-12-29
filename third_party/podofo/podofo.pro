@@ -142,4 +142,9 @@ HEADERS += \
     doc/PdfXObject.h \
     podofo-base.h \
     podofo.h \
-    podofo_config.h
+    podofo_config.h \
+    base/util/PdfMutex.h \
+    base/util/PdfMutexImpl_noop.h \
+    base/util/PdfMutexImpl_pthread.h \
+    base/util/PdfMutexImpl_win32.h \
+    base/util/PdfMutexWrapper.h
