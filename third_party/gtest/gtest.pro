@@ -47,4 +47,6 @@ HEADERS += \
     include/gtest/gtest_pred_impl.h \
     include/gtest/gtest_prod.h \
     src/gtest-internal-inl.h
-    
+
+OTHER_FILES += \
+    README.md

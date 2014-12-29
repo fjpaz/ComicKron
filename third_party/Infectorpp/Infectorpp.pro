@@ -17,3 +17,6 @@ HEADERS += \
     include/Infectorpp/InfectorExceptions.hpp \
     include/Infectorpp/InfectorExport.hpp \
     include/Infectorpp/InfectorHelpers.hpp
+
+OTHER_FILES += \
+    README.md

@@ -40,3 +40,6 @@ HEADERS += \
     include/gmock/gmock-more-matchers.h \
     include/gmock/gmock-spec-builders.h \
     include/gmock/gmock.h
+
+OTHER_FILES += \
+    README.md

@@ -34,7 +34,8 @@ OTHER_FILES += \
     build/distrib.pri \
     build/lib.pri \
     build/staticlib.pri \
-    build/test.pri
+    build/test.pri \
+    README.md
 
 # Subproject paths
 gmock.subdir = third_party/gmock

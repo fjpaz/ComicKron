@@ -46,3 +46,6 @@ HEADERS += \
     zconf.h \
     zlib.h \
     zutil.h
+
+OTHER_FILES += \
+    README.md

@@ -102,3 +102,6 @@ HEADERS += \
     config_msvc.h \
     config_unix.h \
     config_darwin.h
+
+OTHER_FILES += \
+    README.md

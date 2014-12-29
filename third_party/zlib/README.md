@@ -1,7 +1,7 @@
 zlib
 ====
 
-Modified version of zlib 1.2.8. zlib++ is a lossless data-compression library. Upstream version [here](http://www.zlib.net).
+Modified version of zlib 1.2.8. zlib is a lossless data-compression library. Upstream version [here](http://www.zlib.net).
 
 Modifications are intended to integrate zlib in ComicKron build only with needed files.
 

@@ -148,3 +148,6 @@ HEADERS += \
     base/util/PdfMutexImpl_pthread.h \
     base/util/PdfMutexImpl_win32.h \
     base/util/PdfMutexWrapper.h
+
+OTHER_FILES += \
+    README.md
