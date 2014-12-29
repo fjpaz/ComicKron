@@ -6,20 +6,14 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #********************************************************************
 
-TARGET = KronApplicationUnitTests
+# This file must be included only in Unit Test projects. A Unit Test must be:
+# - Automatic
+# - Repeatable
+# - Independent
+# - Fast (not dependant on slow infraestructure services like DB, network or files)
 
-ROOTDIR = ../..
+include(test.pri)
 
-include($$ROOTDIR/build/unit_test.pri)
+CONFIG += console
 
-QT = core gui quick
-
-LIBS += -lKronApplication
-mac: LIBS += -lc++
-
-HEADERS += \ 
-    MockImageProvider.h
-
-SOURCES += \ 
-    TestComicViewerViewModel.cpp \
-    KronApplicationUnitTests.cpp
+unit_test.commands = $$DESTDIR/$$TARGET

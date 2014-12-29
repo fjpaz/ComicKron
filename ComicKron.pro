@@ -35,6 +35,7 @@ OTHER_FILES += \
     build/lib.pri \
     build/staticlib.pri \
     build/test.pri \
+    build/unit_test.pri \
     README.md
 
 # Subproject paths
@@ -51,6 +52,6 @@ zlib.subdir = third_party/zlib
 # Generate dependencies automatically (if subproject dependencies are not manually defined)
 include(build/autodepends.pri)
 
-# Distrib target
+# distrib target
 contains(QMAKE_HOST.os, Windows):win32: include(build/distrib.pri)
 contains(QMAKE_HOST.os, Linux):linux: include(build/distrib.pri)

@@ -31,13 +31,13 @@ contains(QMAKE_HOST.os, Windows):win32 {
     distrib.commands += if not exist $$shell_path($$OUT_PWD/dist) mkdir $$shell_path($$OUT_PWD/dist) $$escape_expand(\n\t)
 
     for(file, DISTRIB_FILES) {
-        distrib.commands += xcopy /y $$shell_path($$file $$OUT_PWD/dist) $$escape_expand(\n\t)
+        distrib.commands += xcopy /y $$shell_path($$file $$OUT_PWD/distrib) $$escape_expand(\n\t)
     }
 }
 
 # Linux build on Linux
 contains(QMAKE_HOST.os, Linux):linux {
-    distrib_FILES += \
+    DISTRIB_FILES += \
         $$BINDIR/* \
         $$LIBDIR/* \
         $$TESTDIR/* \
@@ -50,7 +50,7 @@ contains(QMAKE_HOST.os, Linux):linux {
         $$[QT_INSTALL_LIBS]/libicuuc.so* \
         $$[QT_INSTALL_LIBS]/libicudata.so*
 
-    distrib.commands += mkdir -p $$OUT_PWD/dist; cp -f $$DISTRIB_FILES $$OUT_PWD/dist
+    distrib.commands += mkdir -p $$OUT_PWD/dist; cp -f $$DISTRIB_FILES $$OUT_PWD/distrib
 }
 
 QMAKE_EXTRA_TARGETS += distrib

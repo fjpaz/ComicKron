@@ -8,6 +8,10 @@
 
 TEMPLATE = subdirs
 
+ROOTDIR = ../..
+
+include($$ROOTDIR/build/common.pri)
+
 HEADERS += \
     include/Infectorpp/Infector_details.hpp \
     include/Infectorpp/Infector_multi.hpp \

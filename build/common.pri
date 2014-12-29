@@ -76,3 +76,10 @@ CONFIG(release, debug | release) {
         QT_NO_DEBUG_OUTPUT \
         QT_NO_WARNING_OUTPUT
 }
+
+# Custom targets. Targets for specific subprojects have command defined in specific .pri file
+unit_test.CONFIG = recursive
+unit_test.depends = all
+
+QMAKE_EXTRA_TARGETS += \
+    unit_test
