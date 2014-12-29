@@ -17,7 +17,8 @@ defineReplace(subprojectPro) {
 
 # Test if subproject is a library
 defineTest(isLibrary) {
-    subproject_pro_path = $$1
+    subproject = $$1
+    subproject_pro_path = $$subprojectPro($$subproject)
     subproject_template = $$fromfile($$subproject_pro_path, TEMPLATE)
 
     contains(subproject_template, lib) {
@@ -72,9 +73,7 @@ defineTest(hasDefinedDepends) {
 
 # Get list of library subprojects
 for(SUBPROJECT, SUBDIRS) {
-    SUBPROJECT_PRO = $$subprojectPro($$SUBPROJECT)
-
-    isLibrary($$SUBPROJECT_PRO) {
+    isLibrary($$SUBPROJECT) {
         # Insert target in targets list and target:subproject list
         SUBPROJECT_TARGET = $$fromfile($$SUBPROJECT_PRO, TARGET)
         LIB_TARGETS += $$SUBPROJECT_TARGET
