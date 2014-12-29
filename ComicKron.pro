@@ -12,6 +12,7 @@ ROOTDIR = .
 
 android|ios: CONFIG += USE_SYSTEM_ZLIB
 
+# Subprojects
 !CONFIG(USE_SYSTEM_ZLIB) {
     SUBDIRS += zlib
 }
@@ -30,31 +31,33 @@ SUBDIRS += \
     Infectorpp \
     KronApplication \
     KronApplicationUnitTests \
-    KronMain \
+    KronMain
 
+# Other editable files
 OTHER_FILES += \
-    autodepends.pri \
-    bin.pri \
-    common.pri \
-    deployment.pri \
-    distrib.pri \
-    lib.pri \
-    staticlib.pri \
-    test.pri
+    build/autodepends.pri \
+    build/bin.pri \
+    build/common.pri \
+    build/deployment.pri \
+    build/distrib.pri \
+    build/lib.pri \
+    build/staticlib.pri \
+    build/test.pri
 
-# Subprojects path
-gmock.subdir = 3rdparty/gmock
-gtest.subdir = 3rdparty/gtest
-Infectorpp.subdir = 3rdparty/Infectorpp
+# Subproject paths
+gmock.subdir = third_party/gmock
+gtest.subdir = third_party/gtest
+Infectorpp.subdir = third_party/Infectorpp
 KronApplication.subdir = src/KronApplication
 KronApplicationUnitTests.subdir = test/KronApplicationUnitTests
 KronMain.subdir = src/KronMain
-libarchive.subdir = 3rdparty/libarchive
-podofo.subdir = 3rdparty/podofo
-zlib.subdir = 3rdparty/zlib
+libarchive.subdir = third_party/libarchive
+podofo.subdir = third_party/podofo
+zlib.subdir = third_party/zlib
 
-# Generate dependencies automatically (if subproject dependencies are not manually set)
-include(autodepends.pri)
+# Generate dependencies automatically (if subproject dependencies are not manually defined)
+include(build/autodepends.pri)
 
-contains(QMAKE_HOST.os, Windows):win32: include(distrib.pri)
-contains(QMAKE_HOST.os, Linux):linux: include(distrib.pri)
+# Distrib target
+contains(QMAKE_HOST.os, Windows):win32: include(build/distrib.pri)
+contains(QMAKE_HOST.os, Linux):linux: include(build/distrib.pri)

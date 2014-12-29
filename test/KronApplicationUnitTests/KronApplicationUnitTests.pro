@@ -10,7 +10,7 @@ TARGET = KronUnitTests
 
 ROOTDIR = ../..
 
-include($$ROOTDIR/test.pri)
+include($$ROOTDIR/build/test.pri)
 
 QT = core gui quick
 

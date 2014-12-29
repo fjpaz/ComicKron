@@ -10,7 +10,7 @@ TARGET = ComicKron
 
 ROOTDIR = ../..
 
-include($$ROOTDIR/bin.pri)
+include($$ROOTDIR/build/bin.pri)
 
 QT = core gui qml quick
 

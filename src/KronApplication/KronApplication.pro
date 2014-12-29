@@ -10,7 +10,7 @@ TARGET = KronApplication
 
 ROOTDIR = ../..
 
-include($$ROOTDIR/lib.pri)
+include($$ROOTDIR/build/lib.pri)
 
 QT       = core gui quick
 
