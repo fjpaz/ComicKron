@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ComicViewer.qml</file>
+        <file>ComicReader.qml</file>
     </qresource>
 </RCC>

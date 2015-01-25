@@ -18,36 +18,37 @@ android|ios: CONFIG += USE_SYSTEM_ZLIB
 !CONFIG(USE_SYSTEM_PODOFO): SUBDIRS += podofo
 
 SUBDIRS += \
-    gmock \
+    boost \
     gtest \
-    Infectorpp \
+    HippoMocks \
+    KronAcceptanceTests \
     KronApplication \
     KronApplicationUnitTests \
-    KronMain
-
-# Other editable files
-OTHER_FILES += \
-    build/autodepends.pri \
-    build/bin.pri \
-    build/common.pri \
-    build/deployment.pri \
-    build/distrib.pri \
-    build/lib.pri \
-    build/staticlib.pri \
-    build/test.pri \
-    build/unit_test.pri \
-    README.md
+    KronContractTests \
+    KronDI \
+    KronDomainUnitTests \
+    KronInfrastructure \
+    KronMain \
+    KronUI
 
 # Subproject paths
-gmock.subdir = third_party/gmock
+boost.subdir = third_party/boost
 gtest.subdir = third_party/gtest
-Infectorpp.subdir = third_party/Infectorpp
+HippoMocks.subdir = third_party/HippoMocks
+KronAcceptanceTests.subdir = test/KronAcceptanceTests
 KronApplication.subdir = src/KronApplication
 KronApplicationUnitTests.subdir = test/KronApplicationUnitTests
+KronContractTests.subdir = test/KronContractTests
+KronDI.subdir = src/KronDI
+KronDomainUnitTests.subdir = test/KronDomainUnitTests
+KronInfrastructure.subdir = src/KronInfrastructure
 KronMain.subdir = src/KronMain
+KronUI.subdir = src/KronUI
 libarchive.subdir = third_party/libarchive
 podofo.subdir = third_party/podofo
 zlib.subdir = third_party/zlib
+
+include(build/common.pri)
 
 # Generate dependencies automatically (if subproject dependencies are not manually defined)
 include(build/autodepends.pri)
@@ -55,3 +56,23 @@ include(build/autodepends.pri)
 # distrib target
 contains(QMAKE_HOST.os, Windows):win32: include(build/distrib.pri)
 contains(QMAKE_HOST.os, Linux):linux: include(build/distrib.pri)
+
+# output target
+include(build/output.pri)
+
+# Other editable files
+OTHER_FILES += \
+    build/acceptance_test.pri \
+    build/autodepends.pri \
+    build/bin.pri \
+    build/contract_test.pri \
+    build/common.pri \
+    build/deployment.pri \
+    build/distrib.pri \
+    build/lib.pri \
+    build/output.pri \
+    build/staticlib.pri \
+    build/targets.pri \
+    build/test.pri \
+    build/unit_test.pri \
+    README.md

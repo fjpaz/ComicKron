@@ -12,25 +12,33 @@ ROOTDIR = ../..
 
 include($$ROOTDIR/build/lib.pri)
 
-QT       = core gui quick
+QT = core
 
 DEFINES += KRONAPPLICATION_LIBRARY
-DEFINES += USING_SHARED_PODOFO
-
-SOURCES += \
-    ComicViewerViewModel.cpp \
-    ComicImageProvider.cpp
-
-HEADERS += \
-    ComicViewerViewModel.h\
-    ComicImageProvider.h \
-    kronapplication_global.h
-
-LIBS += \
-    -larchive \
-    -lpodofo
 
 mac: LIBS += -lc++
+
+SOURCES += \
+    viewmodels/ComicReaderVM.cpp \
+    App.cpp \
+    services/AppPageNavigator.cpp \
+    exceptions/ArchiveNotFoundException.cpp \
+    exceptions/ArchiveFormatNotSupportedException.cpp
+
+HEADERS += \
+    KronApplicationExport.h \
+    services/ComicArchiveReader.h \
+    services/ImageContainer.h \
+    exceptions/ArchiveNotFoundException.h \
+    AppFactory.h \
+    viewmodels/ComicReaderVM.h \
+    App.h \
+    services/AppPageNavigator.h \
+    PageId.h \
+    services/ViewModelRegistrar.h \
+    services/AppContext.h \
+    exceptions/ArchiveReadErrorException.h \
+    exceptions/ArchiveFormatNotSupportedException.h
 
 unix {
     target.path = /usr/lib

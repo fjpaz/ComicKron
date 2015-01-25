@@ -75,7 +75,8 @@ defineTest(hasDefinedDepends) {
 for(SUBPROJECT, SUBDIRS) {
     isLibrary($$SUBPROJECT) {
         # Insert target in targets list and target:subproject list
-        SUBPROJECT_TARGET = $$fromfile($$SUBPROJECT_PRO, TARGET)
+        subproject_pro_path = $$subprojectPro($$SUBPROJECT)
+        SUBPROJECT_TARGET = $$fromfile(../$$subproject_pro_path, TARGET)
         LIB_TARGETS += $$SUBPROJECT_TARGET
         TARGET_TO_SUBPROJECT += $$SUBPROJECT_TARGET:$$SUBPROJECT
     }

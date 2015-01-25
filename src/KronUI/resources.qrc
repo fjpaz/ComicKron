@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>views/main.qml</file>
+        <file>views/ComicReader.qml</file>
+    </qresource>
+</RCC>

@@ -17,9 +17,8 @@ QT = core gui quick
 LIBS += -lKronApplication
 mac: LIBS += -lc++
 
-HEADERS += \ 
-    MockImageProvider.h
+HEADERS +=  
 
 SOURCES += \ 
-    TestComicViewerViewModel.cpp \
-    KronApplicationUnitTests.cpp
+    KronApplicationUnitTests.cpp \
+    TestComicReaderViewModel.cpp

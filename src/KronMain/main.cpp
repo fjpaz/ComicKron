@@ -6,24 +6,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#include <KronApplication/ComicImageProvider.h>
-#include <KronApplication/ComicViewerViewModel.h>
+#include "SignalHandler.h"
+
+#include <KronApplication/App.h>
+#include <KronDI/KronAppFactory.h>
 
 #include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    ComicImageProvider* imageProvider = new ComicImageProvider;
-    ComicViewerViewModel viewModel(*imageProvider);
+    kron::SignalHandler::handleSignals();
 
-    QQmlApplicationEngine engine;
-    engine.addImageProvider("comic", imageProvider);
-    engine.rootContext()->setContextProperty("model", &viewModel);
-    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+    kron::AppFactory* appFactory = new kron::KronAppFactory;
+
+    kron::App* kronApp = appFactory->createApp();
+
+    // TODO: Pass command line input (comic path)
+    kronApp->run("");
 
     return app.exec();
 }

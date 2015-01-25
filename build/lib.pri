@@ -10,5 +10,6 @@ include(common.pri)
 
 TEMPLATE = lib
 CONFIG += dll
+CONFIG += plugin
 
 DESTDIR = $$LIBDIR

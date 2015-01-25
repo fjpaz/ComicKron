@@ -29,6 +29,8 @@ else: DEFINES += \
     PODOFO_HAVE_STRINGS_H \
     SZ_LONG=8
 
+QMAKE_CXXFLAGS -= -pedantic-errors
+
 LIBS += -lz
 win32: LIBS += -lWs2_32
 mac: LIBS += -lc++

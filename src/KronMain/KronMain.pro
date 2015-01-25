@@ -14,25 +14,29 @@ include($$ROOTDIR/build/bin.pri)
 
 QT = core gui qml quick
 
-RESOURCES += qml.qrc
-
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
-LIBS += -lKronApplication
+LIBS += \
+    -lKronApplication \
+    -lKronDI \
+    -lKronInfrastructure
 
 ANDROID_PACKAGE_SOURCE_DIR = $$_PRO_FILE_PWD_/$$ROOTDIR/platform/android
 ANDROID_EXTRA_LIBS += \
     $$LIBDIR/libarchive.so \
     $$LIBDIR/libpodofo.so \
-    $$LIBDIR/libKronApplication.so
+    $$LIBDIR/libKronApplication.so \
+    $$LIBDIR/libKronInfrastructure.so
 
 #WINRT_MANIFEST.target = ComicKron.exe
 #WINRT_MANIFEST.publisher = ComicKron
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    SignalHandler.cpp
 
-HEADERS +=
+HEADERS += \
+    SignalHandler.h
 
 OTHER_FILES += \
     $$ROOTDIR/platform/android/AndroidManifest.xml

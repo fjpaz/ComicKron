@@ -6,8 +6,6 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #********************************************************************
 
-include(common.pri)
-
 # Windows build on Windows
 contains(QMAKE_HOST.os, Windows):win32 {
     CONFIG(debug, debug|release):QTLIB_ENDING = d
@@ -28,7 +26,7 @@ contains(QMAKE_HOST.os, Windows):win32 {
         $$[QT_INSTALL_BINS]/icudt52.dll
 
     distrib.commands += del $$shell_path($$OUT_PWD/output/lib/*.a) $$escape_expand(\n\t)
-    distrib.commands += if not exist $$shell_path($$OUT_PWD/dist) mkdir $$shell_path($$OUT_PWD/dist) $$escape_expand(\n\t)
+    distrib.commands += if not exist $$shell_path($$OUT_PWD/distrib) mkdir $$shell_path($$OUT_PWD/dist) $$escape_expand(\n\t)
 
     for(file, DISTRIB_FILES) {
         distrib.commands += xcopy /y $$shell_path($$file $$OUT_PWD/distrib) $$escape_expand(\n\t)

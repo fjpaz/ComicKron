@@ -17,5 +17,4 @@ CONFIG += testcase
 CONFIG -= qml_debug
 
 LIBS += \
-    -lgtest \
-    -lgmock
+    -lgtest

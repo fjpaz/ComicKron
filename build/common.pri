@@ -9,9 +9,9 @@
 # Include path
 INTERNAL_INCLUDEPATH += $$ROOTDIR/src
 EXTERNAL_INCLUDEPATH += \
+    $$ROOTDIR/third_party/boost/include \
     $$ROOTDIR/third_party/gtest/include \
-    $$ROOTDIR/third_party/gmock/include \
-    $$ROOTDIR/third_party/Infectorpp/include
+    $$ROOTDIR/third_party/HippoMocks/include
 
 !CONFIG(USE_SYSTEM_ZLIB) {
     EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/zlib
@@ -50,13 +50,15 @@ msvc {
 # TODO: Flags Visual C++
 }
 else {
-    DEBUG_FLAGS = -g -O0
-    RELEASE_FLAGS = -O3
+    DEBUG_FLAGS = -g -O0 # Insert debugging symbols and don't optimize
+    RELEASE_FLAGS = -O3 # Insert optimization flags of level 3
     QMAKE_CFLAGS_DEBUG = $$DEBUG_FLAGS
     QMAKE_CFLAGS_RELEASE = $$RELEASE_FLAGS
     QMAKE_CXXFLAGS_DEBUG = $$DEBUG_FLAGS
     QMAKE_CXXFLAGS_RELEASE = $$RELEASE_FLAGS
-    QMAKE_CXXFLAGS += -std=c++11
+    QMAKE_CXXFLAGS += -std=c++11 # Use C++11 standard
+    QMAKE_CXXFLAGS += -Werror # Treat warnings as errors
+    QMAKE_CXXFLAGS += -pedantic-errors # Treat all the warnings demanded by strict ISO C and ISO C++ as errors
 
     mac {
         QMAKE_CXXFLAGS += -stdlib=libc++
@@ -77,9 +79,4 @@ CONFIG(release, debug | release) {
         QT_NO_WARNING_OUTPUT
 }
 
-# Custom targets. Targets for specific subprojects have command defined in specific .pri file
-unit_test.CONFIG = recursive
-unit_test.depends = all
-
-QMAKE_EXTRA_TARGETS += \
-    unit_test
+include(common_targets.pri)
