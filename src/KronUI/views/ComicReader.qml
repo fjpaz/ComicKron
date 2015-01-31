@@ -66,11 +66,6 @@ Item {
         title: "Open comic ..."
         onAccepted: {
             console.log("File opened: " + fileDialog.fileUrl)
-//            model.loadFile(fileDialog.fileUrl);
-//            var selectedFileUrl = fileDialog.fileUrl.toString()
-//            var selectedFile = selectedFileUrl.replace("file://", "")
-//            model.openComic(selectedFile)
-            console.log("SHIT!")
             model.openComic(fileDialog.fileUrl)
             fileDialog.close()
         }

@@ -32,7 +32,6 @@ PdfComicArchiveReader::PdfComicArchiveReader()
 
 PdfComicArchiveReader::~PdfComicArchiveReader()
 {
-    delete buffer_;
 }
 
 void PdfComicArchiveReader::open(QString comicArchive)
