@@ -48,31 +48,7 @@ protected:
         appFactory_.release();
     }
 };
-/*
-TEST_F(PageNavigationTest,
-Given_last_page_is_not_being_shown_currently_\
-When_user_requests_to_go_forward_\
-Then_show_next_page)
-{
-    SignalSpy spy(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
 
-    comicReaderVM_->goForward();
-
-    EXPECT_TRUE(spy.signalReceived());
-}
-
-TEST_F(PageNavigationTest,
-Given_last_page_is_being_shown_currently_\
-When_user_requests_to_go_forward_\
-Then_keep_showing_current_page)
-{
-    SignalSpy spy(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
-
-    comicReaderVM_->goForward();
-
-    EXPECT_TRUE(spy.signalReceived());
-}
-*/
 TEST_F(PageNavigationTest,
 Given_any_page_being_shown_\
 When_user_requests_to_go_to_first_page_\
@@ -87,5 +63,37 @@ Then_show_first_page)
     QByteArray currentPageMd5 = QCryptographicHash::hash(currentPage, QCryptographicHash::Md5);
     EXPECT_EQ(testdata::page01Md5, currentPageMd5);
 }
+
+TEST_F(PageNavigationTest,
+Given_last_page_is_not_being_shown_currently_\
+When_user_requests_to_go_forward_\
+Then_show_next_page)
+{
+    SignalSpy spyFirst(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
+    comicReaderVM_->goToFirstPage();
+    ASSERT_TRUE(spyFirst.signalReceived());
+    SignalSpy spyForward(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
+
+    comicReaderVM_->goForward();
+
+    ASSERT_TRUE(spyForward.signalReceived());
+    QByteArray currentPage = spyForward.firstParameter().toByteArray();
+    QByteArray currentPageMd5 = QCryptographicHash::hash(currentPage, QCryptographicHash::Md5);
+    EXPECT_EQ(testdata::page02Md5, currentPageMd5);
+}
+
+/*
+TEST_F(PageNavigationTest,
+Given_last_page_is_being_shown_currently_\
+When_user_requests_to_go_forward_\
+Then_keep_showing_current_page)
+{
+    SignalSpy spy(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
+
+    comicReaderVM_->goForward();
+
+    EXPECT_TRUE(spy.signalReceived());
+}
+*/
 
 }
