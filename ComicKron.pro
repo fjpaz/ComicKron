@@ -16,6 +16,7 @@ android|ios: CONFIG += USE_SYSTEM_ZLIB
 !CONFIG(USE_SYSTEM_ZLIB): SUBDIRS += zlib
 !CONFIG(USE_SYSTEM_LIBARCHIVE): SUBDIRS += libarchive
 !CONFIG(USE_SYSTEM_PODOFO): SUBDIRS += podofo
+!CONFIG(USE_SYSTEM_LEVELDB): SUBDIRS += leveldb
 
 SUBDIRS += \
     boost \
@@ -44,6 +45,7 @@ KronDomainUnitTests.subdir = test/KronDomainUnitTests
 KronInfrastructure.subdir = src/KronInfrastructure
 KronMain.subdir = src/KronMain
 KronUI.subdir = src/KronUI
+leveldb.subdir = third_party/leveldb
 libarchive.subdir = third_party/libarchive
 podofo.subdir = third_party/podofo
 zlib.subdir = third_party/zlib
