@@ -16,7 +16,7 @@ ArchiveNotFoundException::ArchiveNotFoundException(const std::string& archive)
 {
 }
 
-const char* ArchiveNotFoundException::what() const noexcept
+const char* ArchiveNotFoundException::what() const Q_DECL_NOEXCEPT
 {
     std::string message = "Archive" + archive_ + " not found";
 

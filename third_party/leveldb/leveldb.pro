@@ -29,6 +29,8 @@ posix {
 
 !msvc: QMAKE_CXX_FLAGS += -fno-builtin-memcmp
 
+INCLUDEPATH += .
+
 SOURCES += \
     db/builder.cc \
     db/c.cc \

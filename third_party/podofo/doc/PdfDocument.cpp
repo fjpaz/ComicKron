@@ -154,7 +154,7 @@ void PdfDocument::InitPagesTree()
     }
 }
 
-PdfObject* PdfDocument::GetNamedObjectFromCatalog( const char* pszName ) const 
+PdfObject* PdfDocument::GetNamedObjectFromCatalog( const char* pszName ) const
 {
     return m_pCatalog->GetIndirectKey( PdfName( pszName ) );
 }

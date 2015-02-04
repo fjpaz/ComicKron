@@ -35,6 +35,8 @@ LIBS += -lz
 win32: LIBS += -lWs2_32
 mac: LIBS += -lc++
 
+INCLUDEPATH += .
+
 SOURCES += \
     base/PdfArray.cpp \
     base/PdfCanvas.cpp \

@@ -6,17 +6,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef COMICARCHIVEREADER
-#define COMICARCHIVEREADER
-
-#include "../KronApplicationExport.h"
+#ifndef COMICARCHIVEREADER_H
+#define COMICARCHIVEREADER_H
 
 #include <QByteArray>
 #include <QString>
 
 namespace kron {
 
-class KRONAPPLICATION_EXPORT ComicArchiveReader
+class ComicArchiveReader
 {
 public:
     virtual ~ComicArchiveReader() {}
@@ -41,5 +39,5 @@ protected:
 
 }
 
-#endif // COMICARCHIVEREADER
+#endif // COMICARCHIVEREADER_H
 

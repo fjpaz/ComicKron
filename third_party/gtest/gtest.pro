@@ -15,6 +15,8 @@ include($$ROOTDIR/build/staticlib.pri)
 CONFIG -= qt
 CONFIG += warn_off
 
+INCLUDEPATH += .
+
 SOURCES += \
     src/gtest-all.cc \
     src/gtest-death-test.cc \

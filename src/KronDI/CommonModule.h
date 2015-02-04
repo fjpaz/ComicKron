@@ -9,8 +9,6 @@
 #ifndef COMMONMODULE_H
 #define COMMONMODULE_H
 
-#include "KronDIExport.h"
-
 #include <KronApplication/App.h>
 #include <KronApplication/viewmodels/ComicReaderVM.h>
 #include <KronInfrastructure/services/FileComicArchiveReader.h>
@@ -21,7 +19,7 @@ namespace di = boost::di;
 
 namespace kron {
 
-class KRONDI_EXPORT CommonModule
+class CommonModule
 {
 public:
     auto configure() const -> decltype(di::make_injector(
@@ -35,7 +33,7 @@ public:
 };
 
 template<class T>
-KRONDI_EXPORT void addContextProperties(App& app, T& injector)
+void addContextProperties(App& app, T& injector)
 {
     std::unique_ptr<ComicReaderVM> comicReaderVM = injector.template create<std::unique_ptr<ComicReaderVM>>();
 

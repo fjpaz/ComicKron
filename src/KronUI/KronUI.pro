@@ -12,13 +12,13 @@ ROOTDIR = ../..
 
 include($$ROOTDIR/build/lib.pri)
 
-QT       = core gui quick qml
+QT = core gui quick qml
 
 DEFINES += KRONUI_LIBRARY
 
 RESOURCES += resources.qrc
 
-LIBS +=
+LIBS += -lKronApplication
 
 mac: LIBS += -lc++
 

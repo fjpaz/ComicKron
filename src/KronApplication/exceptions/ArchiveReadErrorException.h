@@ -18,7 +18,7 @@ namespace kron {
 class KRONAPPLICATION_EXPORT ArchiveReadErrorException : public std::runtime_error
 {
 public:
-    using std::runtime_error::runtime_error;
+    explicit ArchiveReadErrorException(const std::string& message);
 };
 
 }

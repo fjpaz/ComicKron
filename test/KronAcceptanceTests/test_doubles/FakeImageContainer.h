@@ -11,6 +11,8 @@
 
 #include <KronApplication/services/ImageContainer.h>
 
+#include <QByteArray>
+#include <QString>
 #include <QtGlobal>
 
 namespace kron {

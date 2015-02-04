@@ -9,6 +9,8 @@
 #ifndef QMLAPPCONTEXT_H
 #define QMLAPPCONTEXT_H
 
+#include "../KronUIExport.h"
+
 #include <KronApplication/services/AppContext.h>
 
 #include <memory>
@@ -18,7 +20,7 @@ class QQuickImageProvider;
 
 namespace kron {
 
-class QmlAppContext : public AppContext
+class KRONUI_EXPORT QmlAppContext : public AppContext
 {
 public:
     QmlAppContext(std::unique_ptr<QQuickImageProvider> imageProvider);

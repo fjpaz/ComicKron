@@ -14,6 +14,11 @@
 
 namespace kron {
 
+SignalSpy::SignalSpy(const QObject* obj, const char* signalToSpy)
+    : QSignalSpy(obj, signalToSpy)
+{
+}
+
 bool SignalSpy::signalReceived(int timeout)
 {
     return !empty() || wait(timeout);

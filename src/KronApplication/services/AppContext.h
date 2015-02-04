@@ -9,15 +9,12 @@
 #ifndef APPCONTEXT_H
 #define APPCONTEXT_H
 
-#include "../KronApplicationExport.h"
-
+#include <QObject>
 #include <QString>
-
-class QObject;
 
 namespace kron {
 
-class KRONAPPLICATION_EXPORT AppContext
+class AppContext
 {
 public:
     virtual ~AppContext() {}

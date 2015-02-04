@@ -33,7 +33,9 @@
 
 #ifdef Q_CC_MSVC
 #include "win/stdint.h"
+#include <BaseTsd.h>
 #define snprintf _snprintf
+typedef SSIZE_T ssize_t;
 #endif
 
 namespace leveldb {

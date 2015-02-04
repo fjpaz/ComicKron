@@ -9,6 +9,8 @@
 #ifndef APP_H
 #define APP_H
 
+#include "KronApplicationExport.h"
+
 #include <QObject>
 
 #include <memory>
@@ -18,7 +20,7 @@ namespace kron {
 class AppContext;
 class AppPageNavigator;
 
-class App : public QObject
+class KRONAPPLICATION_EXPORT App : public QObject
 {
     Q_OBJECT
 public:

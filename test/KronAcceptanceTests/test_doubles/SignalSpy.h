@@ -23,7 +23,7 @@ namespace kron {
 class SignalSpy : public QSignalSpy
 {
 public:
-    using QSignalSpy::QSignalSpy;
+    explicit SignalSpy(const QObject* obj, const char* signalToSpy);
 
     /**
      * @brief Wait for a signal if one has not been emitted previously.

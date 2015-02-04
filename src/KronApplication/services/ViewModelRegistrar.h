@@ -9,20 +9,16 @@
 #ifndef VIEWMODELREGISTRAR_H
 #define VIEWMODELREGISTRAR_H
 
-#include "../KronApplicationExport.h"
-
 #include <QString>
-
-#include <memory>
 
 class QObject;
 
 namespace kron {
 
-class KRONAPPLICATION_EXPORT ViewModelRegistrar
+class ViewModelRegistrar
 {
 public:
-    virtual ~ViewModelRegistrar() {}
+    virtual ~ViewModelRegistrar() = default;
 
     virtual void registerViewModel(QString name, QObject& viewModel) = 0;
 };

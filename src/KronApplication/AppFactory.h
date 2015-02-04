@@ -17,7 +17,7 @@ namespace kron {
 
 class App;
 
-class KRONAPPLICATION_EXPORT AppFactory
+class AppFactory
 {
 public:
     virtual ~AppFactory() {}

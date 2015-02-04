@@ -14,8 +14,6 @@
 #include <QByteArray>
 #include <QObject>
 
-#include <memory>
-
 namespace kron {
 
 class ComicArchiveReader;

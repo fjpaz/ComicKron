@@ -12,6 +12,7 @@
 #include "../KronApplicationExport.h"
 
 #include <exception>
+#include <string>
 
 namespace kron {
 
@@ -20,7 +21,7 @@ class KRONAPPLICATION_EXPORT ArchiveNotFoundException : public std::exception
 public:
     explicit ArchiveNotFoundException(const std::string& archive);
 
-    virtual const char* what() const noexcept override;
+    virtual const char* what() const Q_DECL_NOEXCEPT override;
 
 private:
     std::string archive_;

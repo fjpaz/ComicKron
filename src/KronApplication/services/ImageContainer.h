@@ -6,17 +6,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef IMAGECONTAINER
-#define IMAGECONTAINER
-
-#include "../KronApplicationExport.h"
+#ifndef IMAGECONTAINER_H
+#define IMAGECONTAINER_H
 
 class QByteArray;
 class QString;
 
 namespace kron {
 
-class KRONAPPLICATION_EXPORT ImageContainer
+class ImageContainer
 {
 public:
     virtual ~ImageContainer() = default;
@@ -26,5 +24,5 @@ public:
 
 }
 
-#endif // IMAGECONTAINER
+#endif // IMAGECONTAINER_H
 

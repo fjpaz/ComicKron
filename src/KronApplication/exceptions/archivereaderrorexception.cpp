@@ -6,30 +6,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef KRONAPPFACTORY_H
-#define KRONAPPFACTORY_H
-
-#include "KronDIExport.h"
-
-#include <KronApplication/AppFactory.h>
-
-#include <QObject>
-
-class QQmlApplicationEngine;
+#include "ArchiveReadErrorException.h"
 
 namespace kron {
 
-class KRONDI_EXPORT KronAppFactory : public QObject, public AppFactory
+ArchiveReadErrorException::ArchiveReadErrorException(const std::string& message)
+    : std::runtime_error(message)
 {
-    Q_OBJECT
-public:
-    KronAppFactory();
-
-    virtual ~KronAppFactory();
-
-    virtual App* createApp() override;
-};
-
 }
 
-#endif // KRONAPPFACTORY_H
+}

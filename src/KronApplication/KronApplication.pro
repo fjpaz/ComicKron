@@ -23,7 +23,8 @@ SOURCES += \
     App.cpp \
     services/AppPageNavigator.cpp \
     exceptions/ArchiveNotFoundException.cpp \
-    exceptions/ArchiveFormatNotSupportedException.cpp
+    exceptions/ArchiveFormatNotSupportedException.cpp \
+    exceptions/ArchiveReadErrorException.cpp
 
 HEADERS += \
     KronApplicationExport.h \

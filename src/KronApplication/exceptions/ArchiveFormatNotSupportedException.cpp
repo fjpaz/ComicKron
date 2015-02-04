@@ -16,7 +16,7 @@ ArchiveFormatNotSupportedException::ArchiveFormatNotSupportedException(const std
 {
 }
 
-const char* ArchiveFormatNotSupportedException::what() const noexcept
+const char* ArchiveFormatNotSupportedException::what() const Q_DECL_NOEXCEPT
 {
     std::string message = "Archive" + archive_ + " format not supported";
 

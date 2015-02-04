@@ -9,8 +9,8 @@
 #ifndef APPPAGENAVIGATOR_H
 #define APPPAGENAVIGATOR_H
 
-#include "KronApplicationExport.h"
-#include "PageId.h"
+#include "../KronApplicationExport.h"
+#include "../PageId.h"
 
 #include <QObject>
 

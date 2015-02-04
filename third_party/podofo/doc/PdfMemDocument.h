@@ -332,13 +332,6 @@ protected:
     PdfObject* GetMainTrailer() { return PdfDocument::GetTrailer(); }
 
     //private
-    /** Get a dictioary from the catalog dictionary by its name.
-     *  \param pszName will be converted into a PdfName
-     *  \returns the dictionary if it was found or NULL
-     */
-    PdfObject* GetNamedObjectFromCatalog( const char* pszName ) const;
-
-    //private
     /** Internal method to load all objects from a PdfParser object.
      *  The objects will be removed from the parser and are now
      *  owned by the PdfMemDocument.
