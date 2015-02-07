@@ -27,6 +27,15 @@ posix {
     DEFINES += LEVELDB_PLATFORM_QT
 }
 
+win: DEFINES += OS_WIN
+mac: DEFINES += OS_MACOSX
+linux: DEFINES += OS_LINUX
+android: DEFINES += OS_ANDROID
+freebsd*: DEFINES += OS_FREEBSD
+netbsd*: DEFINES += OS_NETBSD
+openbsd*: DEFINES += OS_OPENBSD
+hpux*: DEFINES += OS_HPUX
+
 !msvc: QMAKE_CXX_FLAGS += -fno-builtin-memcmp
 
 INCLUDEPATH += .
