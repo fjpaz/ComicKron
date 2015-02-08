@@ -14,6 +14,8 @@ include($$ROOTDIR/build/lib.pri)
 
 CONFIG += warn_off
 
+DEFINES += SNAPPY
+
 posix {
     CONFIG -= qt
     CONFIG += leveldb_posix
@@ -39,6 +41,9 @@ hpux*: DEFINES += OS_HPUX
 !msvc: QMAKE_CXX_FLAGS += -fno-builtin-memcmp
 
 INCLUDEPATH += .
+
+LIBS += \
+    -lsnappy
 
 mac: LIBS += -lc++
 

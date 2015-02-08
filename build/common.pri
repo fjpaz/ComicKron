@@ -29,6 +29,11 @@ EXTERNAL_INCLUDEPATH += \
     EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/leveldb/include
 }
 
+!CONFIG(USE_SYSTEM_LEVELDB) {
+    EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/snappy
+}
+
+
 mac: EXTERNAL_INCLUDEPATH += $$[QT_INSTALL_PREFIX]/lib/QtQuick.framework/Headers
 else: EXTERNAL_INCLUDEPATH += \
     $$[QT_INSTALL_PREFIX]/include/QtCore \
