@@ -22,6 +22,8 @@ LIBS += -lKronApplication
 
 mac: LIBS += -lc++
 
+ios: QTPLUGIN += qmldbg_tcp
+
 SOURCES += \
     services/QmlViewModelRegistrar.cpp \
     services/QmlAppContext.cpp \
