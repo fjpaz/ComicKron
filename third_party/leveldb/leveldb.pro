@@ -40,6 +40,8 @@ hpux*: DEFINES += OS_HPUX
 
 INCLUDEPATH += .
 
+mac: LIBS += -lc++
+
 SOURCES += \
     db/builder.cc \
     db/c.cc \

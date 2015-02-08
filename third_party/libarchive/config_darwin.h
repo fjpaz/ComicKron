@@ -488,7 +488,7 @@
 /* #undef HAVE_LLISTXATTR */
 
 /* Define to 1 if you have the <localcharset.h> header file. */
-#define HAVE_LOCALCHARSET_H 1
+/* #undef HAVE_LOCALCHARSET_H */
 
 /* Define to 1 if you have the `locale_charset' function. */
 #define HAVE_LOCALE_CHARSET 1

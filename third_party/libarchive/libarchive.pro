@@ -32,6 +32,8 @@ android-* {
 DEFINES += HAVE_SYS_UTIME_H
 }
 
+macx: DEFINES += HAVE_LOCALCHARSET_H
+
 LIBS += -lz
 msvc: LIBS += -lAdvapi32 -lUser32
 mac: LIBS += -liconv -lbz2

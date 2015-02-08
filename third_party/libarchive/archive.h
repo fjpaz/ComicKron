@@ -85,8 +85,11 @@
 #   define __LA_DECL	__declspec(dllimport)
 #  endif
 # endif
+#elif !defined LIBARCHIVE_STATIC
+/* Dynamic libraries on non-Windows */
+# define __LA_DECL      __attribute__ ((visibility("default")))
 #else
-/* Static libraries or non-Windows needs no special declaration. */
+/* Static libraries */
 # define __LA_DECL
 #endif
 
