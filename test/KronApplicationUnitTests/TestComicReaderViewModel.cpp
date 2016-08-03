@@ -6,14 +6,15 @@
 #include <HippoMocks/hippomocks.h>
 
 #include <memory>
+#include <QUrl>
+
+using namespace kron;
 
 std::ostream& operator<<(std::ostream& stream, const QByteArray& byteArray)
 {
     stream << byteArray.toStdString();
     return stream;
 }
-
-namespace kron {
 
 class TestComicViewerViewModel : public ::testing::Test
 {
@@ -41,15 +42,14 @@ protected:
 TEST_F(TestComicViewerViewModel, shouldGoToFirstPageWhenComicLoaded)
 {
     QString testComic = "TestComic.cbz";
+    QUrl comicUrl = QUrl::fromLocalFile(testComic);
     QByteArray expectedPage = "ExpectedPage";
     QString id = "current";
     mocks_->ExpectCall(comicArchiveReader_, ComicArchiveReader::open).With(testComic);
     mocks_->ExpectCall(comicArchiveReader_, ComicArchiveReader::readFirstImage).Return(expectedPage);
     mocks_->ExpectCall(imageContainer_, ImageContainer::setImage).With(id, expectedPage);
 
-    comicReader_->openComic(testComic);
+    comicReader_->openComic(comicUrl.toString());
 
     EXPECT_NO_THROW(mocks_->VerifyAll());
-}
-
 }

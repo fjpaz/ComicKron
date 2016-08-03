@@ -19,7 +19,7 @@
 
 #include <memory>
 
-namespace kron {
+using namespace kron;
 
 typedef ComicArchiveReader* CreateComicArchiveReaderFunc();
 
@@ -111,8 +111,6 @@ TEST_P(ComicArchiveReaderContract, shouldBeAbleToReadPdfArchives)
 
     QByteArray image03Md5 = QCryptographicHash::hash(image03, QCryptographicHash::Md5);
     EXPECT_EQ(testdata::pdfPage01Md5, image03Md5);
-}
-
 }
 
 #endif // COMICARCHIVEREADERCONTRACT_H

@@ -20,7 +20,7 @@
 #include <functional>
 #include <memory>
 
-namespace kron {
+using namespace kron;
 
 // As a comic reader
 // I want to navigate through pages
@@ -95,5 +95,3 @@ Then_keep_showing_current_page)
     EXPECT_TRUE(spy.signalReceived());
 }
 */
-
-}
