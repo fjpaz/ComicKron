@@ -28,7 +28,7 @@ public:
 
     virtual QPixmap requestPixmap(const QString& id, QSize* size, const QSize& requestedSize) override;
 
-    void setImage(const QString& id, const QByteArray& raw);
+    void setImage(const QString& id, const QByteArray& raw) override;
 
 private:
     QHash<QString, QPixmap> pixmaps_;
