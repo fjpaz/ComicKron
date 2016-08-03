@@ -32,7 +32,7 @@ CompressedComicArchiveReader::CompressedComicArchiveReader()
 
 CompressedComicArchiveReader::~CompressedComicArchiveReader()
 {
-    delete buffer_;
+    delete[] buffer_;
 }
 
 void CompressedComicArchiveReader::open(QString comicArchive)
