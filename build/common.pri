@@ -67,6 +67,7 @@ else {
     QMAKE_CXXFLAGS_RELEASE = $$RELEASE_FLAGS
     QMAKE_CXXFLAGS += -std=c++11 # Use C++11 standard
     QMAKE_CXXFLAGS += -Werror # Treat warnings as errors
+    QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declarations
     QMAKE_CXXFLAGS += -pedantic-errors # Treat all the warnings demanded by strict ISO C and ISO C++ as errors
 
     mac {
