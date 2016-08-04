@@ -17,6 +17,7 @@ QT = core gui quick
 DEFINES += KRONINFRASTRUCTURE_LIBRARY
 DEFINES += USING_SHARED_PODOFO
 
+QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declarations
 !msvc: QMAKE_CXXFLAGS -= -pedantic-errors
 
 LIBS += \

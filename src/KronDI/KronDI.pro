@@ -16,6 +16,9 @@ QT = core gui quick
 
 DEFINES += KRONDI_LIBRARY
 
+QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declarations
+QMAKE_CXXFLAGS += -Wno-placement-new # No warn about placement new
+
 LIBS += \
     -lKronApplication \
     -lKronInfrastructure \
