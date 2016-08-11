@@ -49,10 +49,7 @@ protected:
     }
 };
 
-TEST_F(PageNavigationTest,
-Given_any_page_being_shown_\
-When_user_requests_to_go_to_first_page_\
-Then_show_first_page)
+TEST_F(PageNavigationTest, Given_any_page_being_shown_When_user_requests_to_go_to_first_page_Then_show_first_page)
 {
     SignalSpy spy(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
 
@@ -64,10 +61,7 @@ Then_show_first_page)
     EXPECT_EQ(testdata::page01Md5, currentPageMd5);
 }
 
-TEST_F(PageNavigationTest,
-Given_last_page_is_not_being_shown_currently_\
-When_user_requests_to_go_forward_\
-Then_show_next_page)
+TEST_F(PageNavigationTest, Given_last_page_is_not_being_shown_currently_When_user_requests_to_go_forward_Then_show_next_page)
 {
     SignalSpy spyFirst(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
     comicReaderVM_->goToFirstPage();
@@ -83,10 +77,7 @@ Then_show_next_page)
 }
 
 /*
-TEST_F(PageNavigationTest,
-Given_last_page_is_being_shown_currently_\
-When_user_requests_to_go_forward_\
-Then_keep_showing_current_page)
+TEST_F(PageNavigationTest, Given_last_page_is_being_shown_currently_When_user_requests_to_go_forward_Then_keep_showing_current_page)
 {
     SignalSpy spy(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
 
