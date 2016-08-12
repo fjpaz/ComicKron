@@ -14,7 +14,7 @@ include($$ROOTDIR/build/unit_test.pri)
 
 QT = core gui quick
 
-LIBS += -lKronApplication
+LIBS += -lKronCore
 mac: LIBS += -lc++
 
 HEADERS +=  

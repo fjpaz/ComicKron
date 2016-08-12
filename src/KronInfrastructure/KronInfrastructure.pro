@@ -21,7 +21,7 @@ QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declar
 !msvc: QMAKE_CXXFLAGS -= -pedantic-errors
 
 LIBS += \
-    -lKronApplication \
+    -lKronCore \
     -larchive \
     -lpodofo
 

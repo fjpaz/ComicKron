@@ -18,7 +18,7 @@ DEFINES += KRONUI_LIBRARY
 
 RESOURCES += resources.qrc
 
-LIBS += -lKronApplication
+LIBS += -lKronCore
 
 mac: LIBS += -lc++
 

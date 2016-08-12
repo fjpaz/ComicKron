@@ -18,7 +18,7 @@ QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declar
 QMAKE_CXXFLAGS += -Wno-placement-new # No warn about placement new
 
 LIBS += \
-    -lKronApplication \
+    -lKronCore \
     -lKronDI \
     -lKronInfrastructure
 mac: LIBS += -lc++

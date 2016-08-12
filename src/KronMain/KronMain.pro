@@ -18,7 +18,7 @@ QT = core gui qml quick
 QML_IMPORT_PATH =
 
 LIBS += \
-    -lKronApplication \
+    -lKronCore \
     -lKronDI \
     -lKronInfrastructure
 
