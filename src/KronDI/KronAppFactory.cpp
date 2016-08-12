@@ -10,7 +10,7 @@
 
 #include "CommonModule.h"
 
-#include <KronApplication/App.h>
+#include <KronCore/App.h>
 #include <KronUI/services/PixmapImageProvider.h>
 #include <KronUI/services/QmlAppContext.h>
 

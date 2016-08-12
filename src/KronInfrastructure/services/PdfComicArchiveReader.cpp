@@ -8,7 +8,7 @@
 
 #include "PdfComicArchiveReader.h"
 
-#include <KronApplication/exceptions/ArchiveReadErrorException.h>
+#include <KronCore/exceptions/ArchiveReadErrorException.h>
 
 #include <podofo/base/PdfDictionary.h>
 #include <podofo/base/PdfMemStream.h>

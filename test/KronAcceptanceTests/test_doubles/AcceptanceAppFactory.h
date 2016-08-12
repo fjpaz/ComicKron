@@ -9,7 +9,7 @@
 #ifndef ACCEPTANCEAPPFACTORY_H
 #define ACCEPTANCEAPPFACTORY_H
 
-#include <KronApplication/AppFactory.h>
+#include <KronCore/AppFactory.h>
 
 namespace kron {
 

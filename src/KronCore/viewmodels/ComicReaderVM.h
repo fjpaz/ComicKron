@@ -9,7 +9,7 @@
 #ifndef COMICREADERVM_H
 #define COMICREADERVM_H
 
-#include "../KronApplicationExport.h"
+#include "../KronCoreExport.h"
 
 #include <QByteArray>
 #include <QObject>
@@ -19,7 +19,7 @@ namespace kron {
 class ComicArchiveReader;
 class ImageContainer;
 
-class KRONAPPLICATION_EXPORT ComicReaderVM : public QObject
+class KRONCORE_EXPORT ComicReaderVM : public QObject
 {
     Q_OBJECT
 public:

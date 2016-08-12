@@ -11,7 +11,7 @@
 
 #include "../KronUIExport.h"
 
-#include <KronApplication/services/AppContext.h>
+#include <KronCore/services/AppContext.h>
 
 #include <memory>
 

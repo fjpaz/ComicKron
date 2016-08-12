@@ -11,7 +11,7 @@
 
 #include "../common/TestData.h"
 
-#include <KronApplication/services/ComicArchiveReader.h>
+#include <KronCore/services/ComicArchiveReader.h>
 
 #include <gtest/gtest.h>
 #include <QCryptographicHash>

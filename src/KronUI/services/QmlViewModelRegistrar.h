@@ -11,7 +11,7 @@
 
 #include "../KronUIExport.h"
 
-#include <KronApplication/services/ViewModelRegistrar.h>
+#include <KronCore/services/ViewModelRegistrar.h>
 
 class QQmlApplicationEngine;
 

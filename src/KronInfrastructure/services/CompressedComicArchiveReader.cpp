@@ -8,8 +8,8 @@
 
 #include "CompressedComicArchiveReader.h"
 
-#include <KronApplication/exceptions/ArchiveNotFoundException.h>
-#include <KronApplication/exceptions/ArchiveReadErrorException.h>
+#include <KronCore/exceptions/ArchiveNotFoundException.h>
+#include <KronCore/exceptions/ArchiveReadErrorException.h>
 
 #include <archive.h>
 #include <archive_entry.h>

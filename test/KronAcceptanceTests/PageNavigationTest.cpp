@@ -10,8 +10,8 @@
 #include "test_doubles/AcceptanceAppFactory.h"
 #include "test_doubles/SignalSpy.h"
 
-#include <KronApplication/App.h>
-#include <KronApplication/viewmodels/ComicReaderVM.h>
+#include <KronCore/App.h>
+#include <KronCore/viewmodels/ComicReaderVM.h>
 
 #include <gtest/gtest.h>
 #include <QCryptographicHash>

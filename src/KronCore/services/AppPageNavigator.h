@@ -9,14 +9,14 @@
 #ifndef APPPAGENAVIGATOR_H
 #define APPPAGENAVIGATOR_H
 
-#include "../KronApplicationExport.h"
+#include "../KronCoreExport.h"
 #include "../PageId.h"
 
 #include <QObject>
 
 namespace kron {
 
-class KRONAPPLICATION_EXPORT AppPageNavigator : public QObject
+class KRONCORE_EXPORT AppPageNavigator : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(PageId page_ READ currentPage WRITE navigateTo NOTIFY currentPageChanged)

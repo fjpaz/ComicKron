@@ -11,7 +11,7 @@
 
 #include "KronDIExport.h"
 
-#include <KronApplication/AppFactory.h>
+#include <KronCore/AppFactory.h>
 
 #include <QObject>
 

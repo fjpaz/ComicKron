@@ -9,14 +9,14 @@
 #ifndef ARCHIVEFORMATNOTSUPPORTEDEXCEPTION_H
 #define ARCHIVEFORMATNOTSUPPORTEDEXCEPTION_H
 
-#include "../KronApplicationExport.h"
+#include "../KronCoreExport.h"
 
 #include <exception>
 #include <string>
 
 namespace kron {
 
-class KRONAPPLICATION_EXPORT ArchiveFormatNotSupportedException : public std::exception
+class KRONCORE_EXPORT ArchiveFormatNotSupportedException : public std::exception
 {
 public:
     explicit ArchiveFormatNotSupportedException(const std::string& archive);

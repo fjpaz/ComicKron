@@ -24,11 +24,10 @@ SUBDIRS += \
     gtest \
     HippoMocks \
     KronAcceptanceTests \
-    KronApplication \
-    KronApplicationUnitTests \
+    KronCore \
+    KronCoreUnitTests \
     KronContractTests \
     KronDI \
-    KronDomainUnitTests \
     KronInfrastructure \
     KronMain \
     KronUI
@@ -38,11 +37,10 @@ boost.subdir = third_party/boost
 gtest.subdir = third_party/gtest
 HippoMocks.subdir = third_party/HippoMocks
 KronAcceptanceTests.subdir = test/KronAcceptanceTests
-KronApplication.subdir = src/KronApplication
-KronApplicationUnitTests.subdir = test/KronApplicationUnitTests
+KronCore.subdir = src/KronCore
+KronCoreUnitTests.subdir = test/KronCoreUnitTests
 KronContractTests.subdir = test/KronContractTests
 KronDI.subdir = src/KronDI
-KronDomainUnitTests.subdir = test/KronDomainUnitTests
 KronInfrastructure.subdir = src/KronInfrastructure
 KronMain.subdir = src/KronMain
 KronUI.subdir = src/KronUI

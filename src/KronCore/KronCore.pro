@@ -6,7 +6,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #********************************************************************
 
-TARGET = KronApplication
+TARGET = KronCore
 
 ROOTDIR = ../..
 
@@ -14,7 +14,7 @@ include($$ROOTDIR/build/lib.pri)
 
 QT = core
 
-DEFINES += KRONAPPLICATION_LIBRARY
+DEFINES += KRONCORE_LIBRARY
 
 mac: LIBS += -lc++
 
@@ -27,7 +27,6 @@ SOURCES += \
     exceptions/ArchiveReadErrorException.cpp
 
 HEADERS += \
-    KronApplicationExport.h \
     services/ComicArchiveReader.h \
     services/ImageContainer.h \
     exceptions/ArchiveNotFoundException.h \
@@ -39,7 +38,8 @@ HEADERS += \
     services/ViewModelRegistrar.h \
     services/AppContext.h \
     exceptions/ArchiveReadErrorException.h \
-    exceptions/ArchiveFormatNotSupportedException.h
+    exceptions/ArchiveFormatNotSupportedException.h \
+    KronCoreExport.h
 
 unix {
     target.path = /usr/lib

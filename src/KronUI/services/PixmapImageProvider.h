@@ -11,7 +11,7 @@
 
 #include "../KronUIExport.h"
 
-#include <KronApplication/services/ImageContainer.h>
+#include <KronCore/services/ImageContainer.h>
 
 #include <QHash>
 #include <QPixmap>

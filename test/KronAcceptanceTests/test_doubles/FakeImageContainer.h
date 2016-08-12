@@ -9,7 +9,7 @@
 #ifndef FAKEIMAGECONTAINER_H
 #define FAKEIMAGECONTAINER_H
 
-#include <KronApplication/services/ImageContainer.h>
+#include <KronCore/services/ImageContainer.h>
 
 #include <QByteArray>
 #include <QString>

@@ -1,6 +1,6 @@
-#include <KronApplication/services/ComicArchiveReader.h>
-#include <KronApplication/services/ImageContainer.h>
-#include <KronApplication/viewmodels/ComicReaderVM.h>
+#include <KronCore/services/ComicArchiveReader.h>
+#include <KronCore/services/ImageContainer.h>
+#include <KronCore/viewmodels/ComicReaderVM.h>
 
 #include <gtest/gtest.h>
 #include <HippoMocks/hippomocks.h>

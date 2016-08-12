@@ -6,27 +6,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef ARCHIVENOTFOUNDEXCEPTION_H
-#define ARCHIVENOTFOUNDEXCEPTION_H
+#ifndef ARCHIVEREADERROREXCEPTION_H
+#define ARCHIVEREADERROREXCEPTION_H
 
-#include "../KronApplicationExport.h"
+#include "../KronCoreExport.h"
 
-#include <exception>
-#include <string>
+#include <stdexcept>
 
 namespace kron {
 
-class KRONAPPLICATION_EXPORT ArchiveNotFoundException : public std::exception
+class KRONCORE_EXPORT ArchiveReadErrorException : public std::runtime_error
 {
 public:
-    explicit ArchiveNotFoundException(const std::string& archive);
-
-    virtual const char* what() const Q_DECL_NOEXCEPT override;
-
-private:
-    std::string archive_;
+    explicit ArchiveReadErrorException(const std::string& message);
 };
 
 }
 
-#endif // ARCHIVENOTFOUNDEXCEPTION_H
+#endif // ARCHIVEREADERROREXCEPTION_H
+

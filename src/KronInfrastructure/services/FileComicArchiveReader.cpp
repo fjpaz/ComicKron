@@ -11,7 +11,7 @@
 #include "CompressedComicArchiveReader.h"
 #include "PdfComicArchiveReader.h"
 
-#include <KronApplication/exceptions/ArchiveNotFoundException.h>
+#include <KronCore/exceptions/ArchiveNotFoundException.h>
 
 #include <QFileInfo>
 

@@ -11,7 +11,7 @@
 
 #include "../KronInfrastructureExport.h"
 
-#include <KronApplication/services/ComicArchiveReader.h>
+#include <KronCore/services/ComicArchiveReader.h>
 
 #include <QVarLengthArray>
 

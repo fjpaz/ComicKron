@@ -9,7 +9,7 @@
 #ifndef ISOLATEDAPPCONTEXT_H
 #define ISOLATEDAPPCONTEXT_H
 
-#include <KronApplication/services/AppContext.h>
+#include <KronCore/services/AppContext.h>
 
 #include <functional>
 #include <string>

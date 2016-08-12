@@ -9,8 +9,8 @@
 #ifndef COMMONMODULE_H
 #define COMMONMODULE_H
 
-#include <KronApplication/App.h>
-#include <KronApplication/viewmodels/ComicReaderVM.h>
+#include <KronCore/App.h>
+#include <KronCore/viewmodels/ComicReaderVM.h>
 #include <KronInfrastructure/services/FileComicArchiveReader.h>
 
 #include <boost/di.hpp>

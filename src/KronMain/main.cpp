@@ -8,7 +8,7 @@
 
 #include "SignalHandler.h"
 
-#include <KronApplication/App.h>
+#include <KronCore/App.h>
 #include <KronDI/KronAppFactory.h>
 
 #include <QGuiApplication>
