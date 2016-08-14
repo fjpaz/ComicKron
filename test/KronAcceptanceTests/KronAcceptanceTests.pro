@@ -14,6 +14,7 @@ include($$ROOTDIR/build/acceptance_test.pri)
 
 QT = core testlib
 
+QMAKE_CXXFLAGS += -Wno-unknown-warning-option # No warn about unknown warning options
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declarations
 QMAKE_CXXFLAGS += -Wno-placement-new # No warn about placement new
 

@@ -40,3 +40,9 @@ HEADERS += \
 
 OTHER_FILES += \
     $$ROOTDIR/platform/android/AndroidManifest.xml
+
+mac {
+    dylibs.path = Contents/MacOS
+    dylibs.files = $$files($$LIBDIR/*)
+    QMAKE_BUNDLE_DATA += dylibs
+}
