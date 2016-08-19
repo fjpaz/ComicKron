@@ -10,35 +10,39 @@
 contains(QMAKE_HOST.os, Windows):win32 {
     CONFIG(debug, debug|release):QTLIB_ENDING = d
 
+#    # distrib target
     DISTRIB_FILES += \
         $$BINDIR \
-        $$LIBDIR\
-        $$TESTDIR \
-        $$[QT_INSTALL_BINS]/Qt5Core$${QTLIB_ENDING}.dll \
-        $$[QT_INSTALL_BINS]/Qt5Gui$${QTLIB_ENDING}.dll \
-        $$[QT_INSTALL_BINS]/Qt5Qml$${QTLIB_ENDING}.dll \
-        $$[QT_INSTALL_BINS]/Qt5Quick$${QTLIB_ENDING}.dll \
-        $$[QT_INSTALL_BINS]/Qt5Network$${QTLIB_ENDING}.dll \
-        $$[QT_INSTALL_BINS]/libwinpthread-1.dll \
-        $$[QT_INSTALL_BINS]/libstdc++-6.dll \
-        $$[QT_INSTALL_BINS]/icuin52.dll \
-        $$[QT_INSTALL_BINS]/icuuc52.dll \
-        $$[QT_INSTALL_BINS]/icudt52.dll
+        $$LIBDIR
 
-    distrib.commands += del $$shell_path($$OUT_PWD/output/lib/*.a) $$escape_expand(\n\t)
-    distrib.commands += if not exist $$shell_path($$OUT_PWD/distrib) mkdir $$shell_path($$OUT_PWD/dist) $$escape_expand(\n\t)
+    distrib.CONFIG += phony
+    distrib.commands += if exist $$shell_path($$OUT_PWD/distrib) rmdir /s /q $$shell_path($$OUT_PWD/distrib) $$escape_expand(\n\t)
+    distrib.commands += mkdir $$shell_path($$OUT_PWD/distrib) $$escape_expand(\n\t)
 
     for(file, DISTRIB_FILES) {
         distrib.commands += xcopy /y $$shell_path($$file $$OUT_PWD/distrib) $$escape_expand(\n\t)
+    }
+
+    distrib.commands += $$[QT_INSTALL_BINS]/windeployqt --qml --qmldir $$PWD/.. $$OUT_PWD/distrib
+
+    # distrib_test target
+    DISTRIB_TEST_FILES += \
+        $$TESTDIR \
+        $$[QT_INSTALL_BINS]/Qt5Test$${QTLIB_ENDING}.dll
+
+    distrib_test.CONFIG += phony
+
+    for(file, DISTRIB_TEST_FILES) {
+        distrib_test.commands += xcopy /y $$shell_path($$file $$OUT_PWD/distrib) $$escape_expand(\n\t)
     }
 }
 
 # Linux build on Linux
 contains(QMAKE_HOST.os, Linux):linux {
+    # distrib target
     DISTRIB_FILES += \
         $$BINDIR/* \
         $$LIBDIR/* \
-        $$TESTDIR/* \
         $$[QT_INSTALL_LIBS]/libQt5Core.so* \
         $$[QT_INSTALL_LIBS]/libQt5Gui.so* \
         $$[QT_INSTALL_LIBS]/libQt5Qml.so* \
@@ -48,7 +52,16 @@ contains(QMAKE_HOST.os, Linux):linux {
         $$[QT_INSTALL_LIBS]/libicuuc.so* \
         $$[QT_INSTALL_LIBS]/libicudata.so*
 
+    distrib.CONFIG += phony
     distrib.commands += mkdir -p $$OUT_PWD/dist; cp -f $$DISTRIB_FILES $$OUT_PWD/distrib
+
+    # distrib_test target
+    DISTRIB_TEST_FILES += \
+        $$TESTDIR \
+        $$[QT_INSTALL_LIBS]/libQt5Test.so*
+
+    distrib_test.CONFIG += phony
+    distrib_test.commands += cp -f $$DISTRIB_TEST_FILES $$OUT_PWD/distrib
 }
 
-QMAKE_EXTRA_TARGETS += distrib
+QMAKE_EXTRA_TARGETS += distrib distrib_test

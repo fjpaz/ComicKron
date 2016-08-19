@@ -59,9 +59,6 @@ include(build/autodepends.pri)
 contains(QMAKE_HOST.os, Windows):win32: include(build/distrib.pri)
 contains(QMAKE_HOST.os, Linux):linux: include(build/distrib.pri)
 
-# output target
-include(build/output.pri)
-
 # Other editable files
 OTHER_FILES += \
     build/acceptance_test.pri \
@@ -72,7 +69,6 @@ OTHER_FILES += \
     build/deployment.pri \
     build/distrib.pri \
     build/lib.pri \
-    build/output.pri \
     build/staticlib.pri \
     build/targets.pri \
     build/test.pri \

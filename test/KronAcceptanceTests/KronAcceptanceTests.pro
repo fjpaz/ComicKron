@@ -18,6 +18,8 @@ QMAKE_CXXFLAGS += -Wno-unknown-warning-option # No warn about unknown warning op
 QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declarations
 QMAKE_CXXFLAGS += -Wno-placement-new # No warn about placement new
 
+QMAKE_POST_LINK += $$QMAKE_COPY_FILE $$shell_path($$PWD/$$ROOTDIR/test/data/*) $$shell_path($$TESTDIR)
+
 LIBS += \
     -lKronCore \
     -lKronDI \
