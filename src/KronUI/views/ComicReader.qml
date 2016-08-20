@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-import QtQuick 2.2
+import QtQuick 2.7
 import QtQuick.Dialogs 1.1
 
 Item {

@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  * ******************************************************************/
 
-import QtQuick 2.2
-import QtQuick.Window 2.1
+import QtQuick 2.7
+import QtQuick.Window 2.2
 
 Window {
     visible: true
