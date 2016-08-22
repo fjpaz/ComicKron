@@ -6,7 +6,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #********************************************************************
 
-TARGET = KronApplicationUnitTests
+TARGET = KronCoreUnitTests
 
 ROOTDIR = ../..
 
@@ -20,5 +20,5 @@ mac: LIBS += -lc++
 HEADERS +=  
 
 SOURCES += \ 
-    KronApplicationUnitTests.cpp \
-    TestComicReaderViewModel.cpp
+    TestComicReaderViewModel.cpp \
+    KronCoreUnitTests.cpp
