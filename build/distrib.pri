@@ -53,15 +53,15 @@ contains(QMAKE_HOST.os, Linux):linux {
         $$[QT_INSTALL_LIBS]/libicudata.so*
 
     distrib.CONFIG += phony
-    distrib.commands += mkdir -p $$OUT_PWD/dist; cp -f $$DISTRIB_FILES $$OUT_PWD/distrib
+    distrib.commands += mkdir -p $$OUT_PWD/distrib; cp -af $$DISTRIB_FILES $$OUT_PWD/distrib
 
     # distrib_test target
     DISTRIB_TEST_FILES += \
-        $$TESTDIR \
+        $$TESTDIR/* \
         $$[QT_INSTALL_LIBS]/libQt5Test.so*
 
     distrib_test.CONFIG += phony
-    distrib_test.commands += cp -f $$DISTRIB_TEST_FILES $$OUT_PWD/distrib
+    distrib_test.commands += cp -af $$DISTRIB_TEST_FILES $$OUT_PWD/distrib
 }
 
 QMAKE_EXTRA_TARGETS += distrib distrib_test
