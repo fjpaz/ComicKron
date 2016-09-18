@@ -28,12 +28,13 @@ LIBS += \
 mac: LIBS += -lc++
 
 SOURCES += \
-    KronAppFactory.cpp
+    KronAppFactory.cpp \
+    CommonAppFactory.cpp
 
 HEADERS += \
     KronDIExport.h \
-    CommonModule.h \
-    KronAppFactory.h
+    KronAppFactory.h \
+    CommonAppFactory.h
 
 unix {
     target.path = /usr/lib

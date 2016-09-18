@@ -36,7 +36,7 @@ protected:
     {
         appFactory_.reset(new AcceptanceAppFactory);
         app_.reset(appFactory_->createApp());
-        comicReaderVM_ = static_cast<ComicReaderVM*>(&app_->contexProperty("model"));
+        comicReaderVM_ = static_cast<ComicReaderVM*>(&app_->contexProperty("readerVM"));
 
         QUrl comicUrl = QUrl::fromLocalFile("TestComic.cbz");
         comicReaderVM_->openComic(comicUrl.toString());

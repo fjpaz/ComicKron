@@ -11,31 +11,27 @@
 #include "FakeImageContainer.h"
 #include "IsolatedAppContext.h"
 
-#include <KronDI/CommonModule.h>
-
 namespace kron {
 
 AcceptanceAppFactory::AcceptanceAppFactory()
 {
 }
 
-App* AcceptanceAppFactory::createApp()
+std::unique_ptr<AppContext> AcceptanceAppFactory::createAppContext(std::unique_ptr<ImageContainer> imageContainer)
 {
-    auto injector = di::make_injector(
-                CommonModule(),
-                di::object<di::bind<AppContext, IsolatedAppContext>>(),
-                di::object<di::bind<ImageContainer, FakeImageContainer>>());
+    Q_UNUSED(imageContainer)
 
-    injector.call(di::scopes::object_entry());
+    return std::unique_ptr<AppContext>(new IsolatedAppContext);
+}
 
-    App* app = injector.create<App*>();
-    std::unique_ptr<ComicReaderVM> comicReaderVM = injector.create<std::unique_ptr<ComicReaderVM>>();
+std::unique_ptr<ImageContainer> AcceptanceAppFactory::createImageContainer()
+{
+    return std::unique_ptr<ImageContainer>(new FakeImageContainer);
+}
 
-    app->addContextProperty("model", std::unique_ptr<QObject>(comicReaderVM.release()));
-
-    injector.call(di::scopes::object_exit());
-
-    return app;
+void AcceptanceAppFactory::addSpecificContextProperties(App &app)
+{
+    Q_UNUSED(app);
 }
 
 }

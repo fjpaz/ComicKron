@@ -9,7 +9,6 @@
 # Include path
 INTERNAL_INCLUDEPATH += $$ROOTDIR/src
 EXTERNAL_INCLUDEPATH += \
-    $$ROOTDIR/third_party/boost/include \
     $$ROOTDIR/third_party/gtest/include \
     $$ROOTDIR/third_party/HippoMocks/include
 

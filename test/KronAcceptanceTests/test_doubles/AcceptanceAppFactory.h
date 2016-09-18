@@ -6,21 +6,27 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef ACCEPTANCEAPPFACTORY_H
-#define ACCEPTANCEAPPFACTORY_H
+#ifndef KRON_ACCEPTANCEAPPFACTORY_H
+#define KRON_ACCEPTANCEAPPFACTORY_H
 
-#include <KronCore/AppFactory.h>
+#include <KronDI/CommonAppFactory.h>
 
 namespace kron {
 
-class AcceptanceAppFactory : public AppFactory
+class AcceptanceAppFactory : public CommonAppFactory
 {
 public:
     AcceptanceAppFactory();
 
-    virtual App* createApp() override;
+protected:
+    std::unique_ptr<AppContext> createAppContext(
+            std::unique_ptr<ImageContainer> imageContainer) override;
+
+    std::unique_ptr<ImageContainer> createImageContainer() override;
+
+    void addSpecificContextProperties(App &app) override;
 };
 
 }
 
-#endif // ACCEPTANCEAPPFACTORY_H
+#endif // KRON_ACCEPTANCEAPPFACTORY_H

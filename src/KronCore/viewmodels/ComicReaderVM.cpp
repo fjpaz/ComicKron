@@ -17,10 +17,10 @@
 
 namespace kron {
 
-ComicReaderVM::ComicReaderVM(ComicArchiveReader& archiveReader,
-                             ImageContainer& imageContainer)
+ComicReaderVM::ComicReaderVM(
+        std::unique_ptr<ComicArchiveReader> archiveReader, ImageContainer& imageContainer)
     : QObject(),
-      archiveReader_(archiveReader),
+      archiveReader_(std::move(archiveReader)),
       imageContainer_(imageContainer)
 {
 }
@@ -31,19 +31,19 @@ ComicReaderVM::~ComicReaderVM()
 
 void ComicReaderVM::goForward()
 {
-    QByteArray page = archiveReader_.readNextImage();
+    QByteArray page = archiveReader_->readNextImage();
     updateCurrentPage(page);
 }
 
 void ComicReaderVM::goBackward()
 {
-    QByteArray page = archiveReader_.readPreviousImage();
+    QByteArray page = archiveReader_->readPreviousImage();
     updateCurrentPage(page);
 }
 
 void ComicReaderVM::goToFirstPage()
 {
-    QByteArray page = archiveReader_.readFirstImage();
+    QByteArray page = archiveReader_->readFirstImage();
     updateCurrentPage(page);
 }
 
@@ -59,7 +59,7 @@ void ComicReaderVM::openComic(QString comicPath)
 
     QString localComicPath = url.toLocalFile();
 
-    archiveReader_.open(localComicPath);
+    archiveReader_->open(localComicPath);
 
     // TODO: Save current open archive
 

@@ -20,7 +20,6 @@ android|ios: CONFIG += USE_SYSTEM_ZLIB
 !CONFIG(USE_SYSTEM_SNAPPY): SUBDIRS += snappy
 
 SUBDIRS += \
-    boost \
     gtest \
     HippoMocks \
     KronAcceptanceTests \
@@ -33,7 +32,6 @@ SUBDIRS += \
     KronUI
 
 # Subproject paths
-boost.subdir = third_party/boost
 gtest.subdir = third_party/gtest
 HippoMocks.subdir = third_party/HippoMocks
 KronAcceptanceTests.subdir = test/KronAcceptanceTests

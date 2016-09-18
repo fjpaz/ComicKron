@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef SIGNALSPY_H
-#define SIGNALSPY_H
+#ifndef KRON_SIGNALSPY_H
+#define KRON_SIGNALSPY_H
 
 #include <QSignalSpy>
 #include <QVariant>
@@ -54,4 +54,4 @@ public:
 
 }
 
-#endif // SIGNALSPY_H
+#endif // KRON_SIGNALSPY_H

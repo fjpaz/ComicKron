@@ -11,6 +11,7 @@
 
 #include "../KronCoreExport.h"
 
+#include <memory>
 #include <QByteArray>
 #include <QObject>
 
@@ -23,8 +24,9 @@ class KRONCORE_EXPORT ComicReaderVM : public QObject
 {
     Q_OBJECT
 public:
-    ComicReaderVM(ComicArchiveReader& archiveReader,
-                  ImageContainer& imageContainer);
+    ComicReaderVM(
+            std::unique_ptr<ComicArchiveReader> archiveReader,
+            ImageContainer& imageContainer);
 
     virtual ~ComicReaderVM();
 
@@ -43,7 +45,7 @@ public slots:
 private:
     void updateCurrentPage(QByteArray page);
 
-    ComicArchiveReader& archiveReader_;
+    std::unique_ptr<ComicArchiveReader> archiveReader_;
     ImageContainer& imageContainer_;
     QByteArray currentPage_;
 };

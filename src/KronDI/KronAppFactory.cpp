@@ -8,18 +8,12 @@
 
 #include "KronAppFactory.h"
 
-#include "CommonModule.h"
-
 #include <KronCore/App.h>
+#include <KronInfrastructure/services/RealDevice.h>
 #include <KronUI/services/PixmapImageProvider.h>
 #include <KronUI/services/QmlAppContext.h>
 
-#include <boost/di.hpp>
 #include <QCoreApplication>
-
-#include <memory>
-
-namespace di = boost::di;
 
 namespace kron {
 
@@ -34,22 +28,24 @@ KronAppFactory::~KronAppFactory()
 {
 }
 
-App* KronAppFactory::createApp()
+std::unique_ptr<AppContext> KronAppFactory::createAppContext(
+        std::unique_ptr<ImageContainer> imageContainer)
 {
-    auto injector = di::make_injector(
-                CommonModule(),
-                di::object<di::bind<AppContext, QmlAppContext>>(),
-                di::object<di::bind<di::any_of<ImageContainer, QQuickImageProvider>, PixmapImageProvider>>());
+    std::unique_ptr<QQuickImageProvider> imageProvider(
+                reinterpret_cast<QQuickImageProvider*>(
+                    imageContainer.release()));
+    return std::unique_ptr<AppContext>(new QmlAppContext(
+                                           std::move(imageProvider)));
+}
 
-    injector.call(di::scopes::object_entry());
+std::unique_ptr<ImageContainer> KronAppFactory::createImageContainer()
+{
+    return std::unique_ptr<ImageContainer>(new PixmapImageProvider);
+}
 
-    App* app = injector.create<App*>();
-
-    addContextProperties<decltype(injector)>(*app, injector);
-
-    injector.call(di::scopes::object_exit());
-
-    return app;
+void KronAppFactory::addSpecificContextProperties(App &app)
+{
+    app.addContextProperty("device", std::unique_ptr<QObject>(new RealDevice));
 }
 
 }

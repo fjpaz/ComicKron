@@ -20,5 +20,4 @@ mac: LIBS += -lc++
 HEADERS +=  
 
 SOURCES += \ 
-    TestComicReaderViewModel.cpp \
     KronCoreUnitTests.cpp
