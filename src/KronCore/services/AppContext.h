@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef APPCONTEXT_H
-#define APPCONTEXT_H
+#ifndef KRON_APPCONTEXT_H
+#define KRON_APPCONTEXT_H
 
 #include <QObject>
 #include <QString>
@@ -28,5 +28,4 @@ public:
 
 }
 
-#endif // APPCONTEXT_H
-
+#endif // KRON_APPCONTEXT_H

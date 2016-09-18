@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef KRONAPPLICATIONEXPORT_H
-#define KRONAPPLICATIONEXPORT_H
+#ifndef KRONCOREEXPORT_H
+#define KRONCOREEXPORT_H
 
 #include <QtCore/qglobal.h>
 
@@ -17,4 +17,4 @@
 #  define KRONCORE_EXPORT Q_DECL_IMPORT
 #endif
 
-#endif // KRONAPPLICATIONEXPORT_H
+#endif // KRONCOREEXPORT_H

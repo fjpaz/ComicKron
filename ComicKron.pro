@@ -73,4 +73,5 @@ OTHER_FILES += \
     build/targets.pri \
     build/test.pri \
     build/unit_test.pri \
+    cfg/qtquickcontrol2.conf \
     README.md

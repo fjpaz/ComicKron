@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef COMICREADERVM_H
-#define COMICREADERVM_H
+#ifndef KRON_COMICREADERVM_H
+#define KRON_COMICREADERVM_H
 
 #include "../KronCoreExport.h"
 
@@ -50,4 +50,4 @@ private:
 
 }
 
-#endif // COMICREADERVM_H
+#endif // KRON_COMICREADERVM_H

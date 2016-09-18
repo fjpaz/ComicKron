@@ -7,7 +7,7 @@
  ********************************************************************/
 
 import QtQuick 2.7
-import QtQuick.Dialogs 1.1
+import QtQuick.Controls 2.0
 
 Item {
     id: root
@@ -33,7 +33,7 @@ Item {
 
         onClicked: {
             console.log("Next Page")
-            model.goForward()
+            readerVM.goForward()
         }
     }
 
@@ -45,7 +45,7 @@ Item {
 
         onClicked: {
             console.log("Previous Page")
-            model.goBackward()
+            readerVM.goBackward()
         }
     }
 
@@ -57,29 +57,30 @@ Item {
 
         onClicked: {
             console.log("Middle mouse area")
-            fileDialog.visible = true
+            drawer.position = 1 - drawer.position
         }
     }
 
-    FileDialog {
-        id: fileDialog
-        title: "Open comic ..."
-        onAccepted: {
-            console.log("File opened: " + fileDialog.fileUrl)
-            model.openComic(fileDialog.fileUrl)
-            fileDialog.close()
-        }
-        onRejected: {
-            console.log("File opening canceled")
-            fileDialog.close()
-        }
-        Component.onCompleted: {
-            fileDialog.open()
-        }
-    }
+//    FileDialog {
+//        id: fileDialog
+//        title: "Open comic ..."
+//        onAccepted: {
+//            console.log("File opened: " + fileDialog.fileUrl)
+//            readerVM.openComic(fileDialog.fileUrl)
+//            fileDialog.close()
+//        }
+//        onRejected: {
+//            console.log("File opening canceled")
+//            fileDialog.close()
+//        }
+//        Component.onCompleted: {
+//            fileDialog.open()
+//        }
+//    }
+
 
     Connections {
-        target: model
+        target: readerVM
         onPageUpdated: {
             console.log("Comic Image Changed")
             updateImage()

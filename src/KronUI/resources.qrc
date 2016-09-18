@@ -2,5 +2,15 @@
     <qresource prefix="/">
         <file>views/main.qml</file>
         <file>views/ComicReader.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>images/drawer.png</file>
+        <file>images/drawer@2x.png</file>
+        <file>images/drawer@3x.png</file>
+        <file>images/drawer@4x.png</file>
+        <file>images/menu.png</file>
+        <file>images/menu@2x.png</file>
+        <file>images/menu@3x.png</file>
+        <file>images/menu@4x.png</file>
+        <file>views/FileBrowser.qml</file>
     </qresource>
 </RCC>

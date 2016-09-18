@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef APP_H
-#define APP_H
+#ifndef KRON_APP_H
+#define KRON_APP_H
 
 #include "KronCoreExport.h"
 
@@ -18,7 +18,6 @@
 namespace kron {
 
 class AppContext;
-class AppPageNavigator;
 
 class KRONCORE_EXPORT App : public QObject
 {
@@ -36,9 +35,8 @@ public:
 
 private:
     std::unique_ptr<AppContext> context_;
-    std::unique_ptr<AppPageNavigator> navigator_;
 };
 
 }
 
-#endif // APP_H
+#endif // KRON_APP_H

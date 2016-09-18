@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef APPFACTORY_H
-#define APPFACTORY_H
+#ifndef KRON_APPFACTORY_H
+#define KRON_APPFACTORY_H
 
 #include "KronCoreExport.h"
 
@@ -27,5 +27,5 @@ public:
 
 }
 
-#endif // APPFACTORY_H
+#endif // KRON_APPFACTORY_H
 

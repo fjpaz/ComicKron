@@ -21,10 +21,10 @@ mac: LIBS += -lc++
 SOURCES += \
     viewmodels/ComicReaderVM.cpp \
     App.cpp \
-    services/AppPageNavigator.cpp \
     exceptions/ArchiveNotFoundException.cpp \
     exceptions/ArchiveFormatNotSupportedException.cpp \
-    exceptions/ArchiveReadErrorException.cpp
+    exceptions/ArchiveReadErrorException.cpp \
+    viewmodels/FileBrowserVM.cpp
 
 HEADERS += \
     services/ComicArchiveReader.h \
@@ -33,13 +33,12 @@ HEADERS += \
     AppFactory.h \
     viewmodels/ComicReaderVM.h \
     App.h \
-    services/AppPageNavigator.h \
-    PageId.h \
-    services/ViewModelRegistrar.h \
     services/AppContext.h \
     exceptions/ArchiveReadErrorException.h \
     exceptions/ArchiveFormatNotSupportedException.h \
-    KronCoreExport.h
+    KronCoreExport.h \
+    services/Device.h \
+    viewmodels/FileBrowserVM.h
 
 unix {
     target.path = /usr/lib

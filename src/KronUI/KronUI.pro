@@ -25,13 +25,11 @@ mac: LIBS += -lc++
 ios: QTPLUGIN += qmldbg_tcp
 
 SOURCES += \
-    services/QmlViewModelRegistrar.cpp \
     services/QmlAppContext.cpp \
     services/PixmapImageProvider.cpp
 
 HEADERS += \
     KronUIExport.h \
-    services/QmlViewModelRegistrar.h \
     services/QmlAppContext.h \
     services/PixmapImageProvider.h
 

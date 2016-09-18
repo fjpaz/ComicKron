@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef SIGNALHANDLER_H
-#define SIGNALHANDLER_H
+#ifndef KRON_SIGNALHANDLER_H
+#define KRON_SIGNALHANDLER_H
 
 namespace kron {
 
@@ -23,4 +23,4 @@ public:
 
 }
 
-#endif // SIGNALHANDLER_H
+#endif // KRON_SIGNALHANDLER_H

@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef PIXMAPIMAGEPROVIDER_H
-#define PIXMAPIMAGEPROVIDER_H
+#ifndef KRON_PIXMAPIMAGEPROVIDER_H
+#define KRON_PIXMAPIMAGEPROVIDER_H
 
 #include "../KronUIExport.h"
 
@@ -35,4 +35,4 @@ private:
 };
 
 }
-#endif // PIXMAPIMAGEPROVIDER_H
+#endif // KRON_PIXMAPIMAGEPROVIDER_H

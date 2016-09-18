@@ -14,8 +14,6 @@
 #include <QQuickImageProvider>
 #include <QString>
 
-#include <QDebug>
-
 namespace kron {
 
 QmlAppContext::QmlAppContext(std::unique_ptr<QQuickImageProvider> imageProvider)

@@ -31,21 +31,18 @@ ComicReaderVM::~ComicReaderVM()
 
 void ComicReaderVM::goForward()
 {
-    // TODO: Route and validate action with Domain
     QByteArray page = archiveReader_.readNextImage();
     updateCurrentPage(page);
 }
 
 void ComicReaderVM::goBackward()
 {
-    // TODO: Route and validate action with Domain
     QByteArray page = archiveReader_.readPreviousImage();
     updateCurrentPage(page);
 }
 
 void ComicReaderVM::goToFirstPage()
 {
-    // TODO: Route and validate action with Domain
     QByteArray page = archiveReader_.readFirstImage();
     updateCurrentPage(page);
 }
@@ -64,7 +61,7 @@ void ComicReaderVM::openComic(QString comicPath)
 
     archiveReader_.open(localComicPath);
 
-    // TODO: Save archive info in domain
+    // TODO: Save current open archive
 
     goToFirstPage();
 }

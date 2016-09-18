@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef TESTDATA_H
-#define TESTDATA_H
+#ifndef KRON_TESTDATA_H
+#define KRON_TESTDATA_H
 
 #include <QByteArray>
 
@@ -45,5 +45,4 @@ const QByteArray pdfPage03Md5 = QByteArray(reinterpret_cast<char*>(&pdfPage03Md5
 }
 }
 
-#endif // TESTDATA_H
-
+#endif // KRON_TESTDATA_H

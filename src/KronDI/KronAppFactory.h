@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef KRONAPPFACTORY_H
-#define KRONAPPFACTORY_H
+#ifndef KRON_KRONAPPFACTORY_H
+#define KRON_KRONAPPFACTORY_H
 
 #include "KronDIExport.h"
 
@@ -32,4 +32,4 @@ public:
 
 }
 
-#endif // KRONAPPFACTORY_H
+#endif // KRON_KRONAPPFACTORY_H

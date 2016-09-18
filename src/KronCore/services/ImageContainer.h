@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef IMAGECONTAINER_H
-#define IMAGECONTAINER_H
+#ifndef KRON_IMAGECONTAINER_H
+#define KRON_IMAGECONTAINER_H
 
 class QByteArray;
 class QString;
@@ -24,5 +24,5 @@ public:
 
 }
 
-#endif // IMAGECONTAINER_H
+#endif // KRON_IMAGECONTAINER_H
 

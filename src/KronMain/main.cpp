@@ -12,9 +12,13 @@
 #include <KronDI/KronAppFactory.h>
 
 #include <QGuiApplication>
+#include <QScreen>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
+    QGuiApplication::setApplicationName("ComicKron");
+    QGuiApplication::setOrganizationName("ComicKron");
     QGuiApplication app(argc, argv);
 
     kron::SignalHandler::handleSignals();

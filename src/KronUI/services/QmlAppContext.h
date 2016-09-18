@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef QMLAPPCONTEXT_H
-#define QMLAPPCONTEXT_H
+#ifndef KRON_QMLAPPCONTEXT_H
+#define KRON_QMLAPPCONTEXT_H
 
 #include "../KronUIExport.h"
 
@@ -39,4 +39,4 @@ private:
 
 }
 
-#endif // QMLAPPCONTEXT_H
+#endif // KRON_QMLAPPCONTEXT_H

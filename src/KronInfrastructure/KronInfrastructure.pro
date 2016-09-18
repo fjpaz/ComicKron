@@ -30,13 +30,15 @@ mac: LIBS += -lc++
 SOURCES += \
     services/FileComicArchiveReader.cpp \
     services/PdfComicArchiveReader.cpp \
-    services/CompressedComicArchiveReader.cpp
+    services/CompressedComicArchiveReader.cpp \
+    services/RealDevice.cpp
 
 HEADERS += \
     services/FileComicArchiveReader.h \
     services/PdfComicArchiveReader.h \
     services/CompressedComicArchiveReader.h \
-    KronInfrastructureExport.h
+    KronInfrastructureExport.h \
+    services/RealDevice.h
 
 unix {
     target.path = /usr/lib

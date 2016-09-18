@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef FILECOMICARCHIVEREADER_H
-#define FILECOMICARCHIVEREADER_H
+#ifndef KRON_FILECOMICARCHIVEREADER_H
+#define KRON_FILECOMICARCHIVEREADER_H
 
 #include "../KronInfrastructureExport.h"
 
@@ -40,4 +40,4 @@ private:
 
 }
 
-#endif // FILECOMICARCHIVEREADER_H
+#endif // KRON_FILECOMICARCHIVEREADER_H

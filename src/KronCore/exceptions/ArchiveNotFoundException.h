@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef ARCHIVENOTFOUNDEXCEPTION_H
-#define ARCHIVENOTFOUNDEXCEPTION_H
+#ifndef KRON_ARCHIVENOTFOUNDEXCEPTION_H
+#define KRON_ARCHIVENOTFOUNDEXCEPTION_H
 
 #include "../KronCoreExport.h"
 
@@ -29,4 +29,4 @@ private:
 
 }
 
-#endif // ARCHIVENOTFOUNDEXCEPTION_H
+#endif // KRON_ARCHIVENOTFOUNDEXCEPTION_H

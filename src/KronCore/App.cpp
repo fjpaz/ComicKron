@@ -9,7 +9,6 @@
 #include "App.h"
 
 #include "services/AppContext.h"
-#include "services/AppPageNavigator.h"
 
 #include <QCoreApplication>
 
@@ -17,8 +16,7 @@ namespace kron {
 
 App::App(std::unique_ptr<AppContext> context)
     : QObject(),
-      context_(std::move(context)),
-      navigator_(new AppPageNavigator)
+      context_(std::move(context))
 {
     // Clean-up on application exit. See QCoreApplication::exec() documentation.
     // As this object is the application root any other object in the hierarchy

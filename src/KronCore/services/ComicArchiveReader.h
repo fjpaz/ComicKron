@@ -6,8 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  ********************************************************************/
 
-#ifndef COMICARCHIVEREADER_H
-#define COMICARCHIVEREADER_H
+#ifndef KRON_COMICARCHIVEREADER_H
+#define KRON_COMICARCHIVEREADER_H
 
 #include <QByteArray>
 #include <QString>
@@ -39,5 +39,5 @@ protected:
 
 }
 
-#endif // COMICARCHIVEREADER_H
+#endif // KRON_COMICARCHIVEREADER_H
 
