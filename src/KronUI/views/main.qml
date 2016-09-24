@@ -18,19 +18,10 @@ ApplicationWindow {
     visible: true
     width: 600
     height: 1000
-    color: "black"
-
-    // Method to compute component size using device independent pixels
-    function dp(number) {
-        console.log(number + ", dp: " + Math.round(number*((Screen.pixelDensity*25.4)/160)))
-        return Math.round(number*((Screen.pixelDensity*25.4)/160));
-    }
 
     Material.theme: Material.Light
     Material.primary: Material.BlueGrey
     Material.accent: Material.DeepOrange
-//    Material.background: Material.BlueGrey
-//    Material.foreground: Material.Amber
 
     Settings {
         id: settings
@@ -132,10 +123,13 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
-    ComicReader {
-        id: reader
-        visible: false
-        anchors.fill: parent
+    Connections {
+        target: fileBrowserVM
+        onFileOpened: {
+            console.log("File " + fileUrl + " opened")
+            stack.push(Qt.resolvedUrl("qrc:/views/ComicReader.qml"))
+            readerVM.openComic(fileUrl)
+        }
     }
 
     Component.onCompleted: device.setWindow(window)

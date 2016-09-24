@@ -8,8 +8,11 @@
 
 #include "FileBrowserVM.h"
 
+#include <QDebug>
 #include <QDir>
+#include <QtQml/QQmlEngine>
 #include <QStandardPaths>
+#include <QUrl>
 
 namespace kron {
 
@@ -17,7 +20,10 @@ FileBrowserVM::FileBrowserVM(QObject *parent)
     : QObject(parent),
       dir_(new QDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)))
 {
-    qRegisterMetaType<Item>("FileBrowserItem");
+    qmlRegisterUncreatableType<FsItem>(
+                "ComicKron.FsItem", 1, 0, "FsItem",
+                "You cannot create an instance of the FsItem");
+    fillItems();
 }
 
 FileBrowserVM::~FileBrowserVM()
@@ -27,13 +33,39 @@ FileBrowserVM::~FileBrowserVM()
 
 void FileBrowserVM::navigateToFolder(QString folder)
 {
-    Q_UNUSED(folder)
-    // TODO: Replace current items by folder items
+    dir_->cd(folder);
+
+    fillItems();
 }
 
-QList<FileBrowserVM::Item *> FileBrowserVM::currentItems() const
+void FileBrowserVM::openFile(QString file)
 {
-    return items_;
+    QUrl fileUrl = QUrl::fromLocalFile(dir_->absoluteFilePath(file));
+    QString urlString = fileUrl.url();
+
+    qDebug() << "Opening file with URL" << urlString;
+
+    emit fileOpened(urlString);
+}
+
+void FileBrowserVM::fillItems()
+{
+    // Clear old items
+    qDeleteAll(items_);
+    items_.clear();
+
+    // Fill with items of current directory
+    foreach (const QFileInfo& fileInfo, dir_->entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDot, QDir::DirsFirst))
+    {
+        FsItem* item = new FsItem;
+        item->type = fileInfo.isFile() ? FsItem::Type::FILE : FsItem::Type::FOLDER;
+        item->name = fileInfo.fileName();
+        items_.append(item);
+
+        qDebug() << "Item type:" << item->type << "| name:" << item->name;
+    }
+
+    emit itemsChanged(items_);
 }
 
 }

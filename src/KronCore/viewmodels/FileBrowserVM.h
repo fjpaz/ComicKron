@@ -12,43 +12,58 @@
 #include <memory>
 #include <QList>
 #include <QObject>
+#include <QString>
 
 class QDir;
 
 namespace kron {
 
-class FileBrowserVM : public QObject
+class FsItem : public QObject
 {
     Q_OBJECT
 public:
-    enum class Type
+    enum Type
     {
         FILE,
         FOLDER
     };
     Q_ENUM(Type)
 
-    struct Item
-    {
-        Type type;
-        QString name;
-    };
+    Q_PROPERTY(Type type MEMBER type NOTIFY typeChanged)
+    Q_PROPERTY(QString name MEMBER name NOTIFY nameChanged)
 
+    Type type;
+    QString name;
+
+signals:
+    void typeChanged(Type type);
+    void nameChanged(QString name);
+};
+
+class FileBrowserVM : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QList<QObject*> items MEMBER items_ NOTIFY itemsChanged)
+public:
     explicit FileBrowserVM(QObject *parent = 0);
 
     virtual ~FileBrowserVM();
 
 signals:
-    void itemsChanged(QList<Item*> items);
+    void itemsChanged(QList<QObject*> items);
+
+    void fileOpened(QString fileUrl);
 
 public slots:
     void navigateToFolder(QString folder);
 
-    QList<Item*> currentItems() const;
+    void openFile(QString file);
 
 private:
+    void fillItems();
+
     std::unique_ptr<QDir> dir_;
-    QList<Item*> items_;
+    QList<QObject*> items_;
 };
 
 }

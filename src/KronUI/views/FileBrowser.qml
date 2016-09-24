@@ -8,17 +8,30 @@
 
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import ComicKron.FsItem 1.0
 
 Item {
     id: root
 
     ListView {
         id: files
-        model: {
-        }
+        anchors.fill: parent
+        model: fileBrowserVM.items
 
         delegate: ItemDelegate {
-            text: model.fileName
+            text: model.modelData.name
+            width: parent.width
+            font.pixelSize: device.sp(13)
+            font.bold: model.modelData.type
+
+            onClicked: {
+                if (model.modelData.type === FsItem.FOLDER) {
+                    fileBrowserVM.navigateToFolder(model.modelData.name)
+                }
+                else {
+                    fileBrowserVM.openFile(model.modelData.name)
+                }
+            }
         }
     }
 

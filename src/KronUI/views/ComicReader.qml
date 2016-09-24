@@ -61,24 +61,6 @@ Item {
         }
     }
 
-//    FileDialog {
-//        id: fileDialog
-//        title: "Open comic ..."
-//        onAccepted: {
-//            console.log("File opened: " + fileDialog.fileUrl)
-//            readerVM.openComic(fileDialog.fileUrl)
-//            fileDialog.close()
-//        }
-//        onRejected: {
-//            console.log("File opening canceled")
-//            fileDialog.close()
-//        }
-//        Component.onCompleted: {
-//            fileDialog.open()
-//        }
-//    }
-
-
     Connections {
         target: readerVM
         onPageUpdated: {
