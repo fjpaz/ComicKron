@@ -8,18 +8,19 @@
 
 #include "QmlAppContext.h"
 
+#include "../items/ImageShowcase.h"
+
 #include <QObject>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QQuickImageProvider>
 #include <QString>
 
 namespace kron {
 
-QmlAppContext::QmlAppContext(std::unique_ptr<QQuickImageProvider> imageProvider)
+QmlAppContext::QmlAppContext()
     : engine_(new QQmlApplicationEngine)
 {
-    engine_->addImageProvider("comic", imageProvider.release());
+    qmlRegisterType<ImageShowcase>("ComicKron", 1, 0, "ImageShowcase");
 }
 
 QmlAppContext::~QmlAppContext()

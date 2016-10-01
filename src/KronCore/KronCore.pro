@@ -28,7 +28,6 @@ SOURCES += \
 
 HEADERS += \
     services/ComicArchiveReader.h \
-    services/ImageContainer.h \
     exceptions/ArchiveNotFoundException.h \
     AppFactory.h \
     viewmodels/ComicReaderVM.h \

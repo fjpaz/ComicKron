@@ -16,14 +16,13 @@
 #include <memory>
 
 class QQmlApplicationEngine;
-class QQuickImageProvider;
 
 namespace kron {
 
 class KRONUI_EXPORT QmlAppContext : public AppContext
 {
 public:
-    QmlAppContext(std::unique_ptr<QQuickImageProvider> imageProvider);
+    QmlAppContext();
 
     virtual ~QmlAppContext();
 

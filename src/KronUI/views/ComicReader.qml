@@ -8,6 +8,7 @@
 
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import ComicKron 1.0
 
 Item {
     id: root
@@ -18,11 +19,10 @@ Item {
         image.source = "image://comic/current"
     }
 
-    Image {
-        id: image
-        fillMode: Image.PreserveAspectFit
+    ImageShowcase {
+        id: imageShowcase
         anchors.fill: parent
-        cache: false
+        image: readerVM.page
     }
 
     MouseArea {
@@ -58,14 +58,6 @@ Item {
         onClicked: {
             console.log("Middle mouse area")
             drawer.position = 1 - drawer.position
-        }
-    }
-
-    Connections {
-        target: readerVM
-        onPageUpdated: {
-            console.log("Comic Image Changed")
-            updateImage()
         }
     }
 }

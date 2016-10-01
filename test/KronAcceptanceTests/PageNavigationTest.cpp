@@ -35,7 +35,7 @@ protected:
     virtual void SetUp()
     {
         appFactory_.reset(new AcceptanceAppFactory);
-        app_.reset(appFactory_->createApp());
+        app_ = appFactory_->createApp();
         comicReaderVM_ = static_cast<ComicReaderVM*>(&app_->contexProperty("readerVM"));
 
         QUrl comicUrl = QUrl::fromLocalFile("TestComic.cbz");
@@ -51,7 +51,7 @@ protected:
 
 TEST_F(PageNavigationTest, Given_any_page_being_shown_When_user_requests_to_go_to_first_page_Then_show_first_page)
 {
-    SignalSpy spy(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
+    SignalSpy spy(comicReaderVM_, SIGNAL(pageChanged(QVariant)));
 
     comicReaderVM_->goToFirstPage();
 
@@ -63,10 +63,10 @@ TEST_F(PageNavigationTest, Given_any_page_being_shown_When_user_requests_to_go_t
 
 TEST_F(PageNavigationTest, Given_last_page_is_not_being_shown_currently_When_user_requests_to_go_forward_Then_show_next_page)
 {
-    SignalSpy spyFirst(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
+    SignalSpy spyFirst(comicReaderVM_, SIGNAL(pageChanged(QVariant)));
     comicReaderVM_->goToFirstPage();
     ASSERT_TRUE(spyFirst.signalReceived());
-    SignalSpy spyForward(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
+    SignalSpy spyForward(comicReaderVM_, SIGNAL(pageChanged(QVariant)));
 
     comicReaderVM_->goForward();
 
@@ -79,7 +79,7 @@ TEST_F(PageNavigationTest, Given_last_page_is_not_being_shown_currently_When_use
 /*
 TEST_F(PageNavigationTest, Given_last_page_is_being_shown_currently_When_user_requests_to_go_forward_Then_keep_showing_current_page)
 {
-    SignalSpy spy(comicReaderVM_, SIGNAL(pageUpdated(QByteArray)));
+    SignalSpy spy(comicReaderVM_, SIGNAL(pageChanged(QVariant)));
 
     comicReaderVM_->goForward();
 

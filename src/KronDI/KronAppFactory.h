@@ -13,25 +13,20 @@
 #include "KronDIExport.h"
 
 #include <memory>
-#include <QObject>
 
 class QQmlApplicationEngine;
 
 namespace kron {
 
-class KRONDI_EXPORT KronAppFactory : public QObject, public CommonAppFactory
+class KRONDI_EXPORT KronAppFactory : public CommonAppFactory
 {
-    Q_OBJECT
 public:
     KronAppFactory();
 
     virtual ~KronAppFactory();
 
 protected:
-    std::unique_ptr<AppContext> createAppContext(
-            std::unique_ptr<ImageContainer> imageContainer) override;
-
-    std::unique_ptr<ImageContainer> createImageContainer() override;
+    std::unique_ptr<AppContext> createAppContext() override;
 
     void addSpecificContextProperties(App &app) override;
 };

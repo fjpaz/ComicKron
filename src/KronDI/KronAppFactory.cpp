@@ -10,37 +10,22 @@
 
 #include <KronCore/App.h>
 #include <KronInfrastructure/services/RealDevice.h>
-#include <KronUI/services/PixmapImageProvider.h>
 #include <KronUI/services/QmlAppContext.h>
-
-#include <QCoreApplication>
 
 namespace kron {
 
 KronAppFactory::KronAppFactory()
-    : QObject()
+    : CommonAppFactory()
 {
-    connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()),
-            this, SLOT(deleteLater()));
 }
 
 KronAppFactory::~KronAppFactory()
 {
 }
 
-std::unique_ptr<AppContext> KronAppFactory::createAppContext(
-        std::unique_ptr<ImageContainer> imageContainer)
+std::unique_ptr<AppContext> KronAppFactory::createAppContext()
 {
-    std::unique_ptr<QQuickImageProvider> imageProvider(
-                reinterpret_cast<QQuickImageProvider*>(
-                    imageContainer.release()));
-    return std::unique_ptr<AppContext>(new QmlAppContext(
-                                           std::move(imageProvider)));
-}
-
-std::unique_ptr<ImageContainer> KronAppFactory::createImageContainer()
-{
-    return std::unique_ptr<ImageContainer>(new PixmapImageProvider);
+    return std::unique_ptr<AppContext>(new QmlAppContext);
 }
 
 void KronAppFactory::addSpecificContextProperties(App &app)

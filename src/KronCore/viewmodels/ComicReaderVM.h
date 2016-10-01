@@ -14,24 +14,25 @@
 #include <memory>
 #include <QByteArray>
 #include <QObject>
+#include <QVariant>
 
 namespace kron {
 
 class ComicArchiveReader;
-class ImageContainer;
 
 class KRONCORE_EXPORT ComicReaderVM : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QVariant page READ page NOTIFY pageChanged)
 public:
-    ComicReaderVM(
-            std::unique_ptr<ComicArchiveReader> archiveReader,
-            ImageContainer& imageContainer);
+    ComicReaderVM(std::unique_ptr<ComicArchiveReader> archiveReader);
 
     virtual ~ComicReaderVM();
 
+    Q_INVOKABLE QVariant page() const;
+
 signals:
-    void pageUpdated(QByteArray currentPage);
+    void pageChanged(QVariant currentPage);
 
 public slots:
     void goForward();
@@ -46,7 +47,6 @@ private:
     void updateCurrentPage(QByteArray page);
 
     std::unique_ptr<ComicArchiveReader> archiveReader_;
-    ImageContainer& imageContainer_;
     QByteArray currentPage_;
 };
 

@@ -11,9 +11,8 @@
 
 #include "KronCoreExport.h"
 
-#include <QObject>
-
 #include <memory>
+#include <QObject>
 
 namespace kron {
 

@@ -11,24 +11,36 @@
 #include <KronCore/App.h>
 #include <KronDI/KronAppFactory.h>
 
+#include <memory>
 #include <QGuiApplication>
-#include <QScreen>
-#include <QDebug>
+#include <QObject>
 
 int main(int argc, char *argv[])
 {
+    // Instance Qt application object
     QGuiApplication::setApplicationName("ComicKron");
     QGuiApplication::setOrganizationName("ComicKron");
     QGuiApplication app(argc, argv);
 
+    // Handle OS signals
     kron::SignalHandler::handleSignals();
 
-    kron::AppFactory* appFactory = new kron::KronAppFactory;
-
-    kron::App* kronApp = appFactory->createApp();
+    // Create app object
+    std::unique_ptr<kron::AppFactory> appFactory(new kron::KronAppFactory);
+    std::unique_ptr<kron::App> kronApp(appFactory->createApp());
 
     // TODO: Pass command line input (comic path)
+    // Run application
     kronApp->run("");
 
+    // Delete main objects on application exit. See QCoreApplication::exec() documentation.
+    // As this object is the application root any other object in the hierarchy
+    // will be destroyed as well.
+    QObject::connect(&app, SIGNAL(aboutToQuit()),
+                     kronApp.release(), SLOT(deleteLater()));
+    QObject::connect(&app, SIGNAL(aboutToQuit()),
+                     appFactory.release(), SLOT(deleteLater()));
+
+    // Main event loop
     return app.exec();
 }

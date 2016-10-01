@@ -8,7 +8,6 @@
 
 #include "AcceptanceAppFactory.h"
 
-#include "FakeImageContainer.h"
 #include "IsolatedAppContext.h"
 
 namespace kron {
@@ -17,16 +16,9 @@ AcceptanceAppFactory::AcceptanceAppFactory()
 {
 }
 
-std::unique_ptr<AppContext> AcceptanceAppFactory::createAppContext(std::unique_ptr<ImageContainer> imageContainer)
+std::unique_ptr<AppContext> AcceptanceAppFactory::createAppContext()
 {
-    Q_UNUSED(imageContainer)
-
     return std::unique_ptr<AppContext>(new IsolatedAppContext);
-}
-
-std::unique_ptr<ImageContainer> AcceptanceAppFactory::createImageContainer()
-{
-    return std::unique_ptr<ImageContainer>(new FakeImageContainer);
 }
 
 void AcceptanceAppFactory::addSpecificContextProperties(App &app)

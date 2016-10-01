@@ -30,7 +30,6 @@ HEADERS += \
     test_doubles/SignalSpy.h \
     ../common/TestData.h \
     test_doubles/AcceptanceAppFactory.h \
-    test_doubles/FakeImageContainer.h \
     test_doubles/IsolatedAppContext.h
     
 SOURCES += \ 

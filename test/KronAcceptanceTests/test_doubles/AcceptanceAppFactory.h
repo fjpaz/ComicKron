@@ -19,10 +19,7 @@ public:
     AcceptanceAppFactory();
 
 protected:
-    std::unique_ptr<AppContext> createAppContext(
-            std::unique_ptr<ImageContainer> imageContainer) override;
-
-    std::unique_ptr<ImageContainer> createImageContainer() override;
+    std::unique_ptr<AppContext> createAppContext() override;
 
     void addSpecificContextProperties(App &app) override;
 };

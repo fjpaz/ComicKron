@@ -34,11 +34,4 @@ Item {
             }
         }
     }
-
-//    Connections {
-//        target: fileBrowserVM
-//        onPageUpdated: {
-//            console.log("Comic Image Changed")
-//            updateImage()
-//    }
 }

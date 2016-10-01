@@ -10,7 +10,6 @@
 
 #include <KronCore/App.h>
 #include <KronCore/services/AppContext.h>
-#include <KronCore/services/ImageContainer.h>
 #include <KronCore/viewmodels/ComicReaderVM.h>
 #include <KronCore/viewmodels/FileBrowserVM.h>
 #include <KronInfrastructure/services/FileComicArchiveReader.h>
@@ -21,28 +20,24 @@ CommonAppFactory::CommonAppFactory()
 {
 }
 
-App* CommonAppFactory::createApp()
+std::unique_ptr<App> CommonAppFactory::createApp()
 {
-    std::unique_ptr<ImageContainer> imageContainer(createImageContainer());
-    ImageContainer& imageContainerRef = *imageContainer;
-    std::unique_ptr<AppContext> appContext(createAppContext(std::move(imageContainer)));
-    App* app = new App(std::move(appContext));
+    std::unique_ptr<App> app(new App(createAppContext()));
 
-    addCommonContextProperties(*app, imageContainerRef);
+    addCommonContextProperties(*app);
     addSpecificContextProperties(*app);
 
     return app;
 }
 
-void CommonAppFactory::addCommonContextProperties(
-        App& app, ImageContainer& imageContainer)
+void CommonAppFactory::addCommonContextProperties(App& app)
 {
     std::unique_ptr<ComicArchiveReader> archiveReader(
                 new FileComicArchiveReader);
     app.addContextProperty(
                 "readerVM",
                 std::unique_ptr<QObject>(new ComicReaderVM(
-                        std::move(archiveReader), imageContainer)));
+                        std::move(archiveReader))));
     app.addContextProperty(
                 "fileBrowserVM", std::unique_ptr<QObject>(new FileBrowserVM));
 }

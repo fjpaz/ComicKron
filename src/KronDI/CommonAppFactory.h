@@ -14,25 +14,21 @@
 namespace kron {
 
 class AppContext;
-class ImageContainer;
 
 class CommonAppFactory : public AppFactory
 {
 public:
     CommonAppFactory();
     
-    App* createApp();
+    virtual std::unique_ptr<App> createApp() override;
     
 protected:
-    virtual std::unique_ptr<AppContext> createAppContext(
-            std::unique_ptr<ImageContainer> imageContainer) = 0;
-
-    virtual std::unique_ptr<ImageContainer> createImageContainer() = 0;
+    virtual std::unique_ptr<AppContext> createAppContext() = 0;
 
     virtual void addSpecificContextProperties(App& app) = 0;
 
 private:
-    void addCommonContextProperties(App& app, ImageContainer& imageContainer);
+    void addCommonContextProperties(App& app);
 };
 
 }

@@ -12,17 +12,19 @@
 #include "KronCoreExport.h"
 
 #include <memory>
+#include <QObject>
 
 namespace kron {
 
 class App;
 
-class AppFactory
+class AppFactory : public QObject
 {
+    Q_OBJECT
 public:
     virtual ~AppFactory() {}
 
-    virtual App* createApp() = 0;
+    virtual std::unique_ptr<App> createApp() = 0;
 };
 
 }

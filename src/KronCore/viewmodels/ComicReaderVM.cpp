@@ -9,7 +9,6 @@
 #include "ComicReaderVM.h"
 
 #include "../services/ComicArchiveReader.h"
-#include "../services/ImageContainer.h"
 
 #include <QUrl>
 
@@ -18,15 +17,19 @@
 namespace kron {
 
 ComicReaderVM::ComicReaderVM(
-        std::unique_ptr<ComicArchiveReader> archiveReader, ImageContainer& imageContainer)
+        std::unique_ptr<ComicArchiveReader> archiveReader)
     : QObject(),
-      archiveReader_(std::move(archiveReader)),
-      imageContainer_(imageContainer)
+      archiveReader_(std::move(archiveReader))
 {
 }
 
 ComicReaderVM::~ComicReaderVM()
 {
+}
+
+QVariant ComicReaderVM::page() const
+{
+    return currentPage_;
 }
 
 void ComicReaderVM::goForward()
@@ -69,9 +72,8 @@ void ComicReaderVM::openComic(QString comicPath)
 void ComicReaderVM::updateCurrentPage(QByteArray page)
 {
     currentPage_ = page;
-    imageContainer_.setImage("current", currentPage_);
 
-    emit pageUpdated(currentPage_);
+    emit pageChanged(currentPage_);
 }
 
 }

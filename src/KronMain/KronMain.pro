@@ -20,7 +20,8 @@ QML_IMPORT_PATH =
 LIBS += \
     -lKronCore \
     -lKronDI \
-    -lKronInfrastructure
+    -lKronInfrastructure \
+    -lKronUI
 
 ANDROID_PACKAGE_SOURCE_DIR = $$_PRO_FILE_PWD_/$$ROOTDIR/platform/android
 ANDROID_EXTRA_LIBS += \
