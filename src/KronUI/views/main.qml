@@ -83,13 +83,15 @@ ApplicationWindow {
                 id: destinationsModel
 
                 ListElement {
-                    name: qsTr("Library")
-                    source: "qrc:/views/Library.qml"
+                    name: qsTr("Browser")
+                    source: "qrc:/views/FileBrowser.qml"
+                    showToolbar: true
                 }
 
                 ListElement {
-                    name: qsTr("Browser")
-                    source: "qrc:/views/FileBrowser.qml"
+                    name: qsTr("Reader")
+                    source: "qrc:/views/ComicReader.qml"
+                    showToolbar: false
                 }
             }
 
@@ -98,12 +100,26 @@ ApplicationWindow {
                 highlighted: ListView.isCurrentItem
                 text: model.name
                 onClicked: {
-                    if (destinations.currentIndex != index) {
+                    if (destinations.currentIndex != index)
                         destinations.currentIndex = index
-                        stack.replace(model.source)
-                    }
-                    drawer.close()
                 }
+            }
+
+            onCurrentIndexChanged: {
+                var currentDestination = model.get(currentIndex)
+                console.log("Navigate to " + currentDestination.name)
+
+                if (currentDestination.showToolbar)
+                    window.header = toolbar
+                else
+                    window.header = null
+
+                stack.replace(currentDestination.source)
+                drawer.close()
+            }
+
+            function navigateToReader() {
+                destinations.currentIndex = 1
             }
         }
     }
@@ -118,7 +134,7 @@ ApplicationWindow {
         target: fileBrowserVM
         onFileOpened: {
             console.log("File " + fileUrl + " opened")
-            stack.push(Qt.resolvedUrl("qrc:/views/ComicReader.qml"))
+            destinations.navigateToReader()
             readerVM.openComic(fileUrl)
         }
     }

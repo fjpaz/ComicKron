@@ -51,7 +51,7 @@ Item {
 
         onClicked: {
             console.log("Middle mouse area")
-            drawer.position = 1 - drawer.position
+            drawer.open()
         }
     }
 }
