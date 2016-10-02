@@ -13,6 +13,7 @@
 
 #include <KronCore/services/ComicArchiveReader.h>
 
+#include <podofo/base/PdfDefines.h>
 #include <QVector>
 
 #include <memory>
@@ -48,6 +49,7 @@ private:
     std::unique_ptr<QFile> file_;
     char* buffer_;
     quint32 fileIndex_;
+    PoDoFo::pdf_long bytesRead_;
     std::unique_ptr<PoDoFo::PdfMemDocument> pdfDoc_;
     QVector<PoDoFo::PdfObject*> pdfImages_;
 };

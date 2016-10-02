@@ -184,7 +184,11 @@ QByteArray CompressedComicArchiveReader::readFirstImage()
 
 QByteArray CompressedComicArchiveReader::readNextImage()
 {
-    ++fileIndex_;
+    if (fileIndex_ < static_cast<quint32>(imageToIndex_.size() - 1))
+        ++fileIndex_;
+    else
+        qDebug() << "Already on last image";
+
     __LA_SSIZE_T bytesRead = 0;
     quint64 entrySize = 0;
 
@@ -224,7 +228,11 @@ QByteArray CompressedComicArchiveReader::readNextImage()
 
 QByteArray CompressedComicArchiveReader::readPreviousImage()
 {
-    --fileIndex_;
+    if (fileIndex_ != 0)
+        --fileIndex_;
+    else
+        qDebug() << "Already on first image";
+
     __LA_SSIZE_T bytesRead = 0;
     quint64 entrySize = 0;
 
@@ -237,7 +245,7 @@ QByteArray CompressedComicArchiveReader::readPreviousImage()
     int r = archive_read_open_memory(a_, mappedFile, file_->size());
 
     if (r != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not close archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException("Could not open archive " + file_->fileName().toStdString());
 
     quint32 imageIndex = imageToIndex_.at(fileIndex_);
 

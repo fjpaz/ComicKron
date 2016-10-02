@@ -27,7 +27,8 @@ namespace kron {
 PdfComicArchiveReader::PdfComicArchiveReader()
     : file_(new QFile),
       buffer_(new char[10*1024*1024]),
-      fileIndex_(0)
+      fileIndex_(0),
+      bytesRead_(0)
 {
 }
 
@@ -106,42 +107,38 @@ QByteArray PdfComicArchiveReader::readFirstImage()
 
 QByteArray PdfComicArchiveReader::readNextImage()
 {
-    PoDoFo::pdf_long bytesRead = 0;
-
     if (fileIndex_ < static_cast<quint32>(pdfImages_.size()))
     {
         PoDoFo::PdfObject *pObject = pdfImages_[fileIndex_];
         PoDoFo::PdfMemStream* pStream = dynamic_cast<PoDoFo::PdfMemStream*>(pObject->GetStream());
         buffer_ = const_cast<char*>(pStream->Get());
-        bytesRead = pStream->GetLength();
+        bytesRead_ = pStream->GetLength();
+
         fileIndex_++;
     }
     else
-        throw std::out_of_range("Image index " + QString::number(fileIndex_).toStdString() +
-                                " on file " + file_->fileName().toStdString() +
-                                " out of range. Archive has " +
-                                QString::number(pdfImages_.size()).toStdString() + " images");
+        qDebug() << "Already on last image";
 
-    QByteArray image(buffer_, bytesRead);
+    QByteArray image(buffer_, bytesRead_);
 
     return image;
 }
 
 QByteArray PdfComicArchiveReader::readPreviousImage()
 {
-    if (fileIndex_ <= 1)
-        throw std::out_of_range("Already on first image of file " +
-                                file_->fileName().toStdString() +
-                                ". It has no previous image" );
+    if (fileIndex_ > 1)
+    {
+        fileIndex_--;
 
-    fileIndex_--;
+        PoDoFo::PdfObject *pObject = pdfImages_[fileIndex_ - 1];
+        PoDoFo::PdfMemStream* pStream = dynamic_cast<PoDoFo::PdfMemStream*>(pObject->GetStream());
+        buffer_ = const_cast<char*>(pStream->Get());
+        bytesRead_ = pStream->GetLength();
+    }
+    else
+        qDebug() << "Already on first image";
 
-    PoDoFo::PdfObject *pObject = pdfImages_[fileIndex_ - 1];
-    PoDoFo::PdfMemStream* pStream = dynamic_cast<PoDoFo::PdfMemStream*>(pObject->GetStream());
-    buffer_ = const_cast<char*>(pStream->Get());
-    PoDoFo::pdf_long bytesRead = pStream->GetLength();
-
-    QByteArray image(buffer_, bytesRead);
+    QByteArray image(buffer_, bytesRead_);
 
     return image;
 }

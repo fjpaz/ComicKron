@@ -29,13 +29,17 @@ void ImageShowcase::paint(QPainter* painter)
 
     if (paintWidth <= width())
     {
-        painter->drawImage(QRectF(x() + width() / 2.0 - paintWidth / 2.0, y(), paintWidth, height()), image_);
+        painter->drawImage(QRectF(x() + width() / 2.0 - paintWidth / 2.0, y(),
+                                  paintWidth, height()),
+                           image_);
     }
     else
     {
         qreal paintHeight = width() / aspectRatio;
 
-        painter->drawImage(QRectF(x(), y() + height() / 2.0 - paintHeight / 2.0, width(), paintHeight), image_);
+        painter->drawImage(QRectF(x(), y() + height() / 2.0 - paintHeight / 2.0,
+                                  width(), paintHeight),
+                           image_);
     }
 }
 
