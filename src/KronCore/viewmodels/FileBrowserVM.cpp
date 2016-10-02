@@ -17,8 +17,13 @@ namespace kron {
 
 FileBrowserVM::FileBrowserVM(QObject *parent)
     : QObject(parent),
-      dir_(new QDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)))
+      dir_(new QDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation),
+                    "",
+                    QDir::Name | QDir::DirsFirst,
+                    QDir::Files | QDir::AllDirs | QDir::NoDot))
 {
+    dir_->setNameFilters(QStringList() << "*.cbr" << "*.CBR" << "*.cbz" << "*.CBZ" <<
+                         "*.pdf" << "*.PDF");
     fillItems();
 }
 
@@ -53,7 +58,7 @@ void FileBrowserVM::fillItems()
     qDebug() << "Filling items for directory" << dir_->absolutePath();
 
     // Fill with items of current directory
-    foreach (const QFileInfo& fileInfo, dir_->entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDot, QDir::DirsFirst))
+    foreach (const QFileInfo& fileInfo, dir_->entryInfoList())
     {
         FsItem* item = new FsItem;
         item->type = fileInfo.isFile() ? FsItem::Type::FILE : FsItem::Type::FOLDER;
