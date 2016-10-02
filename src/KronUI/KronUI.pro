@@ -12,7 +12,7 @@ ROOTDIR = ../..
 
 include($$ROOTDIR/build/lib.pri)
 
-QT = core gui quick qml
+QT = core gui quick qml quickcontrols2
 
 DEFINES += KRONUI_LIBRARY
 

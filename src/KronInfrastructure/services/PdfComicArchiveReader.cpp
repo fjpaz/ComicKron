@@ -18,6 +18,7 @@
 #include <podofo/doc/PdfPage.h>
 #include <QDebug>
 #include <QFile>
+#include <QString>
 
 #include <stdexcept>
 
@@ -116,9 +117,10 @@ QByteArray PdfComicArchiveReader::readNextImage()
         fileIndex_++;
     }
     else
-        throw std::out_of_range("Image index " + std::to_string(fileIndex_) +
+        throw std::out_of_range("Image index " + QString::number(fileIndex_).toStdString() +
                                 " on file " + file_->fileName().toStdString() +
-                                " out of range. Archive has " + std::to_string(pdfImages_.size()) + " images");
+                                " out of range. Archive has " +
+                                QString::number(pdfImages_.size()).toStdString() + " images");
 
     QByteArray image(buffer_, bytesRead);
 

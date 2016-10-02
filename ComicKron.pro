@@ -72,4 +72,5 @@ OTHER_FILES += \
     build/test.pri \
     build/unit_test.pri \
     cfg/qtquickcontrol2.conf \
+    platform/android/AndroidManifest.xml \
     README.md

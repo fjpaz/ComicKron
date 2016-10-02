@@ -9,6 +9,7 @@
 #include "SignalSpy.h"
 
 #include <QList>
+#include <QString>
 
 #include <stdexcept>
 
@@ -58,7 +59,9 @@ QVariant SignalSpy::parameter(int position) const
     QList<QVariant> firstSignal = first();
 
     if (firstSignal.count() <= position)
-        throw std::out_of_range("Signal doesn't have parameter " + std::to_string(position));
+        throw std::out_of_range(
+                "Signal doesn't have parameter " +
+                QString::number(position).toStdString());
 
     return firstSignal.at(position - 1);
 }

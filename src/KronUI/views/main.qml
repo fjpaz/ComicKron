@@ -11,7 +11,6 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.0
-import Qt.labs.settings 1.0
 
 ApplicationWindow {
     id: window
@@ -22,14 +21,6 @@ ApplicationWindow {
     Material.theme: Material.Light
     Material.primary: Material.BlueGrey
     Material.accent: Material.DeepOrange
-
-    Settings {
-        id: settings
-        property alias x: window.x
-        property alias y: window.y
-        property alias width: window.width
-        property alias height: window.height
-    }
 
     header: ToolBar {
         id: toolbar

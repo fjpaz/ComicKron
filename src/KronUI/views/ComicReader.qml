@@ -13,12 +13,6 @@ import ComicKron 1.0
 Item {
     id: root
 
-    function updateImage() {
-        console.log("Update Image")
-        image.source = ""
-        image.source = "image://comic/current"
-    }
-
     ImageShowcase {
         id: imageShowcase
         anchors.fill: parent

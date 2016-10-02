@@ -31,7 +31,10 @@ else: DEFINES += \
     PODOFO_HAVE_STRINGS_H \
     SZ_LONG=8
 
-!msvc: QMAKE_CXXFLAGS -= -pedantic-errors
+!msvc {
+    QMAKE_CXXFLAGS -= -pedantic-errors
+    QMAKE_CXXFLAGS += -Wno-deprecated-declarations
+}
 
 LIBS += -lz
 win32: LIBS += -lWs2_32

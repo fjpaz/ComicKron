@@ -10,7 +10,6 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QtQml/QQmlEngine>
 #include <QStandardPaths>
 #include <QUrl>
 
@@ -20,9 +19,6 @@ FileBrowserVM::FileBrowserVM(QObject *parent)
     : QObject(parent),
       dir_(new QDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)))
 {
-    qmlRegisterUncreatableType<FsItem>(
-                "ComicKron.FsItem", 1, 0, "FsItem",
-                "You cannot create an instance of the FsItem");
     fillItems();
 }
 
@@ -53,6 +49,8 @@ void FileBrowserVM::fillItems()
     // Clear old items
     qDeleteAll(items_);
     items_.clear();
+
+    qDebug() << "Filling items for directory" << dir_->absolutePath();
 
     // Fill with items of current directory
     foreach (const QFileInfo& fileInfo, dir_->entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDot, QDir::DirsFirst))
