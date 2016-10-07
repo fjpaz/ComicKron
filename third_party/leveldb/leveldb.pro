@@ -38,7 +38,12 @@ netbsd*: DEFINES += OS_NETBSD
 openbsd*: DEFINES += OS_OPENBSD
 hpux*: DEFINES += OS_HPUX
 
-!msvc: QMAKE_CXX_FLAGS += -fno-builtin-memcmp
+!msvc {
+    QMAKE_CXXFLAGS -= -pedantic-errors
+    QMAKE_CXXFLAGS -= -Werror
+    QMAKE_CXXFLAGS += -fno-builtin-memcmp
+    QMAKE_CXXFLAGS += -Wno-variadic-macros
+}
 
 INCLUDEPATH += .
 

@@ -15,6 +15,10 @@ include($$ROOTDIR/build/staticlib.pri)
 CONFIG -= qt
 CONFIG += warn_off
 
+!msvc {
+    QMAKE_CXXFLAGS -= -pedantic-errors
+}
+
 INCLUDEPATH += .
 
 SOURCES += \
