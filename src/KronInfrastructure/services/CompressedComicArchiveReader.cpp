@@ -24,14 +24,20 @@ CompressedComicArchiveReader::CompressedComicArchiveReader()
     : file_(new QFile),
       buffer_(new char[10*1024*1024]),
       fileIndex_(0),
-      a_(),
-      entry_(),
+      a_(nullptr),
+      entry_(nullptr),
       imageToIndex_()
 {
 }
 
 CompressedComicArchiveReader::~CompressedComicArchiveReader()
 {
+    if (a_)
+    {
+        archive_read_close(a_);
+        archive_read_free(a_);
+    }
+
     delete[] buffer_;
 }
 
