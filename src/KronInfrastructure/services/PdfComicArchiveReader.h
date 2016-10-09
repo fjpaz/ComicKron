@@ -48,7 +48,7 @@ public:
 private:
     std::unique_ptr<QFile> file_;
     char* buffer_;
-    quint32 fileIndex_;
+    int fileIndex_;
     PoDoFo::pdf_long bytesRead_;
     std::unique_ptr<PoDoFo::PdfMemDocument> pdfDoc_;
     QVector<PoDoFo::PdfObject*> pdfImages_;

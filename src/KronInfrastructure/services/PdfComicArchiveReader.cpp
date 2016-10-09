@@ -26,7 +26,7 @@ namespace kron {
 
 PdfComicArchiveReader::PdfComicArchiveReader()
     : file_(new QFile),
-      buffer_(new char[10*1024*1024]),
+      buffer_(nullptr),
       fileIndex_(0),
       bytesRead_(0)
 {
@@ -34,7 +34,6 @@ PdfComicArchiveReader::PdfComicArchiveReader()
 
 PdfComicArchiveReader::~PdfComicArchiveReader()
 {
-    delete[] buffer_;
 }
 
 void PdfComicArchiveReader::open(QString comicArchive)
@@ -108,7 +107,7 @@ QByteArray PdfComicArchiveReader::readFirstImage()
 
 QByteArray PdfComicArchiveReader::readNextImage()
 {
-    if (fileIndex_ < static_cast<quint32>(pdfImages_.size()))
+    if (fileIndex_ < pdfImages_.size())
     {
         PoDoFo::PdfObject *pObject = pdfImages_[fileIndex_];
         PoDoFo::PdfMemStream* pStream = dynamic_cast<PoDoFo::PdfMemStream*>(pObject->GetStream());
@@ -120,7 +119,7 @@ QByteArray PdfComicArchiveReader::readNextImage()
     else
         qDebug() << "Already on last image";
 
-    QByteArray image(buffer_, bytesRead_);
+    QByteArray image(buffer_, static_cast<int>(bytesRead_));
 
     return image;
 }
@@ -139,7 +138,7 @@ QByteArray PdfComicArchiveReader::readPreviousImage()
     else
         qDebug() << "Already on first image";
 
-    QByteArray image(buffer_, bytesRead_);
+    QByteArray image(buffer_, static_cast<int>(bytesRead_));
 
     return image;
 }
