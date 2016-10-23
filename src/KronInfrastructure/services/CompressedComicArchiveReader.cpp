@@ -22,6 +22,7 @@ namespace kron {
 
 CompressedComicArchiveReader::CompressedComicArchiveReader()
     : file_(new QFile),
+      mappedFile_(nullptr),
       buffer_(new char[10*1024*1024]),
       fileIndex_(0),
       a_(nullptr),
@@ -48,24 +49,30 @@ void CompressedComicArchiveReader::open(QString comicArchive)
     bool isOpen = file_->open(QIODevice::ReadOnly);
 
     if (!isOpen)
-        throw ArchiveNotFoundException("Archive " + comicArchive.toStdString() + " not found");
+        throw ArchiveNotFoundException(
+                "Archive " + comicArchive.toStdString() + " not found");
 
-    uchar* mappedFile = file_->map(0, file_->size());
+    mappedFile_ = file_->map(0, file_->size());
 
     int ret = 0;
 
     if (0 != fileIndex_)
     {
-        // Close and open the file to read from beggining (libarchive cannot read backwards)
+        // Close and open the file to read from beggining
+        // (libarchive cannot read backwards)
         ret = archive_read_close(a_);
 
         if (ret != ARCHIVE_OK)
-            throw ArchiveReadErrorException("Could not close archive " + file_->fileName().toStdString());
+            throw ArchiveReadErrorException(
+                    "Could not close archive " +
+                    file_->fileName().toStdString());
 
         ret = archive_read_free(a_);
 
         if (ret != ARCHIVE_OK)
-            throw ArchiveReadErrorException("Could not free memory for archive " + file_->fileName().toStdString());
+            throw ArchiveReadErrorException(
+                    "Could not free memory for archive " +
+                    file_->fileName().toStdString());
 
         fileIndex_ = 0;
     }
@@ -74,14 +81,19 @@ void CompressedComicArchiveReader::open(QString comicArchive)
     archive_read_support_filter_all(a_);
     archive_read_support_format_all(a_);
 
-    ret = archive_read_open_memory(a_, mappedFile, file_->size());
+    ret = archive_read_open_memory(
+                a_,
+                mappedFile_,
+                static_cast<size_t>(file_->size()));
 
     if (ret != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not open archive " + comicArchive.toStdString());
+        throw ArchiveReadErrorException(
+                "Could not open archive " +
+                comicArchive.toStdString());
 
     // Generate ordered file entry index
-    QMap<QString, quint32> stringToIndex;
-    quint32 i = 0;
+    QMap<QString, int> stringToIndex;
+    int i = 0;
     bool hasMoreEntries = true;
 
     while (hasMoreEntries)
@@ -117,12 +129,16 @@ void CompressedComicArchiveReader::open(QString comicArchive)
     ret = archive_read_close(a_);
 
     if (ret != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not close archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not close archive " +
+                file_->fileName().toStdString());
 
     ret = archive_read_free(a_);
 
     if (ret != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not free memory for archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not free memory for archive " +
+                file_->fileName().toStdString());
 
     fileIndex_ = 0;
 
@@ -130,10 +146,15 @@ void CompressedComicArchiveReader::open(QString comicArchive)
     archive_read_support_filter_all(a_);
     archive_read_support_format_all(a_);
 
-    ret = archive_read_open_memory(a_, mappedFile, file_->size());
+    ret = archive_read_open_memory(
+                a_,
+                mappedFile_,
+                static_cast<size_t>(file_->size()));
 
     if (ret != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not open archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not open archive " +
+                file_->fileName().toStdString());
 }
 
 QByteArray CompressedComicArchiveReader::readFirstImage()
@@ -141,93 +162,128 @@ QByteArray CompressedComicArchiveReader::readFirstImage()
     fileIndex_ = 0;
     __LA_SSIZE_T bytesRead = 0;
 
-    // Close and open the file to read from beggining (libarchive cannot read backwards)
+    // Close and open the file to read from beggining
+    // (libarchive cannot read backwards)
     int r = archive_read_close(a_);
 
     if (r != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not close archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not close archive " +
+                file_->fileName().toStdString());
 
     r = archive_read_free(a_);
 
     if (r != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not free memory for archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not free memory for archive " +
+                file_->fileName().toStdString());
 
     a_ = archive_read_new();
     archive_read_support_filter_all(a_);
     archive_read_support_format_all(a_);
 
-    uchar* mappedFile = file_->map(0, file_->size());
-
-    r = archive_read_open_memory(a_, mappedFile, file_->size());
+    r = archive_read_open_memory(
+                a_,
+                mappedFile_,
+                static_cast<size_t>(file_->size()));
 
     if (r != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not open archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not open archive " +
+                file_->fileName().toStdString());
 
-    quint64 entrySize = 0;
+    size_t entrySize = 0;
 
-    quint32 firstImageIndex = imageToIndex_.at(0);
+    int firstImageIndex = imageToIndex_.at(0);
 
-    for (quint32 i = 0; i <= firstImageIndex; ++i)
+    for (int i = 0; i <= firstImageIndex; ++i)
     {
         if (archive_read_next_header(a_, &entry_) != ARCHIVE_OK)
-            throw ArchiveReadErrorException("Could not read from archive " + file_->fileName().toStdString());
+            throw ArchiveReadErrorException(
+                    "Could not read from archive " +
+                    file_->fileName().toStdString());
 
-        entrySize = archive_entry_size(entry_);
+        entrySize = static_cast<size_t>(archive_entry_size(entry_));
     }
 
     qDebug() << archive_entry_pathname(entry_);
 
-    qDebug() << "Filter Count: " << archive_filter_count(a_) << ", Name: " << QString(archive_format_name(a_)) << ", Code: " << archive_format(a_) <<
+    qDebug() << "Filter Count: " << archive_filter_count(a_) <<
+                ", Name: " << QString(archive_format_name(a_)) <<
+                ", Code: " << archive_format(a_) <<
                 ", Header Pos: " << archive_read_header_position(a_);
 
     bytesRead = archive_read_data(a_, buffer_, entrySize);
     qDebug() << "Bytes read: " << bytesRead;
 
-    QByteArray image(buffer_, bytesRead);
+    QByteArray image = QByteArray::fromRawData(
+                buffer_, static_cast<int>(bytesRead));
 
     return image;
 }
 
 QByteArray CompressedComicArchiveReader::readNextImage()
 {
-    if (fileIndex_ < static_cast<quint32>(imageToIndex_.size() - 1))
+    if (fileIndex_ < imageToIndex_.size() - 1)
         ++fileIndex_;
     else
         qDebug() << "Already on last image";
 
     __LA_SSIZE_T bytesRead = 0;
-    quint64 entrySize = 0;
+    size_t entrySize = 0;
+
+    int r = archive_read_close(a_);
+
+    if (r != ARCHIVE_OK)
+        throw ArchiveReadErrorException(
+                "Could not close archive " +
+                file_->fileName().toStdString());
+
+    r = archive_read_free(a_);
+
+    if (r != ARCHIVE_OK)
+        throw ArchiveReadErrorException(
+                "Could not free memory for archive " +
+                file_->fileName().toStdString());
 
     a_ = archive_read_new();
     archive_read_support_filter_all(a_);
     archive_read_support_format_all(a_);
 
-    uchar* mappedFile = file_->map(0, file_->size());
-
-    int r = archive_read_open_memory(a_, mappedFile, file_->size());
+    r = archive_read_open_memory(
+                a_,
+                mappedFile_,
+                static_cast<size_t>(file_->size()));
 
     if (r != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not open archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not open archive " +
+                file_->fileName().toStdString());
 
-    quint32 imageIndex = imageToIndex_.at(fileIndex_);
+    int imageIndex = imageToIndex_.at(fileIndex_);
 
-    for (quint32 i = 0; i <= imageIndex; ++i)
+    for (int i = 0; i <= imageIndex; ++i)
     {
         if (archive_read_next_header(a_, &entry_) != ARCHIVE_OK)
-            throw ArchiveReadErrorException("Could not read from archive " + file_->fileName().toStdString());
+            throw ArchiveReadErrorException(
+                    "Could not read from archive " +
+                    file_->fileName().toStdString());
 
-        entrySize = archive_entry_size(entry_);
+        entrySize = static_cast<size_t>(archive_entry_size(entry_));
     }
 
     qDebug() << archive_entry_pathname(entry_);
 
-    qDebug() << "Filter Count: " << archive_filter_count(a_) << ", Name: " << QString(archive_format_name(a_)) << ", Code: " << archive_format(a_) <<
+    qDebug() << "Filter Count: " << archive_filter_count(a_) <<
+                ", Name: " << QString(archive_format_name(a_)) <<
+                ", Code: " << archive_format(a_) <<
                 ", Header Pos: " << archive_read_header_position(a_);
 
     bytesRead = archive_read_data(a_, buffer_, entrySize);
     qDebug() << "Bytes read: " << bytesRead;
 
-    QByteArray image(buffer_, bytesRead);
+    QByteArray image = QByteArray::fromRawData(
+                buffer_, static_cast<int>(bytesRead));
 
     return image;
 }
@@ -240,38 +296,60 @@ QByteArray CompressedComicArchiveReader::readPreviousImage()
         qDebug() << "Already on first image";
 
     __LA_SSIZE_T bytesRead = 0;
-    quint64 entrySize = 0;
+    size_t entrySize = 0;
+
+    int r = archive_read_close(a_);
+
+    if (r != ARCHIVE_OK)
+        throw ArchiveReadErrorException(
+                "Could not close archive " +
+                file_->fileName().toStdString());
+
+    r = archive_read_free(a_);
+
+    if (r != ARCHIVE_OK)
+        throw ArchiveReadErrorException(
+                "Could not free memory for archive " +
+                file_->fileName().toStdString());
 
     a_ = archive_read_new();
     archive_read_support_filter_all(a_);
     archive_read_support_format_all(a_);
 
-    uchar* mappedFile = file_->map(0, file_->size());
-
-    int r = archive_read_open_memory(a_, mappedFile, file_->size());
+    r = archive_read_open_memory(
+                a_,
+                mappedFile_,
+                static_cast<size_t>(file_->size()));
 
     if (r != ARCHIVE_OK)
-        throw ArchiveReadErrorException("Could not open archive " + file_->fileName().toStdString());
+        throw ArchiveReadErrorException(
+                "Could not open archive " +
+                file_->fileName().toStdString());
 
-    quint32 imageIndex = imageToIndex_.at(fileIndex_);
+    int imageIndex = imageToIndex_.at(fileIndex_);
 
-    for (quint32 i = 0; i <= imageIndex; ++i)
+    for (int i = 0; i <= imageIndex; ++i)
     {
         if (archive_read_next_header(a_, &entry_) != ARCHIVE_OK)
-            throw ArchiveReadErrorException("Could not read from archive " + file_->fileName().toStdString());
+            throw ArchiveReadErrorException(
+                    "Could not read from archive " +
+                    file_->fileName().toStdString());
 
-        entrySize = archive_entry_size(entry_);
+        entrySize = static_cast<size_t>(archive_entry_size(entry_));
     }
 
     qDebug() << archive_entry_pathname(entry_);
 
-    qDebug() << "Filter Count: " << archive_filter_count(a_) << ", Name: " << QString(archive_format_name(a_)) << ", Code: " << archive_format(a_) <<
+    qDebug() << "Filter Count: " << archive_filter_count(a_) <<
+                ", Name: " << QString(archive_format_name(a_)) <<
+                ", Code: " << archive_format(a_) <<
                 ", Header Pos: " << archive_read_header_position(a_);
 
     bytesRead = archive_read_data(a_, buffer_, entrySize);
     qDebug() << "Bytes read: " << bytesRead;
 
-    QByteArray image(buffer_, bytesRead);
+    QByteArray image = QByteArray::fromRawData(
+                buffer_, static_cast<int>(bytesRead));
 
     return image;
 }

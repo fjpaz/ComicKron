@@ -46,6 +46,8 @@ public:
     virtual QString currentArchive() const;
 
 private:
+    void trackIfImage(PoDoFo::PdfObject* pdfObject);
+
     std::unique_ptr<QFile> file_;
     char* buffer_;
     int fileIndex_;

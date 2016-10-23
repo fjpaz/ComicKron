@@ -42,11 +42,12 @@ public:
 
 private:
     std::unique_ptr<QFile> file_;
+    uchar* mappedFile_;
     char* buffer_;
-    quint32 fileIndex_;
+    int fileIndex_;
     struct archive* a_;
     struct archive_entry* entry_;
-    QVarLengthArray<quint32, 128> imageToIndex_;
+    QVarLengthArray<int, 128> imageToIndex_;
 };
 
 }

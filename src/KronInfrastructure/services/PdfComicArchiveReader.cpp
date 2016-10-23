@@ -43,7 +43,8 @@ void PdfComicArchiveReader::open(QString comicArchive)
     bool isOpen = file_->open(QIODevice::ReadOnly);
 
     if (!isOpen)
-        throw ArchiveReadErrorException("Could not open file " + comicArchive.toStdString());
+        throw ArchiveReadErrorException(
+                "Could not open file " + comicArchive.toStdString());
 
     uchar* mappedFile = file_->map(0, file_->size());
     pdfDoc_.reset(new PoDoFo::PdfMemDocument);
@@ -55,7 +56,9 @@ void PdfComicArchiveReader::open(QString comicArchive)
     for( int i = 0; i < numPages; ++i )
     {
         PoDoFo::PdfPage* pdfPage = pdfDoc_->GetPage( i );
+
         qDebug() << "Page" << pdfPage->GetPageNumber();
+
         PoDoFo::PdfObject* resources = pdfPage->GetResources();
         PoDoFo::PdfDictionary& dictionary = resources->GetDictionary();
 
@@ -74,23 +77,15 @@ void PdfComicArchiveReader::open(QString comicArchive)
                 {
                     PoDoFo::TKeyMap keys = xobject->GetDictionary().GetKeys();
 
-                    for (PoDoFo::TCIKeyMap it = keys.begin(); it != keys.end(); ++it)
+                    for (PoDoFo::TCIKeyMap it = keys.begin();
+                         it != keys.end();
+                         ++it)
                     {
                         PoDoFo::PdfObject* mapObj = it->second;
 
                         if (mapObj->IsReference())
                         {
-                            // Get object by reference and add to tracked images if it is an image
-                            PoDoFo::PdfObject* imgObject = pdfDoc_->GetObjects().GetObject(mapObj->GetReference());
-                            PoDoFo::PdfObject* pObjType = imgObject->GetDictionary().GetKey( PoDoFo::PdfName::KeyType );
-                            PoDoFo::PdfObject* pObjSubType = imgObject->GetDictionary().GetKey( PoDoFo::PdfName::KeySubtype );
-
-                            if( (pObjType && pObjType->IsName() && ( pObjType->GetName().GetName() == "XObject" )) ||
-                                (pObjSubType && pObjSubType->IsName() && ( pObjSubType->GetName().GetName() == "Image")))
-                            {
-                                pdfImages_.push_back(imgObject);
-                                pdfDoc_->FreeObjectMemory(imgObject);
-                            }
+                            trackIfImage(mapObj);
                         }
                     }
                 }
@@ -110,7 +105,8 @@ QByteArray PdfComicArchiveReader::readNextImage()
     if (fileIndex_ < pdfImages_.size())
     {
         PoDoFo::PdfObject *pObject = pdfImages_[fileIndex_];
-        PoDoFo::PdfMemStream* pStream = dynamic_cast<PoDoFo::PdfMemStream*>(pObject->GetStream());
+        PoDoFo::PdfMemStream* pStream = static_cast<PoDoFo::PdfMemStream*>(
+                    pObject->GetStream());
         buffer_ = const_cast<char*>(pStream->Get());
         bytesRead_ = pStream->GetLength();
 
@@ -119,7 +115,8 @@ QByteArray PdfComicArchiveReader::readNextImage()
     else
         qDebug() << "Already on last image";
 
-    QByteArray image(buffer_, static_cast<int>(bytesRead_));
+    QByteArray image = QByteArray::fromRawData(
+                buffer_, static_cast<int>(bytesRead_));
 
     return image;
 }
@@ -131,14 +128,16 @@ QByteArray PdfComicArchiveReader::readPreviousImage()
         fileIndex_--;
 
         PoDoFo::PdfObject *pObject = pdfImages_[fileIndex_ - 1];
-        PoDoFo::PdfMemStream* pStream = dynamic_cast<PoDoFo::PdfMemStream*>(pObject->GetStream());
+        PoDoFo::PdfMemStream* pStream = static_cast<PoDoFo::PdfMemStream*>(
+                    pObject->GetStream());
         buffer_ = const_cast<char*>(pStream->Get());
         bytesRead_ = pStream->GetLength();
     }
     else
         qDebug() << "Already on first image";
 
-    QByteArray image(buffer_, static_cast<int>(bytesRead_));
+    QByteArray image = QByteArray::fromRawData(
+                buffer_, static_cast<int>(bytesRead_));
 
     return image;
 }
@@ -146,6 +145,26 @@ QByteArray PdfComicArchiveReader::readPreviousImage()
 QString PdfComicArchiveReader::currentArchive() const
 {
     return file_->fileName();
+}
+
+void PdfComicArchiveReader::trackIfImage(PoDoFo::PdfObject* pdfObject)
+{
+    // Get object by reference and add to tracked images if it is an image
+    PoDoFo::PdfObject* imgObject = pdfDoc_->GetObjects().GetObject(
+                pdfObject->GetReference());
+    PoDoFo::PdfObject* pObjType = imgObject->GetDictionary().GetKey(
+                PoDoFo::PdfName::KeyType);
+    PoDoFo::PdfObject* pObjSubType = imgObject->GetDictionary().GetKey(
+                PoDoFo::PdfName::KeySubtype);
+
+    if( (pObjType && pObjType->IsName() &&
+         (pObjType->GetName().GetName() == "XObject")) ||
+        (pObjSubType && pObjSubType->IsName() &&
+         (pObjSubType->GetName().GetName() == "Image")))
+    {
+        pdfImages_.push_back(imgObject);
+        pdfDoc_->FreeObjectMemory(imgObject);
+    }
 }
 
 }
