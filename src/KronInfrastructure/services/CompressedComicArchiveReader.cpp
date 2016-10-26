@@ -216,8 +216,10 @@ QByteArray CompressedComicArchiveReader::readFirstImage()
     bytesRead = archive_read_data(a_, buffer_, entrySize);
     qDebug() << "Bytes read: " << bytesRead;
 
-    QByteArray image = QByteArray::fromRawData(
-                buffer_, static_cast<int>(bytesRead));
+    QByteArray image;
+
+    if (bytesRead > 0)
+        image = QByteArray::fromRawData( buffer_, static_cast<int>(bytesRead));
 
     return image;
 }
@@ -282,8 +284,10 @@ QByteArray CompressedComicArchiveReader::readNextImage()
     bytesRead = archive_read_data(a_, buffer_, entrySize);
     qDebug() << "Bytes read: " << bytesRead;
 
-    QByteArray image = QByteArray::fromRawData(
-                buffer_, static_cast<int>(bytesRead));
+    QByteArray image;
+
+    if (bytesRead > 0)
+        image = QByteArray::fromRawData( buffer_, static_cast<int>(bytesRead));
 
     return image;
 }
@@ -348,8 +352,10 @@ QByteArray CompressedComicArchiveReader::readPreviousImage()
     bytesRead = archive_read_data(a_, buffer_, entrySize);
     qDebug() << "Bytes read: " << bytesRead;
 
-    QByteArray image = QByteArray::fromRawData(
-                buffer_, static_cast<int>(bytesRead));
+    QByteArray image;
+
+    if (bytesRead > 0)
+        image = QByteArray::fromRawData( buffer_, static_cast<int>(bytesRead));
 
     return image;
 }
