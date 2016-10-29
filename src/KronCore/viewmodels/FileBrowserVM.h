@@ -9,6 +9,8 @@
 #ifndef KRON_FILEBROWSERVM_H
 #define KRON_FILEBROWSERVM_H
 
+#include "../KronCoreExport.h"
+
 #include <memory>
 #include <QList>
 #include <QObject>
@@ -18,7 +20,7 @@ class QDir;
 
 namespace kron {
 
-class FsItem : public QObject
+class KRONCORE_EXPORT FsItem : public QObject
 {
     Q_OBJECT
 public:
@@ -40,7 +42,7 @@ signals:
     void nameChanged(QString name);
 };
 
-class FileBrowserVM : public QObject
+class KRONCORE_EXPORT FileBrowserVM : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QList<QObject*> items MEMBER items_ NOTIFY itemsChanged)

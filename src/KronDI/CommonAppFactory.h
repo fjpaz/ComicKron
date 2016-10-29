@@ -9,13 +9,15 @@
 #ifndef KRON_COMMONAPPFACTORY_H
 #define KRON_COMMONAPPFACTORY_H
 
+#include "KronDIExport.h"
+
 #include <KronCore/AppFactory.h>
 
 namespace kron {
 
 class AppContext;
 
-class CommonAppFactory : public AppFactory
+class KRONDI_EXPORT CommonAppFactory : public AppFactory
 {
 public:
     CommonAppFactory();
