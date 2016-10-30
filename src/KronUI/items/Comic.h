@@ -96,8 +96,8 @@ private:
     static constexpr qreal TOUCH_MARGIN = 5;
     static constexpr int MAX_INERTIA_INTERVAL = 100;
     static constexpr int INERTIA_LENGTH_MSECS = 250;
-    static constexpr qreal MIN_SWIPE_LENGTH = 100;
-    static constexpr qreal MAX_SWIPE_INTERVAL = 500;
+    static constexpr qreal MIN_SWIPE_LENGTH = 100.0;
+    static constexpr qreal MAX_SWIPE_INTERVAL = 100.0;
 
     QByteArray imageBytes_;
     QPixmap image_;
@@ -117,6 +117,7 @@ private:
     bool tapInProgress_;
     bool panInProgress_;
     bool pinchInProgress_;
+    bool swipeInProgress_;
     bool updatePending_;
 };
 

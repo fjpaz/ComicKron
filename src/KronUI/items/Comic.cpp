@@ -28,7 +28,8 @@ Comic::Comic(QQuickItem* parent)
       aspectRatio_(1.0),
       tapInProgress_(false),
       panInProgress_(false),
-      pinchInProgress_(false)
+      pinchInProgress_(false),
+      swipeInProgress_(false)
 {
     parallelAnimation_.addAnimation(panAnimation_);
     parallelAnimation_.addAnimation(zoomAnimation_);
@@ -124,6 +125,12 @@ void Comic::touchEvent(QTouchEvent* event)
     if (touchPointStates == Qt::TouchPointPressed)
     {
         panAnimation_->stop();
+
+        bool inLeftLimit = qFuzzyCompare(centerOffset_.x(), maxXOffset_);
+        bool inRightLimit = qFuzzyCompare(centerOffset_.x(), -maxXOffset_);
+
+        if (inLeftLimit || inRightLimit)
+            swipeInProgress_ = true;
     }
 
     if (numTouchPoints == 1)
@@ -235,10 +242,6 @@ void Comic::touchEvent(QTouchEvent* event)
 
     if (Qt::TouchPointReleased == touchPointStates)
     {
-        tapInProgress_ = false;
-        panInProgress_ = false;
-        pinchInProgress_ = false;
-
         if (scaleFactor_ < 1.0)
         {
             // Scale to fit item and center on gesture end
@@ -304,6 +307,10 @@ void Comic::touchEvent(QTouchEvent* event)
         }
 
         lastPanTouchs_.clear();
+        tapInProgress_ = false;
+        panInProgress_ = false;
+        pinchInProgress_ = false;
+        swipeInProgress_ = false;
     }
 }
 
@@ -403,7 +410,8 @@ bool Comic::imageOutOfLimits() const
 
 bool Comic::swipeNext() const
 {
-    if (centerOffset_.x() < (-maxXOffset_ - MIN_SWIPE_LENGTH) / scaleFactor_ &&
+    if (swipeInProgress_ &&
+        centerOffset_.x() < (-maxXOffset_ - MIN_SWIPE_LENGTH) / scaleFactor_ &&
         lastPanTouchs_.isFull() &&
         lastPanTouchs_.first().time.msecsTo(lastPanTouchs_.last().time) <
             MAX_SWIPE_INTERVAL)
@@ -413,7 +421,8 @@ bool Comic::swipeNext() const
 
 bool Comic::swipePrevious() const
 {
-    if (centerOffset_.x() > (maxXOffset_ + MIN_SWIPE_LENGTH) / scaleFactor_ &&
+    if (swipeInProgress_ &&
+        centerOffset_.x() > (maxXOffset_ + MIN_SWIPE_LENGTH) / scaleFactor_ &&
         lastPanTouchs_.isFull() &&
         lastPanTouchs_.first().time.msecsTo(lastPanTouchs_.last().time) <
             MAX_SWIPE_INTERVAL)
