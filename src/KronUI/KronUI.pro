@@ -26,12 +26,14 @@ ios: QTPLUGIN += qmldbg_tcp
 
 SOURCES += \
     services/QmlAppContext.cpp \
-    items/ImageShowcase.cpp
+    items/ImageShowcase.cpp \
+    items/Comic.cpp
 
 HEADERS += \
     KronUIExport.h \
     services/QmlAppContext.h \
-    items/ImageShowcase.h
+    items/ImageShowcase.h \
+    items/Comic.h
 
 unix {
     target.path = /usr/lib

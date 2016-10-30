@@ -15,6 +15,7 @@ import QtQuick.Controls.Material 2.0
 ApplicationWindow {
     id: window
     visible: true
+    visibility: Qt.platform.os == "android" ? Window.FullScreen : Window.Windowed
     width: 600
     height: 1000
 
@@ -126,6 +127,7 @@ ApplicationWindow {
 
     StackView {
         id: stack
+        focus: true
         initialItem: Qt.resolvedUrl("qrc:/views/FileBrowser.qml")
         anchors.fill: parent
     }

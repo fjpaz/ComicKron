@@ -45,7 +45,7 @@ QVariant SignalSpy::secondParameter() const
 
     QList<QVariant> firstSignal = first();
 
-    if (firstSignal.count() < 2)
+    if (firstSignal.size() < 2)
         throw std::out_of_range("Signal doesn't have second parameter");
 
     return firstSignal.at(1);
@@ -58,7 +58,7 @@ QVariant SignalSpy::parameter(int position) const
 
     QList<QVariant> firstSignal = first();
 
-    if (firstSignal.count() <= position)
+    if (firstSignal.size() <= position)
         throw std::out_of_range(
                 "Signal doesn't have parameter " +
                 QString::number(position).toStdString());

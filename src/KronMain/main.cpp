@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setApplicationName("ComicKron");
     QGuiApplication::setOrganizationName("ComicKron");
     QGuiApplication app(argc, argv);
+    app.setAttribute(Qt::AA_SynthesizeTouchForUnhandledMouseEvents);
 
     // Handle OS signals
     kron::SignalHandler::handleSignals();

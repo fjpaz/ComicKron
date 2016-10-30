@@ -13,44 +13,25 @@ import ComicKron 1.0
 Item {
     id: root
 
-    ImageShowcase {
-        id: imageShowcase
+    Comic {
+        id: comic
+        focus: true
         anchors.fill: parent
         image: readerVM.page
     }
 
-    MouseArea {
-        width: parent.width / 4
-        height: parent.height
-        anchors.right: parent.right
-        anchors.top: parent.top
-
-        onClicked: {
-            console.log("Next Page")
+    Connections {
+        target: comic
+        onNextRequested: {
+            console.log("Go Forward")
             readerVM.goForward()
         }
-    }
-
-    MouseArea {
-        width: parent.width / 4
-        height: parent.height
-        anchors.left: parent.left
-        anchors.top: parent.top
-
-        onClicked: {
-            console.log("Previous Page")
+        onPreviousRequested: {
+            console.log("Go Backward")
             readerVM.goBackward()
         }
-    }
-
-    MouseArea {
-        width: parent.width / 2
-        height: parent.height
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-
-        onClicked: {
-            console.log("Middle mouse area")
+        onMoreActionsRequested: {
+            console.log("More Actions")
             drawer.open()
         }
     }

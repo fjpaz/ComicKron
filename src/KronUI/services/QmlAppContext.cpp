@@ -8,6 +8,7 @@
 
 #include "QmlAppContext.h"
 
+#include "../items/Comic.h"
 #include "../items/ImageShowcase.h"
 
 #include <KronCore/viewmodels/FileBrowserVM.h>
@@ -23,6 +24,7 @@ QmlAppContext::QmlAppContext()
     : engine_(new QQmlApplicationEngine)
 {
     qmlRegisterType<ImageShowcase>("ComicKron", 1, 0, "ImageShowcase");
+    qmlRegisterType<Comic>("ComicKron", 1, 0, "Comic");
     qmlRegisterUncreatableType<FsItem>(
                 "ComicKron.FsItem", 1, 0, "FsItem",
                 "You cannot create an instance of the FsItem");
