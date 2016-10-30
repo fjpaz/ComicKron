@@ -80,7 +80,7 @@ void Comic::paint(QPainter* painter)
                 "Comic::paint start";
 
     painter->setRenderHint(QPainter::SmoothPixmapTransform);
-        painter->translate(itemCenter_);
+    painter->translate(itemCenter_);
     painter->scale(scaleFactor_, scaleFactor_);
     painter->translate(centerOffset_ - itemCenter_);
 

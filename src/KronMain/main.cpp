@@ -17,6 +17,9 @@
 
 int main(int argc, char *argv[])
 {
+    // Do not scale windows
+    qputenv("QT_SCALE_FACTOR", "1");
+
     // Instance Qt application object
     QGuiApplication::setApplicationName("ComicKron");
     QGuiApplication::setOrganizationName("ComicKron");
