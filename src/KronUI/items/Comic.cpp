@@ -76,20 +76,17 @@ void Comic::paint(QPainter* painter)
     QElapsedTimer timer;
     timer.start();
 
-    qDebug() << QTime::currentTime().toString("HH:mm:ss.zzz") <<
-                "Comic::paint start";
+    qDebug() << "Comic paint start. centerOffset:" << centerOffset_ <<
+                "scaleFactor:" << scaleFactor_;
 
     painter->setRenderHint(QPainter::SmoothPixmapTransform);
     painter->translate(itemCenter_);
     painter->scale(scaleFactor_, scaleFactor_);
     painter->translate(centerOffset_ - itemCenter_);
 
-    qDebug() << "centerOffset:" << centerOffset_ <<
-                "scaleFactor:" << scaleFactor_;
-
     painter->drawPixmap(paintRect_, image_, image_.rect());
 
-    qDebug() << "Comic::paint elapsed" << timer.elapsed();
+    qDebug() << "Comic paint elapsed" << timer.elapsed() << "ms";
 }
 
 void Comic::setImage(QVariant image)

@@ -54,7 +54,7 @@ RealDevice::RealDevice()
             static_cast<qreal>(DensityBucket::MDPI);
 
     qDebug() << "Density bucket:" << bucket_ <<
-                "| Scale factor:" << scaleFactor_;
+                "Scale factor:" << scaleFactor_;
 }
 
 RealDevice::~RealDevice()
@@ -113,8 +113,8 @@ qreal RealDevice::calculateDiagonal()
         width = screenSize.width();
         height = screenSize.height();
 
-        qDebug() << "Screen size:" << window_->screen()->size().width() << "x" <<
-                    window_->screen()->size().height();
+        qDebug() << "Screen size:" << window_->screen()->size().width() <<
+                    "x" << window_->screen()->size().height();
     }
     else
     {
@@ -125,7 +125,8 @@ qreal RealDevice::calculateDiagonal()
         width = window_->width() * screenSize.width() / screenWidth;
         height = window_->height() * screenSize.height() / screenHeight;
 
-        qDebug() << "Window size:" << window_->width() << "x" << window_->height();
+        qDebug() << "Window size:" << window_->width() <<
+                    "x" << window_->height();
     }
 
 

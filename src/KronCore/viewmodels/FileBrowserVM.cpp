@@ -65,7 +65,7 @@ void FileBrowserVM::fillItems()
         item->name = fileInfo.fileName();
         items_.append(item);
 
-        qDebug() << "Item type:" << item->type << "| name:" << item->name;
+        qDebug() << "Item type:" << item->type << "name:" << item->name;
     }
 
     emit itemsChanged(items_);

@@ -114,7 +114,7 @@ void CompressedComicArchiveReader::open(QString comicArchive)
         }
         else
         {
-            qDebug() << "Error on archive_read_next_header";
+            qWarning() << "Error on archive_read_next_header";
             return;
         }
 
@@ -208,13 +208,13 @@ QByteArray CompressedComicArchiveReader::readFirstImage()
 
     qDebug() << archive_entry_pathname(entry_);
 
-    qDebug() << "Filter Count: " << archive_filter_count(a_) <<
-                ", Name: " << QString(archive_format_name(a_)) <<
-                ", Code: " << archive_format(a_) <<
-                ", Header Pos: " << archive_read_header_position(a_);
+    qDebug() << "Filter Count:" << archive_filter_count(a_) <<
+                "Name:" << QString(archive_format_name(a_)) <<
+                "Code:" << archive_format(a_) <<
+                "Header Pos:" << archive_read_header_position(a_);
 
     bytesRead = archive_read_data(a_, buffer_, entrySize);
-    qDebug() << "Bytes read: " << bytesRead;
+    qDebug() << "Bytes read:" << bytesRead;
 
     QByteArray image;
 
@@ -276,13 +276,13 @@ QByteArray CompressedComicArchiveReader::readNextImage()
 
     qDebug() << archive_entry_pathname(entry_);
 
-    qDebug() << "Filter Count: " << archive_filter_count(a_) <<
-                ", Name: " << QString(archive_format_name(a_)) <<
-                ", Code: " << archive_format(a_) <<
-                ", Header Pos: " << archive_read_header_position(a_);
+    qDebug() << "Filter Count:" << archive_filter_count(a_) <<
+                "Name:" << QString(archive_format_name(a_)) <<
+                "Code:" << archive_format(a_) <<
+                "Header Pos:" << archive_read_header_position(a_);
 
     bytesRead = archive_read_data(a_, buffer_, entrySize);
-    qDebug() << "Bytes read: " << bytesRead;
+    qDebug() << "Bytes read:" << bytesRead;
 
     QByteArray image;
 
@@ -344,13 +344,13 @@ QByteArray CompressedComicArchiveReader::readPreviousImage()
 
     qDebug() << archive_entry_pathname(entry_);
 
-    qDebug() << "Filter Count: " << archive_filter_count(a_) <<
-                ", Name: " << QString(archive_format_name(a_)) <<
-                ", Code: " << archive_format(a_) <<
-                ", Header Pos: " << archive_read_header_position(a_);
+    qDebug() << "Filter Count:" << archive_filter_count(a_) <<
+                "Name:" << QString(archive_format_name(a_)) <<
+                "Code:" << archive_format(a_) <<
+                "Header Pos:" << archive_read_header_position(a_);
 
     bytesRead = archive_read_data(a_, buffer_, entrySize);
-    qDebug() << "Bytes read: " << bytesRead;
+    qDebug() << "Bytes read:" << bytesRead;
 
     QByteArray image;
 

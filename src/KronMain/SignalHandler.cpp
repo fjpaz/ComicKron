@@ -39,7 +39,7 @@ void SignalHandler::handleSignals()
 void SignalHandler::cleanExitSignalHandler(int signum)
 {
 #ifdef Q_OS_UNIX
-    qDebug() << "Signal" << signum << "captured. Exiting...";
+    qInfo() << "Signal" << signum << "captured. Exiting...";
 
     signal(signum, SIG_DFL);
 
@@ -52,7 +52,7 @@ void SignalHandler::cleanExitSignalHandler(int signum)
 void SignalHandler::resendSignalHandler(int signum)
 {
 #ifdef Q_OS_UNIX
-    qDebug() << "Signal" << signum << "captured. Resending signal...";
+    qCritical() << "Signal" << signum << "captured. Resending signal...";
 
     signal(signum, SIG_DFL);
 
