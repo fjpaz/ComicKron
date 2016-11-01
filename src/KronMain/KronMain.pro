@@ -43,6 +43,7 @@ ANDROID_DEPLOYMENT_DEPENDENCIES += \
     lib/libQt5QuickTemplates2.so \
     lib/libQt5QuickParticles.so \
     lib/libQt5QuickControls2.so \
+    lib/libQt5AndroidExtras.so \
     plugins/bearer/libqandroidbearer.so \
     plugins/qmltooling/libqmldbg_debugger.so \
     plugins/qmltooling/libqmldbg_inspector.so \

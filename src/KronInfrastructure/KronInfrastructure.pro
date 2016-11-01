@@ -13,6 +13,7 @@ ROOTDIR = ../..
 include($$ROOTDIR/build/lib.pri)
 
 QT = core gui quick
+android: QT += androidextras
 
 DEFINES += KRONINFRASTRUCTURE_LIBRARY
 DEFINES += USING_SHARED_PODOFO

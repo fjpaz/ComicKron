@@ -12,6 +12,8 @@
 
 #include <KronCore/services/Device.h>
 
+#include <QMap>
+
 class QWindow;
 
 namespace kron {
@@ -57,6 +59,7 @@ private:
     QWindow* window_;
     int dpi_;
     DensityBucket bucket_;
+    QMap<DensityBucket, int> buckets_;
     qreal scaleFactor_;
     FormFactor formFactor_;
 };

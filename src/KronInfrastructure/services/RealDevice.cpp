@@ -14,46 +14,62 @@
 #include <QtMath>
 #include <QWindow>
 
+#if defined(Q_OS_ANDROID)
+#include <QAndroidJniObject>
+#include <QtAndroid>
+#endif
+
 namespace kron {
 
 RealDevice::RealDevice()
     : window_(nullptr),
       dpi_(qRound(qApp->primaryScreen()->physicalDotsPerInch() *
-                  qApp->primaryScreen()->devicePixelRatio()))
+                  qApp->primaryScreen()->devicePixelRatio())),
+      buckets_({{DensityBucket::LDPI, static_cast<int>(DensityBucket::LDPI)},
+                {DensityBucket::MDPI, static_cast<int>(DensityBucket::MDPI)},
+                {DensityBucket::TVDPI, static_cast<int>(DensityBucket::TVDPI)},
+                {DensityBucket::HDPI, static_cast<int>(DensityBucket::HDPI)},
+                {DensityBucket::XHDPI, static_cast<int>(DensityBucket::XHDPI)},
+                {DensityBucket::XXHDPI, static_cast<int>(DensityBucket::XXHDPI)},
+                {DensityBucket::XXXHDPI, static_cast<int>(DensityBucket::XXXHDPI)}})
 {
-    if (dpi_ < static_cast<int>(DensityBucket::MDPI))
+#if defined(Q_OS_ANDROID)
+    // Use DPI reported by Android
+    QAndroidJniObject qtActivity =
+            QAndroidJniObject::callStaticObjectMethod(
+                "org/qtproject/qt5/android/QtNative",
+                "activity", "()Landroid/app/Activity;");
+    QAndroidJniObject resources =
+            qtActivity.callObjectMethod("getResources",
+                                        "()Landroid/content/res/Resources;");
+    QAndroidJniObject displayMetrics =
+            resources.callObjectMethod("getDisplayMetrics",
+                                       "()Landroid/util/DisplayMetrics;");
+    dpi_ = displayMetrics.getField<int>("densityDpi");
+#elif defined(Q_OS_WIN) || defined(Q_OS_OSX)
+    dpi_ = qRound(qApp->primaryScreen()->logicalDotsPerInch() *
+                  qApp->primaryScreen()->devicePixelRatio());
+#endif
+
+    // Initialize distance to a value much greater than any expected
+    int nearestDistance = 100000;
+
+    foreach (int bucket, buckets_.values())
     {
-        bucket_ = DensityBucket::LDPI;
-    }
-    else if (dpi_ < static_cast<int>(DensityBucket::TVDPI))
-    {
-        bucket_ = DensityBucket::MDPI;
-    }
-    else if (dpi_ < static_cast<int>(DensityBucket::HDPI))
-    {
-        bucket_ = DensityBucket::TVDPI;
-    }
-    else if (dpi_ < static_cast<int>(DensityBucket::XHDPI))
-    {
-        bucket_ = DensityBucket::HDPI;
-    }
-    else if (dpi_ < static_cast<int>(DensityBucket::XXHDPI))
-    {
-        bucket_ = DensityBucket::XHDPI;
-    }
-    else if (dpi_ < static_cast<int>(DensityBucket::XXXHDPI))
-    {
-        bucket_ = DensityBucket::XXHDPI;
-    }
-    else
-    {
-        bucket_ = DensityBucket::XXXHDPI;
+        int distanceToBucket = qAbs(dpi_ - bucket);
+
+        if (distanceToBucket < nearestDistance)
+        {
+            nearestDistance = distanceToBucket;
+            bucket_ = buckets_.key(bucket);
+        }
     }
 
-    scaleFactor_ = static_cast<qreal>(bucket_) /
-            static_cast<qreal>(DensityBucket::MDPI);
+    scaleFactor_ = buckets_.value(bucket_) /
+            buckets_.value(DensityBucket::MDPI);
 
-    qDebug() << "Density bucket:" << bucket_ <<
+    qDebug() << "DPI:" << dpi_ <<
+                "Density bucket:" << bucket_ <<
                 "Scale factor:" << scaleFactor_;
 }
 
