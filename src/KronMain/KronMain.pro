@@ -26,13 +26,13 @@ LIBS += \
 ANDROID_PACKAGE_SOURCE_DIR = $$_PRO_FILE_PWD_/$$ROOTDIR/platform/android
 ANDROID_EXTRA_LIBS += \
     $$LIBDIR/libarchive.so \
+    $$LIBDIR/libsnappy.so \
     $$LIBDIR/libleveldb.so \
     $$LIBDIR/libpodofo.so \
-    $$LIBDIR/libsnappy.so \
     $$LIBDIR/libKronCore.so \
-    $$LIBDIR/libKronDI.so \
     $$LIBDIR/libKronInfrastructure.so \
-    $$LIBDIR/libKronUI.so
+    $$LIBDIR/libKronUI.so \
+    $$LIBDIR/libKronDI.so
 ANDROID_DEPLOYMENT_DEPENDENCIES += \
     jar/QtAndroid-bundled.jar \
     lib/libQt5Core.so \
