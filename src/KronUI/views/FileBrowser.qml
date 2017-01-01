@@ -16,12 +16,17 @@ Item {
     ListView {
         id: files
         anchors.fill: parent
+        boundsBehavior: Flickable.StopAtBounds
         model: fileBrowserVM.items
 
         delegate: ItemDelegate {
             text: model.modelData.name
             width: parent.width
-            font.pixelSize: device.sp(13)
+            height: device.dp(48)
+            leftPadding: device.dp(16)
+            rightPadding: device.dp(16)
+            anchors.topMargin: device.dp(8)
+            font.pixelSize: device.sp(16)
             font.bold: model.modelData.type
 
             onClicked: {

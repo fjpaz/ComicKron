@@ -11,13 +11,15 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.0
+import ComicKron.Device 1.0
 
 ApplicationWindow {
     id: window
     visible: true
     visibility: Qt.platform.os == "android" ? Window.FullScreen : Window.Windowed
-    width: 600
-    height: 1000
+    minimumWidth: device.dp(320)
+    minimumHeight: device.dp(480)
+    FontLoader { id: localFont; source: "qrc:/fonts/Roboto/Roboto-Regular.ttf" }
 
     Material.theme: Material.Light
     Material.primary: Material.BlueGrey
@@ -30,10 +32,14 @@ ApplicationWindow {
 
         RowLayout {
             anchors.fill: parent
+            anchors.leftMargin: device.dp(16)
+            anchors.rightMargin: device.dp(16)
 
             ToolButton {
                 contentItem: Image {
-                    fillMode: Image.Pad
+                    fillMode: Image.PreserveAspectFit
+                    sourceSize.width: device.dp(48)
+                    sourceSize.height: device.dp(48)
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
                     source: "qrc:/images/drawer.png"
@@ -42,14 +48,18 @@ ApplicationWindow {
             }
 
             Label {
+                leftPadding: device.dp(8)
                 text: qsTr(Qt.application.name)
+                font.pixelSize: device.sp(20)
             }
 
             Item { Layout.fillWidth: true }
 
             ToolButton {
                 contentItem: Image {
-                    fillMode: Image.Pad
+                    fillMode: Image.PreserveAspectFit
+                    sourceSize.width: device.dp(48)
+                    sourceSize.height: device.dp(48)
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
                     source: "qrc:/images/menu.png"
@@ -61,7 +71,7 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: Math.min(parent.width, parent.height) / 3
+        width: (device.layout === Device.SMALL) ? device.dp(280) : device.dp(320)
         height: window.height
 
         Rectangle {
@@ -72,6 +82,19 @@ ApplicationWindow {
             width: parent.width
             height: device.dp(192)
             color: Material.primary
+            z: 1
+        }
+
+        Image {
+            id: drawerIcon
+            anchors.centerIn: drawerHeader
+            fillMode: Image.PreserveAspectFit
+            sourceSize.width: device.dp(72)
+            sourceSize.height: device.dp(72)
+            horizontalAlignment: Image.AlignHCenter
+            verticalAlignment: Image.AlignVCenter
+            source: "qrc:/images/comickron.png"
+            z: 1
         }
 
         ListView {
@@ -80,25 +103,45 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
+            boundsBehavior: Flickable.StopAtBounds
             model: ListModel {
                 id: destinationsModel
 
                 ListElement {
                     name: qsTr("Browser")
                     source: "qrc:/views/FileBrowser.qml"
+                    icon: "qrc:/images/browser.png"
                     showToolbar: true
                 }
 
                 ListElement {
                     name: qsTr("Reader")
                     source: "qrc:/views/ComicReader.qml"
+                    icon: "qrc:/images/reader.png"
                     showToolbar: false
                 }
             }
 
             delegate: ItemDelegate {
                 width: parent.width
+                height: device.dp(48)
+                leftPadding: device.dp(72)
+                rightPadding: device.dp(72)
+                font.pixelSize: device.sp(16)
+                font.bold: false
                 highlighted: ListView.isCurrentItem
+                indicator: Image {
+                    id: itemIcon
+                    anchors.left: parent.left
+                    anchors.leftMargin: device.dp(16)
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: model.icon
+                    fillMode: Image.PreserveAspectFit
+                    sourceSize.width: device.dp(24)
+                    sourceSize.height: device.dp(24)
+                    horizontalAlignment: Image.AlignHCenter
+                    verticalAlignment: Image.AlignVCenter
+                }
                 text: model.name
                 onClicked: {
                     if (destinations.currentIndex != index)

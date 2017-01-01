@@ -21,27 +21,80 @@ class KRONCORE_EXPORT Device : public QObject
     Q_OBJECT
 
 public:
-    enum class FormFactor
+    enum Layout
     {
-        Smartphone,
-        Tablet,
-        Desktop,
+        SMALL,
+        MEDIUM,
+        LARGE,
         TV
     };
-    Q_ENUM(FormFactor)
+    Q_ENUM(Layout)
+
+    enum LayoutMode
+    {
+        LAYOUT_AUTO,
+        LAYOUT_MANUAL
+    };
+    Q_ENUM(LayoutMode)
+
+    Q_PROPERTY(Layout layout READ layout WRITE setLayout NOTIFY layoutChanged)
+    Q_PROPERTY(LayoutMode layoutMode READ layoutMode NOTIFY layoutModeChanged)
+
+    Device() : layout_(SMALL), layoutMode_(LAYOUT_AUTO) {}
 
     virtual ~Device() = default;
+
+    Q_INVOKABLE Layout layout()
+    {
+        return layout_;
+    }
+
+    Q_INVOKABLE void setLayout(Layout layout)
+    {
+        if (layout != layout_)
+        {
+            layout_ = layout;
+
+            emit layoutChanged(layout);
+
+            if (layoutMode_ != LAYOUT_MANUAL)
+            {
+                layoutMode_ = LAYOUT_MANUAL;
+
+                emit layoutModeChanged(LAYOUT_MANUAL);
+            }
+        }
+    }
+
+    Q_INVOKABLE LayoutMode layoutMode() const
+    {
+        return layoutMode_;
+    }
+
+    Q_INVOKABLE void setAutoLayout()
+    {
+        if (layoutMode_ != LAYOUT_AUTO)
+        {
+            layoutMode_ = LAYOUT_AUTO;
+
+            emit layoutModeChanged(LAYOUT_AUTO);
+        }
+    }
 
     Q_INVOKABLE virtual int dp(int dp) const = 0;
 
     Q_INVOKABLE virtual int sp(int sp) const = 0;
 
-    Q_INVOKABLE virtual FormFactor formFactor() const = 0;
-
     Q_INVOKABLE virtual void setWindow(QWindow* window) = 0;
 
 signals:
-    void formFactorChanged(FormFactor formFactor);
+    void layoutChanged(Layout layout);
+
+    void layoutModeChanged(LayoutMode layoutMode);
+
+protected:
+    Layout layout_;
+    LayoutMode layoutMode_;
 };
 
 }

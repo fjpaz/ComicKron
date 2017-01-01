@@ -88,20 +88,18 @@ int RealDevice::sp(int sp) const
     return qRound(sp * scaleFactor_);
 }
 
-Device::FormFactor RealDevice::formFactor() const
+void RealDevice::onWindowSizeChanged()
 {
-    return formFactor_;
-}
-
-void RealDevice::windowSizeChanged()
-{
-    FormFactor oldFormFactor = formFactor_;
-
-    calculateFormFactor();
-
-    if (oldFormFactor != formFactor_)
+    if (LAYOUT_AUTO == layoutMode())
     {
-        emit formFactorChanged(formFactor_);
+        Layout oldLayout = layout_;
+
+        calculateLayout();
+
+        if (oldLayout != layout_)
+        {
+            emit layoutChanged(layout_);
+        }
     }
 }
 
@@ -109,12 +107,12 @@ void RealDevice::setWindow(QWindow* window)
 {
     window_ = window;
 
-    calculateFormFactor();
+    calculateLayout();
 
     connect(window_, SIGNAL(widthChanged(int)),
-            this, SLOT(windowSizeChanged()));
+            this, SLOT(onWindowSizeChanged()));
     connect(window_, SIGNAL(heightChanged(int)),
-            this, SLOT(windowSizeChanged()));
+            this, SLOT(onWindowSizeChanged()));
 }
 
 qreal RealDevice::calculateDiagonal()
@@ -130,7 +128,7 @@ qreal RealDevice::calculateDiagonal()
         height = screenSize.height();
 
         qDebug() << "Screen size:" << window_->screen()->size().width() <<
-                    "x" << window_->screen()->size().height();
+                    "x" << window_->screen()->size().height() << "pixels";
     }
     else
     {
@@ -142,7 +140,7 @@ qreal RealDevice::calculateDiagonal()
         height = window_->height() * screenSize.height() / screenHeight;
 
         qDebug() << "Window size:" << window_->width() <<
-                    "x" << window_->height();
+                    "x" << window_->height() << "pixels";
     }
 
 
@@ -152,33 +150,42 @@ qreal RealDevice::calculateDiagonal()
     return diagonal;
 }
 
-void RealDevice::calculateFormFactor()
+void RealDevice::calculateLayout()
 {
     qreal diagonal = calculateDiagonal();
+    int widthDP = pixelsToDp(window_->width());
+    int heightDP = pixelsToDp(window_->height());
 
-    if (diagonal < 6.5)
+    if (diagonal >= 32)
     {
-        formFactor_ = FormFactor::Smartphone;
+        layout_ = TV;
     }
-    else if (diagonal >= 6.5 && diagonal < 10.1)
+    else if (widthDP < 600)
     {
-        formFactor_ = FormFactor::Tablet;
+        layout_ = SMALL;
     }
-    else if (diagonal >= 10.1 && diagonal < 29)
+    else if (widthDP >= 600 && widthDP < 1280)
     {
-        formFactor_ = FormFactor::Desktop;
+        layout_ = MEDIUM;
     }
-    else if (diagonal >= 29)
+    else if (widthDP >= 1280)
     {
-        formFactor_ = FormFactor::TV;
+        layout_ = LARGE;
     }
 
-    qDebug() << "Form factor:" << formFactor_;
+    qDebug() << "Layout:" << layout_ <<
+                "window size:" << widthDP << "x" << heightDP << "dp" <<
+                "diagonal:" << diagonal << "inches";
 }
 
 qreal RealDevice::mmToInches() const
 {
     return 0.0393701;
+}
+
+int RealDevice::pixelsToDp(int pixels) const
+{
+    return qRound(pixels / scaleFactor_);
 }
 
 }

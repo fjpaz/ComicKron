@@ -42,26 +42,25 @@ public:
 
     virtual int sp(int sp) const override;
 
-    virtual FormFactor formFactor() const override;
-
 public slots:
-    void windowSizeChanged();
+    void onWindowSizeChanged();
 
     virtual void setWindow(QWindow* window) override;
 
 private:
     qreal calculateDiagonal();
 
-    void calculateFormFactor();
+    void calculateLayout();
 
     qreal mmToInches() const;
+
+    int pixelsToDp(int pixels) const;
 
     QWindow* window_;
     int dpi_;
     DensityBucket bucket_;
     QMap<DensityBucket, int> buckets_;
     qreal scaleFactor_;
-    FormFactor formFactor_;
 };
 
 }

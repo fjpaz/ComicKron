@@ -4,13 +4,22 @@
         <file>views/ComicReader.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>images/drawer.png</file>
-        <file>images/drawer@2x.png</file>
-        <file>images/drawer@3x.png</file>
-        <file>images/drawer@4x.png</file>
         <file>images/menu.png</file>
-        <file>images/menu@2x.png</file>
-        <file>images/menu@3x.png</file>
-        <file>images/menu@4x.png</file>
         <file>views/FileBrowser.qml</file>
+        <file>fonts/Roboto/Roboto-Black.ttf</file>
+        <file>fonts/Roboto/Roboto-BlackItalic.ttf</file>
+        <file>fonts/Roboto/Roboto-Bold.ttf</file>
+        <file>fonts/Roboto/Roboto-BoldItalic.ttf</file>
+        <file>fonts/Roboto/Roboto-Italic.ttf</file>
+        <file>fonts/Roboto/Roboto-Light.ttf</file>
+        <file>fonts/Roboto/Roboto-LightItalic.ttf</file>
+        <file>fonts/Roboto/Roboto-Medium.ttf</file>
+        <file>fonts/Roboto/Roboto-MediumItalic.ttf</file>
+        <file>fonts/Roboto/Roboto-Regular.ttf</file>
+        <file>fonts/Roboto/Roboto-Thin.ttf</file>
+        <file>fonts/Roboto/Roboto-ThinItalic.ttf</file>
+        <file>images/comickron.png</file>
+        <file>images/browser.png</file>
+        <file>images/reader.png</file>
     </qresource>
 </RCC>

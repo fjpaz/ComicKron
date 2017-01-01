@@ -11,6 +11,7 @@
 #include "../items/Comic.h"
 #include "../items/ImageShowcase.h"
 
+#include <KronCore/services/Device.h>
 #include <KronCore/viewmodels/FileBrowserVM.h>
 
 #include <QObject>
@@ -27,7 +28,10 @@ QmlAppContext::QmlAppContext()
     qmlRegisterType<Comic>("ComicKron", 1, 0, "Comic");
     qmlRegisterUncreatableType<FsItem>(
                 "ComicKron.FsItem", 1, 0, "FsItem",
-                "You cannot create an instance of the FsItem");
+                "You cannot create an instance of the FsItem item");
+    qmlRegisterUncreatableType<Device>(
+                "ComicKron.Device", 1, 0, "Device",
+                "You cannot create an instance of the Device item");
 }
 
 QmlAppContext::~QmlAppContext()
