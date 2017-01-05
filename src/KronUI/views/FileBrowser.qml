@@ -22,11 +22,11 @@ Item {
         delegate: ItemDelegate {
             text: model.modelData.name
             width: parent.width
-            height: device.dp(48)
-            leftPadding: device.dp(16)
-            rightPadding: device.dp(16)
-            anchors.topMargin: device.dp(8)
-            font.pixelSize: device.sp(16)
+            height: 48
+            leftPadding: 16
+            rightPadding: 16
+            anchors.topMargin: 8
+            font.pixelSize: 16
             font.bold: model.modelData.type
 
             onClicked: {

@@ -21,5 +21,7 @@
         <file>images/comickron.png</file>
         <file>images/browser.png</file>
         <file>images/reader.png</file>
+        <file>images/settings.png</file>
+        <file>views/Settings.qml</file>
     </qresource>
 </RCC>

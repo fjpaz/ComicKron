@@ -11,6 +11,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QtGlobal>
+#include <QtGui/private/qhighdpiscaling_p.h>
 #include <QtMath>
 #include <QWindow>
 
@@ -77,6 +78,21 @@ RealDevice::~RealDevice()
 {
 }
 
+qreal RealDevice::scaleFactor() const
+{
+    return QHighDpiScaling::factor(window_);
+}
+
+void RealDevice::setScaleFactor(qreal scaleFactor)
+{
+    qDebug() << "Set scale factor:" << scaleFactor;
+
+    QHighDpiScaling::setScreenFactor(window_->screen(), scaleFactor);
+    QHighDpiScaling::updateHighDpiScaling();
+
+    emit scaleFactorChanged(scaleFactor);
+}
+
 int RealDevice::dp(int dp) const
 {
     return qRound(dp * scaleFactor_);
@@ -121,6 +137,10 @@ qreal RealDevice::calculateDiagonal()
     qreal width = 0;
     qreal height = 0;
     QSizeF screenSize = window_->screen()->physicalSize();
+
+    qDebug() << "Device Pixel Ratio:" << window_->screen()->devicePixelRatio() <<
+                "Logical / Physical DPI:" << qApp->primaryScreen()->logicalDotsPerInch() <<
+                "/" << qApp->primaryScreen()->physicalDotsPerInch();
 
     if (window_->visibility() == QWindow::FullScreen)
     {

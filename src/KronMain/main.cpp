@@ -17,14 +17,14 @@
 
 int main(int argc, char *argv[])
 {
-    // Do not scale windows
-    qputenv("QT_SCALE_FACTOR", "1");
+    // Use device independent pixels
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     // Instance Qt application object
     QGuiApplication::setApplicationName("ComicKron");
     QGuiApplication::setOrganizationName("ComicKron");
     QGuiApplication app(argc, argv);
-    app.setAttribute(Qt::AA_SynthesizeTouchForUnhandledMouseEvents);
 
     // Handle OS signals
     kron::SignalHandler::handleSignals();

@@ -39,6 +39,7 @@ public:
 
     Q_PROPERTY(Layout layout READ layout WRITE setLayout NOTIFY layoutChanged)
     Q_PROPERTY(LayoutMode layoutMode READ layoutMode NOTIFY layoutModeChanged)
+    Q_PROPERTY(qreal scaleFactor READ scaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged)
 
     Device() : layout_(SMALL), layoutMode_(LAYOUT_AUTO) {}
 
@@ -81,6 +82,10 @@ public:
         }
     }
 
+    Q_INVOKABLE virtual qreal scaleFactor() const = 0;
+
+    Q_INVOKABLE virtual void setScaleFactor(qreal scaleFactor) = 0;
+
     Q_INVOKABLE virtual int dp(int dp) const = 0;
 
     Q_INVOKABLE virtual int sp(int sp) const = 0;
@@ -91,6 +96,8 @@ signals:
     void layoutChanged(Layout layout);
 
     void layoutModeChanged(LayoutMode layoutMode);
+
+    void scaleFactorChanged(qreal scaleFactor);
 
 protected:
     Layout layout_;

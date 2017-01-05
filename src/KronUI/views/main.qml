@@ -17,29 +17,31 @@ ApplicationWindow {
     id: window
     visible: true
     visibility: Qt.platform.os == "android" ? Window.FullScreen : Window.Windowed
-    minimumWidth: device.dp(320)
-    minimumHeight: device.dp(480)
+    minimumWidth: 320
+    minimumHeight: 480
     FontLoader { id: localFont; source: "qrc:/fonts/Roboto/Roboto-Regular.ttf" }
 
-    Material.theme: Material.Light
+//    Material.theme: Material.Light
+    Material.theme: Material.Dark
     Material.primary: Material.BlueGrey
     Material.accent: Material.DeepOrange
 
     header: ToolBar {
         id: toolbar
-        height: device.dp(56)
-        font.pixelSize: device.sp(20)
+        height: 56
+        width: window.width
+        font.pixelSize: 20
 
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: device.dp(16)
-            anchors.rightMargin: device.dp(16)
+            anchors.leftMargin: 16
+            anchors.rightMargin: 16
 
             ToolButton {
                 contentItem: Image {
                     fillMode: Image.PreserveAspectFit
-                    sourceSize.width: device.dp(48)
-                    sourceSize.height: device.dp(48)
+                    sourceSize.width: 48
+                    sourceSize.height: 48
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
                     source: "qrc:/images/drawer.png"
@@ -48,9 +50,9 @@ ApplicationWindow {
             }
 
             Label {
-                leftPadding: device.dp(8)
-                text: qsTr(Qt.application.name)
-                font.pixelSize: device.sp(20)
+                leftPadding: 8
+                text: destinationsModel.get(destinations.currentIndex).name
+                font.pixelSize: 20
             }
 
             Item { Layout.fillWidth: true }
@@ -58,8 +60,8 @@ ApplicationWindow {
             ToolButton {
                 contentItem: Image {
                     fillMode: Image.PreserveAspectFit
-                    sourceSize.width: device.dp(48)
-                    sourceSize.height: device.dp(48)
+                    sourceSize.width: 48
+                    sourceSize.height: 48
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
                     source: "qrc:/images/menu.png"
@@ -71,7 +73,7 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: (device.layout === Device.SMALL) ? device.dp(280) : device.dp(320)
+        width: (device.layout === Device.SMALL) ? 280 : 320
         height: window.height
 
         Rectangle {
@@ -80,7 +82,7 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.right: parent.right
             width: parent.width
-            height: device.dp(192)
+            height: 192
             color: Material.primary
             z: 1
         }
@@ -89,8 +91,8 @@ ApplicationWindow {
             id: drawerIcon
             anchors.centerIn: drawerHeader
             fillMode: Image.PreserveAspectFit
-            sourceSize.width: device.dp(72)
-            sourceSize.height: device.dp(72)
+            sourceSize.width: 72
+            sourceSize.height: 72
             horizontalAlignment: Image.AlignHCenter
             verticalAlignment: Image.AlignVCenter
             source: "qrc:/images/comickron.png"
@@ -120,25 +122,32 @@ ApplicationWindow {
                     icon: "qrc:/images/reader.png"
                     showToolbar: false
                 }
+
+                ListElement {
+                    name: qsTr("Settings")
+                    source: "qrc:/views/Settings.qml"
+                    icon: "qrc:/images/settings.png"
+                    showToolbar: true
+                }
             }
 
             delegate: ItemDelegate {
                 width: parent.width
-                height: device.dp(48)
-                leftPadding: device.dp(72)
-                rightPadding: device.dp(72)
-                font.pixelSize: device.sp(16)
+                height: 48
+                leftPadding: 72
+                rightPadding: 72
+                font.pixelSize: 16
                 font.bold: false
                 highlighted: ListView.isCurrentItem
                 indicator: Image {
                     id: itemIcon
                     anchors.left: parent.left
-                    anchors.leftMargin: device.dp(16)
+                    anchors.leftMargin: 16
                     anchors.verticalCenter: parent.verticalCenter
                     source: model.icon
                     fillMode: Image.PreserveAspectFit
-                    sourceSize.width: device.dp(24)
-                    sourceSize.height: device.dp(24)
+                    sourceSize.width: 24
+                    sourceSize.height: 24
                     horizontalAlignment: Image.AlignHCenter
                     verticalAlignment: Image.AlignVCenter
                 }
@@ -181,6 +190,21 @@ ApplicationWindow {
             console.log("File " + fileUrl + " opened")
             destinations.navigateToReader()
             readerVM.openComic(fileUrl)
+        }
+    }
+
+    Loader {
+        id: windowLoader
+        active: false
+    }
+
+    Connections {
+        target: device
+        onScaleFactorChanged: {
+            console.log("Scale factor changed")
+            windowLoader.active = true
+            window.close()
+            windowLoader.source = Qt.resolvedUrl("qrc:/views/main.qml")
         }
     }
 

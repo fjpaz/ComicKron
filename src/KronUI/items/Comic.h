@@ -70,7 +70,14 @@ protected:
 
     virtual void keyReleaseEvent(QKeyEvent* event) override;
 
-    void geometryChanged(const QRectF& newGeometry, const QRectF& oldGeometry) override;
+    virtual void mousePressEvent(QMouseEvent* event) override;
+
+    virtual void mouseMoveEvent(QMouseEvent* event) override;
+
+    virtual void mouseReleaseEvent(QMouseEvent* event) override;
+
+    void geometryChanged(
+            const QRectF& newGeometry, const QRectF& oldGeometry) override;
 
 private:
     bool imageOutOfLimits() const;
@@ -84,6 +91,10 @@ private:
     void calculatePaintParameters();
 
     void calculateMaxOffsets();
+
+    void processTouchs(
+            const QList<QTouchEvent::TouchPoint>& touchPoints,
+            Qt::TouchPointStates touchPointStates);
 
     static constexpr qreal SCALE_EXP_BASE = 1.0025;
     static constexpr qreal MAX_SCALE_FACTOR = 8.0;
@@ -105,6 +116,8 @@ private:
     QPropertyAnimation* zoomAnimation_;
     QParallelAnimationGroup parallelAnimation_;
     QContiguousCache<TouchPosTime> lastPanTouchs_;
+    QPointF startPosMouse_;
+    QPointF lastPosMouse_;
     QRectF paintRect_;
     QPointF itemCenter_;
     QPointF centerOffset_;

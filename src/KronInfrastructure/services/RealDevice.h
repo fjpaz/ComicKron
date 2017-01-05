@@ -38,6 +38,10 @@ public:
 
     virtual ~RealDevice();
 
+    virtual qreal scaleFactor() const override;
+
+    virtual void setScaleFactor(qreal scaleFactor) override;
+
     virtual int dp(int dp) const override;
 
     virtual int sp(int sp) const override;
