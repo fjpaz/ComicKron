@@ -54,17 +54,7 @@ ANDROID_DEPLOYMENT_DEPENDENCIES += \
     plugins/qmltooling/libqmldbg_server.so \
     plugins/qmltooling/libqmldbg_tcp.so \
     plugins/platforms/android/libqtforandroid.so \
-    plugins/platforms/libqeglfs.so \
-    plugins/platforms/libqminimal.so \
-    plugins/platforms/libqminimalegl.so \
-    plugins/platforms/libqoffscreen.so \
-    plugins/generic/libqevdevkeyboardplugin.so \
-    plugins/generic/libqevdevmouseplugin.so \
-    plugins/generic/libqevdevtabletplugin.so \
-    plugins/generic/libqevdevtouchplugin.so \
-    plugins/generic/libqtuiotouchplugin.so \
     plugins/iconengines/libqsvgicon.so \
-    plugins/imageformats/libqdds.so \
     plugins/imageformats/libqgif.so \
     plugins/imageformats/libqicns.so \
     plugins/imageformats/libqico.so \
@@ -74,7 +64,6 @@ ANDROID_DEPLOYMENT_DEPENDENCIES += \
     plugins/imageformats/libqtiff.so \
     plugins/imageformats/libqwbmp.so \
     plugins/imageformats/libqwebp.so \
-    plugins/scenegraph/libsoftwarecontext.so \
     qml/QtQuick.2/qmldir \
     qml/QtQuick.2/libqtquick2plugin.so \
     qml/QtQuick.2/plugins.qmltypes \
@@ -143,7 +132,7 @@ ANDROID_DEPLOYMENT_DEPENDENCIES += \
     qml/QtQuick/Controls.2/Material/ScrollIndicator.qml \
     qml/QtQuick/Controls.2/Material/Frame.qml \
     qml/QtQuick/Controls.2/Material/Drawer.qml \
-    qml/QtQuick/Controls.2/Material/Ripple.qml \
+    qml/QtQuick/Controls.2/Material/RectangularGlow.qml \
     qml/QtQuick/Controls.2/Material/ElevationEffect.qml \
     qml/QtQuick/Controls.2/Material/TabButton.qml \
     qml/QtQuick/Controls.2/Material/Button.qml \
