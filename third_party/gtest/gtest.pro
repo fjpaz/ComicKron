@@ -16,7 +16,7 @@ CONFIG -= qt
 CONFIG += warn_off
 
 !msvc {
-    QMAKE_CXXFLAGS -= -pedantic-errors
+    QMAKE_CXXFLAGS -= -Werror -pedantic-errors -Wall -Wextra
 }
 
 INCLUDEPATH += .

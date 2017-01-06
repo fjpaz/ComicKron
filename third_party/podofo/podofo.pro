@@ -32,7 +32,7 @@ else: DEFINES += \
     SZ_LONG=8
 
 !msvc {
-    QMAKE_CXXFLAGS -= -pedantic-errors
+    QMAKE_CXXFLAGS -= -Werror -pedantic-errors -Wall -Wextra
     QMAKE_CXXFLAGS += -Wno-deprecated-declarations
 }
 

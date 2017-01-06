@@ -24,6 +24,10 @@ EXTERNAL_INCLUDEPATH += \
     EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party
 }
 
+!CONFIG(USE_SYSTEM_LMDB) {
+    EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/lmdb
+}
+
 !CONFIG(USE_SYSTEM_LEVELDB) {
     EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/leveldb/include
 }
@@ -31,11 +35,6 @@ EXTERNAL_INCLUDEPATH += \
 !CONFIG(USE_SYSTEM_LEVELDB) {
     EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/snappy
 }
-
-
-EXTERNAL_INCLUDEPATH += \
-    $$[QT_INSTALL_HEADERS]/QtCore/$$[QT_VERSION] \
-    $$[QT_INSTALL_HEADERS]/QtGui/$$[QT_VERSION]
 
 INCLUDEPATH += $$INTERNAL_INCLUDEPATH $$EXTERNAL_INCLUDEPATH
 DEPENDPATH += $$INTERNAL_INCLUDEPATH
@@ -61,6 +60,7 @@ else {
     QMAKE_CFLAGS_RELEASE = $$RELEASE_FLAGS
     QMAKE_CXXFLAGS_DEBUG = $$DEBUG_FLAGS
     QMAKE_CXXFLAGS_RELEASE = $$RELEASE_FLAGS
+    QMAKE_CXXFLAGS += -Wall -Wextra
     QMAKE_CXXFLAGS += -std=c++11 # Use C++11 standard
     QMAKE_CXXFLAGS += -Werror # Treat warnings as errors
     QMAKE_CXXFLAGS += -pedantic-errors # Treat all the warnings demanded by strict ISO C and ISO C++ as errors

@@ -20,6 +20,10 @@ unix: DEFINES += \
     HAVE_BUILTIN_EXPECT \
     HAVE_BUILTIN_CTZ
 
+!msvc {
+    QMAKE_CXXFLAGS -= -Werror -pedantic-errors -Wall -Wextra
+}
+
 INCLUDEPATH += .
 
 mac: LIBS += -lc++

@@ -18,8 +18,14 @@ android: QT += androidextras
 DEFINES += KRONINFRASTRUCTURE_LIBRARY
 DEFINES += USING_SHARED_PODOFO
 
-QMAKE_CXXFLAGS += -Wno-deprecated-declarations # No warn about deprecated declarations
+# No warn about deprecated declarations
+QMAKE_CXXFLAGS += -Wno-deprecated-declarations
 !msvc: QMAKE_CXXFLAGS -= -pedantic-errors
+
+# Include folders needed to use private class QHighDpiScaling
+INCLUDEPATH += \
+    $$[QT_INSTALL_HEADERS]/QtCore/$$[QT_VERSION] \
+    $$[QT_INSTALL_HEADERS]/QtGui/$$[QT_VERSION]
 
 LIBS += \
     -lKronCore \
