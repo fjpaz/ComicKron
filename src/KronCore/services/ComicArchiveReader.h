@@ -9,12 +9,14 @@
 #ifndef KRON_COMICARCHIVEREADER_H
 #define KRON_COMICARCHIVEREADER_H
 
+#include "../KronCoreExport.h"
+
 #include <QByteArray>
 #include <QString>
 
 namespace kron {
 
-class ComicArchiveReader
+class KRONCORE_EXPORT ComicArchiveReader
 {
 public:
     virtual ~ComicArchiveReader() {}

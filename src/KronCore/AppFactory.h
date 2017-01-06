@@ -18,7 +18,7 @@ namespace kron {
 
 class App;
 
-class AppFactory : public QObject
+class KRONCORE_EXPORT AppFactory : public QObject
 {
     Q_OBJECT
 public:
