@@ -19,8 +19,10 @@ DEFINES += KRONINFRASTRUCTURE_LIBRARY
 DEFINES += USING_SHARED_PODOFO
 
 # No warn about deprecated declarations
-QMAKE_CXXFLAGS += -Wno-deprecated-declarations
-!msvc: QMAKE_CXXFLAGS -= -pedantic-errors
+!msvc {
+    QMAKE_CXXFLAGS += -Wno-deprecated-declarations
+    QMAKE_CXXFLAGS -= -pedantic-errors
+}
 
 # Include folders needed to use private class QHighDpiScaling
 INCLUDEPATH += \
