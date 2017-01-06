@@ -10,7 +10,7 @@ TARGET = snappy
 
 ROOTDIR = ../..
 
-include($$ROOTDIR/build/lib.pri)
+include($$ROOTDIR/build/staticlib.pri)
 
 CONFIG -= qt
 CONFIG += warn_off
