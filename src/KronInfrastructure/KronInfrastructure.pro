@@ -25,7 +25,10 @@ DEFINES += USING_SHARED_PODOFO
 }
 
 # Include folders needed to use private class QHighDpiScaling
-INCLUDEPATH += \
+mac: INCLUDEPATH += \
+    $$[QT_INSTALL_LIBS]/QtCore.framework/Versions/5/Headers/$$[QT_VERSION] \
+    $$[QT_INSTALL_LIBS]/QtGui.framework/Versions/5/Headers/$$[QT_VERSION]
+else: INCLUDEPATH += \
     $$[QT_INSTALL_HEADERS]/QtCore/$$[QT_VERSION] \
     $$[QT_INSTALL_HEADERS]/QtGui/$$[QT_VERSION]
 
