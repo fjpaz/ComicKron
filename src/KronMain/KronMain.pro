@@ -26,8 +26,6 @@ LIBS += \
 ANDROID_PACKAGE_SOURCE_DIR = $$_PRO_FILE_PWD_/$$ROOTDIR/platform/android
 ANDROID_EXTRA_LIBS += \
     $$LIBDIR/libarchive.so \
-    $$LIBDIR/libsnappy.so \
-    $$LIBDIR/libleveldb.so \
     $$LIBDIR/libpodofo.so \
     $$LIBDIR/libKronCore.so \
     $$LIBDIR/libKronInfrastructure.so \

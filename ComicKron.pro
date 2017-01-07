@@ -17,8 +17,6 @@ android|ios: CONFIG += USE_SYSTEM_ZLIB
 !CONFIG(USE_SYSTEM_LIBARCHIVE): SUBDIRS += libarchive
 !CONFIG(USE_SYSTEM_PODOFO): SUBDIRS += podofo
 !CONFIG(USE_SYSTEM_LMDB): SUBDIRS += lmdb
-!CONFIG(USE_SYSTEM_LEVELDB): SUBDIRS += leveldb
-!CONFIG(USE_SYSTEM_SNAPPY): SUBDIRS += snappy
 
 SUBDIRS += \
     gtest \
@@ -43,11 +41,9 @@ KronDI.subdir = src/KronDI
 KronInfrastructure.subdir = src/KronInfrastructure
 KronMain.subdir = src/KronMain
 KronUI.subdir = src/KronUI
-leveldb.subdir = third_party/leveldb
 libarchive.subdir = third_party/libarchive
 lmdb.subdir = third_party/lmdb
 podofo.subdir = third_party/podofo
-snappy.subdir = third_party/snappy
 zlib.subdir = third_party/zlib
 
 include(build/common.pri)
