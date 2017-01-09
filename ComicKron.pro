@@ -28,7 +28,8 @@ SUBDIRS += \
     KronDI \
     KronInfrastructure \
     KronMain \
-    KronUI
+    KronUI \
+    lmdbxx
 
 # Subproject paths
 gtest.subdir = third_party/gtest
@@ -43,6 +44,7 @@ KronMain.subdir = src/KronMain
 KronUI.subdir = src/KronUI
 libarchive.subdir = third_party/libarchive
 lmdb.subdir = third_party/lmdb
+lmdbxx.subdir = third_party/lmdbxx
 podofo.subdir = third_party/podofo
 zlib.subdir = third_party/zlib
 

@@ -10,7 +10,8 @@
 INTERNAL_INCLUDEPATH += $$ROOTDIR/src
 EXTERNAL_INCLUDEPATH += \
     $$ROOTDIR/third_party/gtest/include \
-    $$ROOTDIR/third_party/HippoMocks/include
+    $$ROOTDIR/third_party/HippoMocks/include \
+    $$ROOTDIR/third_party/lmdbxx
 
 !CONFIG(USE_SYSTEM_ZLIB) {
     EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/zlib
