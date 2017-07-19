@@ -34,7 +34,7 @@ else: INCLUDEPATH += \
 
 LIBS += \
     -lKronCore \
-    -larchive \
+    -lunarr \
     -lpodofo
 
 mac: LIBS += -lc++

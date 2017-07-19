@@ -13,12 +13,15 @@
 
 #include <KronCore/services/ComicArchiveReader.h>
 
+#include <memory>
 #include <QVarLengthArray>
 
-#include <memory>
+extern "C" {
+#include <unarr/unarr.h>
+}
 
-struct archive;
-struct archive_entry;
+//struct archive;
+//struct archive_entry;
 class QFile;
 
 namespace kron {
@@ -41,13 +44,15 @@ public:
     virtual QString currentArchive() const;
 
 private:
+    QByteArray readImage(int index);
+
     std::unique_ptr<QFile> file_;
     uchar* mappedFile_;
     char* buffer_;
-    int fileIndex_;
-    struct archive* a_;
-    struct archive_entry* entry_;
-    QVarLengthArray<int, 128> imageToIndex_;
+    int imageIndex_;
+    ar_stream* stream_;
+    ar_archive* archive_;
+    QVarLengthArray<off64_t, 128> indexToOffset_;
 };
 
 }

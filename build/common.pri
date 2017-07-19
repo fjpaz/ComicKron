@@ -9,16 +9,14 @@
 # Include path
 INTERNAL_INCLUDEPATH += $$ROOTDIR/src
 EXTERNAL_INCLUDEPATH += \
+    $$ROOTDIR/third_party/bzip2 \
     $$ROOTDIR/third_party/gtest/include \
     $$ROOTDIR/third_party/HippoMocks/include \
-    $$ROOTDIR/third_party/lmdbxx
+    $$ROOTDIR/third_party/lmdbxx \
+    $$ROOTDIR/third_party/lzma
 
 !CONFIG(USE_SYSTEM_ZLIB) {
     EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/zlib
-}
-
-!CONFIG(USE_SYSTEM_LIBARCHIVE) {
-    EXTERNAL_INCLUDEPATH += $$ROOTDIR/third_party/libarchive
 }
 
 !CONFIG(USE_SYSTEM_PODOFO) {

@@ -23,7 +23,7 @@ FileBrowserVM::FileBrowserVM(QObject *parent)
                     QDir::Files | QDir::AllDirs | QDir::NoDot))
 {
     dir_->setNameFilters(QStringList() << "*.cbr" << "*.CBR" << "*.cbz" << "*.CBZ" <<
-                         "*.pdf" << "*.PDF");
+                         "*.cbt" << "*.CBT" << "*.cb7" << ".CB7" << "*.pdf" << "*.PDF");
     fillItems();
 }
 

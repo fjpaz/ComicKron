@@ -14,9 +14,9 @@ android|ios: CONFIG += USE_SYSTEM_ZLIB
 
 # Subprojects
 !CONFIG(USE_SYSTEM_ZLIB): SUBDIRS += zlib
-!CONFIG(USE_SYSTEM_LIBARCHIVE): SUBDIRS += libarchive
 !CONFIG(USE_SYSTEM_PODOFO): SUBDIRS += podofo
 !CONFIG(USE_SYSTEM_LMDB): SUBDIRS += lmdb
+!CONFIG(USE_SYSTEM_BZIP2): SUBDIRS += bzip2
 
 SUBDIRS += \
     gtest \
@@ -29,9 +29,12 @@ SUBDIRS += \
     KronInfrastructure \
     KronMain \
     KronUI \
-    lmdbxx
+    lmdbxx \
+    lzma \
+    unarr
 
 # Subproject paths
+bzip2.subdir = third_party/bzip2
 gtest.subdir = third_party/gtest
 HippoMocks.subdir = third_party/HippoMocks
 KronAcceptanceTests.subdir = test/KronAcceptanceTests
@@ -45,7 +48,10 @@ KronUI.subdir = src/KronUI
 libarchive.subdir = third_party/libarchive
 lmdb.subdir = third_party/lmdb
 lmdbxx.subdir = third_party/lmdbxx
+lzma.subdir = third_party/lzma
+lzmasdk.subdir = third_party/lzmasdk
 podofo.subdir = third_party/podofo
+unarr.subdir = third_party/unarr
 zlib.subdir = third_party/zlib
 
 include(build/common.pri)

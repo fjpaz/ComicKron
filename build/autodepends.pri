@@ -48,7 +48,7 @@ defineReplace(subprojectDepends) {
     # Insert linked libraries found in targets list into dependencies list
     for(lib_to_link, linked_libraries) {
         contains(LIB_TARGETS, $$lib_to_link) {
-            target_and_subproject = $$find(TARGET_TO_SUBPROJECT, $$lib_to_link)
+            target_and_subproject = $$find(TARGET_TO_SUBPROJECT, $$lib_to_link:)
             subproject_depend = $$replace(target_and_subproject, $$lib_to_link:, '')
             subproject_depends += $$subproject_depend
         }
